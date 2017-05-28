@@ -1,0 +1,88 @@
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 14:35:01 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN ..\output\main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\main.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(.
+                    -.\output\main.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "ds1302.h"
+   3          #include "lcd12864.h"
+   4          #include "keyboard.h"
+   5          #include "time.h"
+   6          
+   7          bit flag200ms = 0;
+   8          uint8 T0RH = 0;
+   9          uint8 T0RL = 0;
+  10          
+  11          void ConfigureTimerZero(uint8 ms);
+  12          
+  13          void main()
+  14          {
+  15   1              EA = 1; 
+  16   1              InitDS1302();                                                                             
+  17   1              InitLCD12864();
+  18   1              ConfigureTimerZero(1);
+  19   1      
+  20   1              while(1)
+  21   1              {
+  22   2                      if(flag200ms){
+  23   3                              flag200ms = 0;
+  24   3                              ShowCurrentTime();
+  25   3                      }
+  26   2              }
+  27   1      }
+  28          
+  29          void ConfigureTimerZero(uint8 ms)
+  30          {
+  31   1              uint16 tmp;
+  32   1      
+  33   1              tmp = 11059200/12/1000*ms;
+  34   1              tmp = 65536 - tmp+18;
+  35   1      
+  36   1              T0RH = (uint8)(tmp >> 8);
+  37   1              T0RL = (uint8) tmp;
+  38   1      
+  39   1              TMOD &= 0xF0;
+  40   1              TMOD |= 0x01;
+  41   1      
+  42   1              TH0 = T0RH;
+  43   1              TL0 = T0RL;
+  44   1      
+  45   1              TR0 = 1;
+  46   1              ET0 = 1;
+  47   1      }
+  48          
+  49          void InterruptTimerZero() interrupt 1
+  50          {
+  51   1              static uint8 cnt = 0;
+  52   1      
+  53   1              TH0 = T0RH;
+  54   1              TL0 = T0RL;     
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 14:35:01 PAGE 2   
+
+  55   1      
+  56   1              cnt++;
+  57   1              if(cnt >= 200)
+  58   1              {
+  59   2                      cnt = 0;
+  60   2                      flag200ms = 1;
+  61   2              }
+  62   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    120    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      3    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

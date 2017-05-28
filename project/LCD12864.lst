@@ -1,0 +1,171 @@
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 14:35:00 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
+OBJECT MODULE PLACED IN ..\output\LCD12864.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\LCD12864.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\LCD12864.lst) 
+                    -OBJECT(..\output\LCD12864.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "lcd12864.h"
+   3          
+   4          #define _LCD12864_C
+   5          
+   6          void LCDWaitReady()
+   7          {
+   8   1              uint8 tmp = 0xFF;
+   9   1      
+  10   1              LCD12864_RS = 0;
+  11   1              LCD12864_RW = 1;
+  12   1              do{
+  13   2                      LCD12864_EN = 1;
+  14   2                      tmp = LCD12864_DB & 0x80;
+  15   2                      LCD12864_EN = 0;        
+  16   2              }while(tmp != 0x00);
+  17   1              LCD12864_EN = 0;        
+  18   1      }
+  19          
+  20          void LCDWriteCmd(uint8 cmd)
+  21          {
+  22   1              LCDWaitReady();
+  23   1              LCD12864_RS = 0;
+  24   1              LCD12864_RW = 0;
+  25   1              LCD12864_EN = 1;
+  26   1              LCD12864_DB = cmd;
+  27   1              LCD12864_EN = 0;        
+  28   1      }
+  29          
+  30          void LCDWriteData(uint8 dat)
+  31          {
+  32   1              LCDWaitReady();
+  33   1              LCD12864_RS = 1;
+  34   1              LCD12864_RW = 0;
+  35   1              LCD12864_EN = 1;
+  36   1              LCD12864_DB = dat;
+  37   1              LCD12864_EN = 0;
+  38   1      }
+  39          
+  40          void InitLCD12864()
+  41          {
+  42   1              LCDWriteCmd(0x30);
+  43   1              LCDWriteCmd(0x0C);
+  44   1              LCDWriteCmd(0x01); //清屏，(0,0)位置字符设定成空格
+  45   1              LCDShowStr(0,0," ",1);
+  46   1      }
+  47          
+  48          void LCDShowStr(uint8 x, uint8 y, uint8* str, uint8 strlen)     //写入字符串
+  49          {
+  50   1              LCDSetCursor(x,y);
+  51   1              do{
+  52   2                      LCDWriteData(*str++);
+  53   2                      strlen--;       
+  54   2              }while(strlen > 0);
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 14:35:00 PAGE 2   
+
+  55   1      }
+  56          
+  57          void LCDShowCN(uint8 x, uint8 y, uint16* str, uint8 strlen)     //写入字符串
+  58          {
+  59   1              uint8 msb,lsb;
+  60   1      
+  61   1              while(strlen-- > 0){
+  62   2                      LCDSetCursor(x,y);
+  63   2                      x++;
+  64   2                      if(x > 7){
+  65   3                              x = 0;
+  66   3                              y++;
+  67   3                      }                       //先写入地址
+  68   2                      msb = (uint8)(*str >> 8);       //写入数据
+  69   2                      lsb = (uint8)(*str); 
+  70   2                      LCDWriteData(msb);
+  71   2                      LCDWriteData(lsb);
+  72   2                      str++;                                          
+  73   2              }
+  74   1      }
+  75          
+  76          void LCDSetCursor(uint8 x, uint8 y)
+  77          {
+  78   1              uint8 pos = 0;
+  79   1      
+  80   1              switch(y)
+  81   1              {
+  82   2                      case 0:
+  83   2                              pos = 0x80 + x;
+  84   2                              break;
+  85   2                      case 1:
+  86   2                              pos = 0x90 + x;
+  87   2                              break;
+  88   2                      case 2:
+  89   2                              pos = 0x88 + x;
+  90   2                              break;
+  91   2                      case 3:
+  92   2                              pos = 0x98 + x;
+  93   2                              break;
+  94   2                      default:
+  95   2                              break;
+  96   2              }
+  97   1              LCDWriteCmd(pos);
+  98   1      }
+  99          
+ 100          void LCDShowCursor()
+ 101          {
+ 102   1              LCDWriteCmd(0x0F);
+ 103   1      }
+ 104          
+ 105          void LCDCancelCursor()
+ 106          {
+ 107   1              LCDWriteCmd(0x0C);
+ 108   1      }
+ 109          
+ 110          void LCDClearAll()
+ 111          {
+ 112   1              LCDWriteCmd(0x30);
+ 113   1              LCDWriteCmd(0x01);
+ 114   1              LCDShowStr(0,0," ",1);
+ 115   1      }
+ 116          
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 14:35:00 PAGE 3   
+
+ 117          void LCDShowImage(uint8* image)
+ 118          {
+ 119   1              uint8 i,j;
+ 120   1      
+ 121   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
+ 122   1              LCDWriteCmd(0x34);
+ 123   1              for(i = 0; i < 32; i++){
+ 124   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 125   2                      LCDWriteCmd(0x80);
+ 126   2                      for( j = 0; j < 8; j++)
+ 127   2                      {
+ 128   3                              LCDWriteData(*image++);
+ 129   3                              LCDWriteData(*image++);
+ 130   3                      }
+ 131   2              }
+ 132   1              
+ 133   1              for(i = 0; i < 32; i++){
+ 134   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 135   2                      LCDWriteCmd(0x88);
+ 136   2                      for( j = 0; j < 8; j++)
+ 137   2                      {
+ 138   3                              LCDWriteData(*image++);
+ 139   3                              LCDWriteData(*image++);
+ 140   3                      }
+ 141   2              }       
+ 142   1              LCDWriteCmd(0x36);      
+ 143   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    428    ----
+   CONSTANT SIZE    =      2    ----
+   XDATA SIZE       =   ----      15
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

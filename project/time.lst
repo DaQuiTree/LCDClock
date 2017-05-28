@@ -1,0 +1,91 @@
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 14:35:01 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN ..\output\time.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\time.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\time.lst) OBJECT(.
+                    -.\output\time.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "ds1302.h"
+   3          #include "lcd12864.h"
+   4          #include "lunar.h"
+   5          
+   6          uint16* code weekCN[] = {
+   7                  "*","一","二","三","四","五","六","天"
+   8          };
+   9          
+  10          uint8 ClockGetLunar(struct sTime* curTime, uint16* lunarDate)
+  11          {
+  12   1              uint32 year,month,day;
+  13   1              
+  14   1              year = (curTime->year & 0xF0) * 10 + (curTime->year >> 4);
+  15   1              month = (curTime->month & 0xF0) * 10 + (curTime->month >> 4);
+  16   1              day = (curTime->day & 0xF0) * 10 + (curTime->day >> 4); 
+  17   1              return(GetLunarDate(year, month, day, lunarDate));
+  18   1      }
+  19          
+  20          void ShowCurrentTime()
+  21          {
+  22   1              static uint8 pSec = 0xAA;
+  23   1              static uint8 pDay = 0xAA;
+  24   1              uint8  tStr[20];
+  25   1              uint8  lunarLen;
+  26   1              uint16 lunar[8];
+  27   1      
+  28   1              DS1302BurstRead(&timeMod); 
+  29   1              if(pSec != timeMod.sec)
+  30   1              {
+  31   2                      pSec = timeMod.sec;
+  32   2                      tStr[0] = ' ';
+  33   2                      tStr[1] = (timeMod.month >> 4) + '0';   //月高
+  34   2                      tStr[2] = (timeMod.month & 0x0F) + '0';//月低
+  35   2                      tStr[3] = '-';//日期分隔符
+  36   2                      tStr[4] = (timeMod.day >> 4) + '0';     //日高
+  37   2                      tStr[5] = (timeMod.day & 0x0F) + '0';//日低
+  38   2                      tStr[6] = ' '; 
+  39   2                      tStr[7] = (timeMod.hour >> 4) + '0';    //时高
+  40   2                      tStr[8] = (timeMod.hour & 0x0F) + '0';//时低
+  41   2                      tStr[9] = ':';//时间分隔符
+  42   2                      tStr[10] = (timeMod.min >> 4) + '0';    //分高
+  43   2                      tStr[11] = (timeMod.min & 0x0F) + '0';//分低
+  44   2                      tStr[12] = ':';//时间分隔符
+  45   2                      tStr[13] = (timeMod.sec >> 4) + '0';    //秒高
+  46   2                      tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低
+  47   2                      LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间
+  48   2              }
+  49   1      /*      if(pDay != timeMod.day) //显示年、礼拜、农历
+  50   1              {
+  51   1                      pDay = timeMod.day;
+  52   1                      tStr[0] = '2';  //公元2000年
+  53   1                      tStr[1] = '0';
+  54   1                      tStr[2] = (timeMod.year >> 4) + '0';    //年高
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 14:35:01 PAGE 2   
+
+  55   1                      tStr[3] = (timeMod.year & 0x0F) + '0';//年低
+  56   1                      LCDShowStr(1,0,tStr,4);//第0行显示年份
+  57   1                      LCDShowCN(4,0,"礼拜",2);
+  58   1                      LCDShowCN(6,0,weekCN[timeMod.week],1);
+  59   1                      lunarLen = ClockGetLunar(&timeMod, lunar);
+  60   1                      LCDShowCN(1,2,lunar,lunarLen);
+  61   1              }  */
+  62   1      }
+*** WARNING C280 IN LINE 23 OF ..\SOURCE\TIME.C: 'pDay': unreferenced local variable
+*** WARNING C280 IN LINE 25 OF ..\SOURCE\TIME.C: 'lunarLen': unreferenced local variable
+*** WARNING C280 IN LINE 26 OF ..\SOURCE\TIME.C: 'lunar': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    361    ----
+   CONSTANT SIZE    =     46    ----
+   XDATA SIZE       =      2      55
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

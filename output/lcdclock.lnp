@@ -1,0 +1,7 @@
+"..\output\DS1302.obj",
+"..\output\LCD12864.obj",
+"..\output\main.obj",
+"..\output\time.obj",
+"..\output\lunar.obj" 
+TO "..\output\lcdclock" 
+PRINT(".\lcdclock.m51") RAMSIZE(256) 
