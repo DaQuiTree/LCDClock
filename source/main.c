@@ -3,8 +3,11 @@
 #include "lcd12864.h"
 #include "keyboard.h"
 #include "time.h"
+#include "DHT11.h"
 
 bit flag200ms = 0;
+bit flag2s = 0;
+
 uint8 T0RH = 0;
 uint8 T0RL = 0;
 
@@ -15,13 +18,20 @@ void main()
 	EA = 1;	
 	InitDS1302();										  
 	InitLCD12864();
-	ConfigureTimerZero(1);
+	ConfigureTimerZero(10);
+	ConfigureDHT11();
 
 	while(1)
 	{
 		if(flag200ms){
 			flag200ms = 0;
 			ShowCurrentTime();
+		}
+
+		if(flag2s)
+		{
+			flag2s = 0;
+			ShowTemp();
 		}
 	}
 }
@@ -48,15 +58,24 @@ void ConfigureTimerZero(uint8 ms)
 
 void InterruptTimerZero() interrupt 1
 {
-	static uint8 cnt = 0;
+	static uint8 cnt200ms = 0;
+	static uint8 cnt2s = 0;
 
 	TH0 = T0RH;
 	TL0 = T0RL;	
 
-	cnt++;
-	if(cnt >= 200)
+	cnt200ms++;
+	if(cnt200ms >= 20)
 	{
-		cnt = 0;
+		cnt200ms = 0;
 		flag200ms = 1;
 	}
+
+	cnt2s++;
+	if(cnt2s >= 200)
+	{
+		cnt2s = 0;
+		flag2s = 1;
+	}
+
 } 

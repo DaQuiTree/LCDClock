@@ -139,6 +139,7 @@ uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate)
 	lunarDate[i++] = 0xD4C2;
 	lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
 	lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
+	lunarDate[i++] = 0xA1A0; //¿Õ¸ñ
 	aniPos = (year + 2000 - 1900)%12;
 	if(animalNewYear)
 	{

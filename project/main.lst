@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 17:02:46 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 18:48:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -13,75 +13,94 @@ line level    source
    3          #include "lcd12864.h"
    4          #include "keyboard.h"
    5          #include "time.h"
-   6          
-   7          bit flag200ms = 0;
-   8          uint8 T0RH = 0;
-   9          uint8 T0RL = 0;
+   6          #include "DHT11.h"
+   7          
+   8          bit flag200ms = 0;
+   9          bit flag2s = 0;
   10          
-  11          void ConfigureTimerZero(uint8 ms);
-  12          
-  13          void main()
-  14          {
-  15   1              EA = 1; 
-  16   1              InitDS1302();                                                                             
-  17   1              InitLCD12864();
-  18   1              ConfigureTimerZero(1);
-  19   1      
-  20   1              while(1)
-  21   1              {
-  22   2                      if(flag200ms){
-  23   3                              flag200ms = 0;
-  24   3                              ShowCurrentTime();
-  25   3                      }
-  26   2              }
-  27   1      }
-  28          
-  29          void ConfigureTimerZero(uint8 ms)
-  30          {
-  31   1              uint16 tmp;
-  32   1      
-  33   1              tmp = 11059200/12/1000*ms;
-  34   1              tmp = 65536 - tmp+18;
-  35   1      
-  36   1              T0RH = (uint8)(tmp >> 8);
-  37   1              T0RL = (uint8) tmp;
-  38   1      
-  39   1              TMOD &= 0xF0;
-  40   1              TMOD |= 0x01;
-  41   1      
-  42   1              TH0 = T0RH;
-  43   1              TL0 = T0RL;
-  44   1      
-  45   1              TR0 = 1;
-  46   1              ET0 = 1;
-  47   1      }
-  48          
-  49          void InterruptTimerZero() interrupt 1
-  50          {
-  51   1              static uint8 cnt = 0;
-  52   1      
-  53   1              TH0 = T0RH;
-  54   1              TL0 = T0RL;     
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 17:02:46 PAGE 2   
+  11          uint8 T0RH = 0;
+  12          uint8 T0RL = 0;
+  13          
+  14          void ConfigureTimerZero(uint8 ms);
+  15          
+  16          void main()
+  17          {
+  18   1              EA = 1; 
+  19   1              InitDS1302();                                                                             
+  20   1              InitLCD12864();
+  21   1              ConfigureTimerZero(10);
+  22   1              ConfigureDHT11();
+  23   1      
+  24   1              while(1)
+  25   1              {
+  26   2                      if(flag200ms){
+  27   3                              flag200ms = 0;
+  28   3                              ShowCurrentTime();
+  29   3                      }
+  30   2      
+  31   2                      if(flag2s)
+  32   2                      {
+  33   3                              flag2s = 0;
+  34   3                              ShowTemp();
+  35   3                      }
+  36   2              }
+  37   1      }
+  38          
+  39          void ConfigureTimerZero(uint8 ms)
+  40          {
+  41   1              uint16 tmp;
+  42   1      
+  43   1              tmp = 11059200/12/1000*ms;
+  44   1              tmp = 65536 - tmp+18;
+  45   1      
+  46   1              T0RH = (uint8)(tmp >> 8);
+  47   1              T0RL = (uint8) tmp;
+  48   1      
+  49   1              TMOD &= 0xF0;
+  50   1              TMOD |= 0x01;
+  51   1      
+  52   1              TH0 = T0RH;
+  53   1              TL0 = T0RL;
+  54   1      
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 18:48:26 PAGE 2   
 
-  55   1      
-  56   1              cnt++;
-  57   1              if(cnt >= 200)
-  58   1              {
-  59   2                      cnt = 0;
-  60   2                      flag200ms = 1;
-  61   2              }
-  62   1      } 
+  55   1              TR0 = 1;
+  56   1              ET0 = 1;
+  57   1      }
+  58          
+  59          void InterruptTimerZero() interrupt 1
+  60          {
+  61   1              static uint8 cnt200ms = 0;
+  62   1              static uint8 cnt2s = 0;
+  63   1      
+  64   1              TH0 = T0RH;
+  65   1              TL0 = T0RL;     
+  66   1      
+  67   1              cnt200ms++;
+  68   1              if(cnt200ms >= 20)
+  69   1              {
+  70   2                      cnt200ms = 0;
+  71   2                      flag200ms = 1;
+  72   2              }
+  73   1      
+  74   1              cnt2s++;
+  75   1              if(cnt2s >= 200)
+  76   1              {
+  77   2                      cnt2s = 0;
+  78   2                      flag2s = 1;
+  79   2              }
+  80   1      
+  81   1      } 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     97    ----
+   CODE SIZE        =    122    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      3    ----
+   DATA SIZE        =      4    ----
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      1    ----
+   BIT SIZE         =      2    ----
 END OF MODULE INFORMATION.
 
 

@@ -2,6 +2,7 @@
 "..\output\LCD12864.obj",
 "..\output\main.obj",
 "..\output\time.obj",
-"..\output\lunar.obj" 
+"..\output\lunar.obj",
+"..\output\DHT11.obj" 
 TO "..\output\lcdclock" 
 PRINT(".\lcdclock.m51") RAMSIZE(256) 

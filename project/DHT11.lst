@@ -1,0 +1,92 @@
+C51 COMPILER V8.08   DHT11                                                                 05/28/2017 18:48:27 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
+OBJECT MODULE PLACED IN ..\output\DHT11.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DHT11.c BROWSE DEBUG OBJECTEXTEND PRINT(.\DHT11.lst) OBJECT(..\ou
+                    -tput\DHT11.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "dht11.h"
+   3          
+   4          #define _DHT11_C
+   5          
+   6          void DelayX10us(uint16 x)
+   7          {
+   8   1              
+   9   1              do{
+  10   2                      _nop_();
+  11   2                      _nop_();
+  12   2              }while(--x);    
+  13   1      }
+  14          
+  15          bit DHT11GetACK()
+  16          {
+  17   1              bit ack;
+  18   1      
+  19   1              DHT11_DATA = 0;
+  20   1              DelayX10us(2000);//延时20ms
+  21   1              DHT11_DATA = 1;                                                            
+  22   1              DelayX10us(4);
+  23   1              ack = DHT11_DATA;
+  24   1              
+  25   1              return ~ack;    
+  26   1      }
+  27          
+  28          
+  29          bit DHT11GetData(uint8* humi, uint8* temp) 
+  30          {
+  31   1              bit ack;
+  32   1              uint8 cnt = 32;
+  33   1              uint32 mdat = 0;
+  34   1      
+  35   1              ack = DHT11GetACK();
+  36   1              if(!ack)return ack;  //读数失败
+  37   1              while(!DHT11_DATA);       //等待DHT11拉高电平
+  38   1              DelayX10us(8);  
+  39   1      
+  40   1              while(cnt--){
+  41   2                      while(!DHT11_DATA);     //等待高电平到来                  
+  42   2                      TL1 = 0;
+  43   2                      TR1 = 1;
+  44   2                      while(DHT11_DATA);      //等待高电平结束
+  45   2                      TR1 = 0;                        //结束计时
+  46   2                      if(TL1 < 30){  //低电平
+  47   3                              mdat <<= 1; 
+  48   3                      }else{                  //高电平
+  49   3                              mdat <<= 1;
+  50   3                              mdat |= 0x1;
+  51   3                      }               
+  52   2              }
+  53   1      
+  54   1              *humi = (uint8)(mdat >> 24);
+C51 COMPILER V8.08   DHT11                                                                 05/28/2017 18:48:27 PAGE 2   
+
+  55   1              *temp = (uint8)(mdat >> 8);
+  56   1              return 1;       
+  57   1      }
+  58          
+  59          void ConfigureDHT11()
+  60          {
+  61   1              TMOD &= 0x0F;
+  62   1              TMOD |= 0x10;
+  63   1      
+  64   1              ET1 = 0;
+  65   1              PT1 = 1;        //定时器1设置高优先级
+  66   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    215    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 1   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 18:48:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LUNAR
@@ -62,7 +62,7 @@ line level    source
   42          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
   43          {  
   44   1          uint16 Spring_NY,Sun_NY;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 2   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 18:48:26 PAGE 2   
 
   45   1          uint8 index,flag,StaticDayCount;  
   46   1          //Spring_NY 记录春节离当年元旦的天数。  
@@ -126,7 +126,7 @@ line level    source
  104   2              while (Spring_NY > StaticDayCount)  
  105   2              {  
  106   3                  Spring_NY -= StaticDayCount;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 3   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 18:48:26 PAGE 3   
 
  107   3                  index--;  
  108   3                  if (flag == 0)  
@@ -163,35 +163,36 @@ line level    source
  139   1              lunarDate[i++] = 0xD4C2;
  140   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
  141   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
- 142   1              aniPos = (year + 2000 - 1900)%12;
- 143   1              if(animalNewYear)
- 144   1              {
- 145   2                      lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
- 146   2              }else{
- 147   2                      if(aniPos == 0) 
- 148   2                      {
- 149   3                              aniPos = 11;
- 150   3                      }else{
- 151   3                              aniPos--;
- 152   3                      }
- 153   2                      lunarDate[i++] = ChAnimal[aniPos]; //未过春节属相计算
- 154   2              }
- 155   1              
- 156   1              return i;
- 157   1      } 
+ 142   1              lunarDate[i++] = 0xA1A0; //空格
+ 143   1              aniPos = (year + 2000 - 1900)%12;
+ 144   1              if(animalNewYear)
+ 145   1              {
+ 146   2                      lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
+ 147   2              }else{
+ 148   2                      if(aniPos == 0) 
+ 149   2                      {
+ 150   3                              aniPos = 11;
+ 151   3                      }else{
+ 152   3                              aniPos--;
+ 153   3                      }
+ 154   2                      lunarDate[i++] = ChAnimal[aniPos]; //未过春节属相计算
+ 155   2              }
+ 156   1              
+ 157   1              return i;
+ 158   1      } 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1205    ----
+   CODE SIZE        =   1227    ----
    CONSTANT SIZE    =    618    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      4      17
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
-END OF MODULE INFORMATION.
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 18:48:26 PAGE 4   
 
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 4   
+END OF MODULE INFORMATION.
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

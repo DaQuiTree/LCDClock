@@ -2,6 +2,7 @@
 #include "ds1302.h"
 #include "lcd12864.h"
 #include "lunar.h"
+#include "DHT11.h"
 
 uint16* code weekCN[] = {
 	"*","一","二","三","四","五","六","天"
@@ -13,7 +14,7 @@ void ShowCurrentTime()
 	static uint8 pDay = 0xAA;
 	uint8  tStr[20];
 	uint8  lunarLen, lday, lyear, lmonth;
-	uint16 lunar[6];
+	uint16 lunar[7];
 
 	DS1302BurstRead(&timeMod); 
 	if(pSec != timeMod.sec)
@@ -52,4 +53,20 @@ void ShowCurrentTime()
 		lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
 		LCDShowCN(1,2,lunar,lunarLen);
 	}  
+}
+
+void ShowTemp()
+{
+	uint8 temp,humi;
+	uint8 dat[16] = "  30    45%RH   ";
+	uint16 symbol = 0xA1E6;
+
+	DHT11GetData(&humi, &temp);
+	dat[2] = temp/10 + '0';
+	dat[3] = temp%10 + '0';
+	dat[8] = humi/10 + '0';
+	dat[9] = humi%10 + '0';
+
+	LCDShowStr(0,3,dat,16);
+	LCDShowCN(2,3,&symbol,1);
 }

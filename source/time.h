@@ -12,5 +12,6 @@
  #endif
 
  void ShowCurrentTime();
+ void ShowTemp();
 
  #endif

@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  05/28/2017 17:02:46 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 18:48:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -12,68 +12,85 @@ line level    source
    2          #include "ds1302.h"
    3          #include "lcd12864.h"
    4          #include "lunar.h"
-   5          
-   6          uint16* code weekCN[] = {
-   7                  "*","一","二","三","四","五","六","天"
-   8          };
-   9          
-  10          void ShowCurrentTime()
-  11          {
-  12   1              static uint8 pSec = 0xAA;
-  13   1              static uint8 pDay = 0xAA;
-  14   1              uint8  tStr[20];
-  15   1              uint8  lunarLen, lday, lyear, lmonth;
-  16   1              uint16 lunar[6];
-  17   1      
-  18   1              DS1302BurstRead(&timeMod); 
-  19   1              if(pSec != timeMod.sec)
-  20   1              {
-  21   2                      pSec = timeMod.sec;
-  22   2                      tStr[0] = ' ';
-  23   2                      tStr[1] = (timeMod.month >> 4) + '0';   //月高
-  24   2                      tStr[2] = (timeMod.month & 0x0F) + '0';//月低
-  25   2                      tStr[3] = '-';//日期分隔符
-  26   2                      tStr[4] = (timeMod.day >> 4) + '0';     //日高
-  27   2                      tStr[5] = (timeMod.day & 0x0F) + '0';//日低
-  28   2                      tStr[6] = ' '; 
-  29   2                      tStr[7] = (timeMod.hour >> 4) + '0';    //时高
-  30   2                      tStr[8] = (timeMod.hour & 0x0F) + '0';//时低
-  31   2                      tStr[9] = ':';//时间分隔符
-  32   2                      tStr[10] = (timeMod.min >> 4) + '0';    //分高
-  33   2                      tStr[11] = (timeMod.min & 0x0F) + '0';//分低
-  34   2                      tStr[12] = ':';//时间分隔符
-  35   2                      tStr[13] = (timeMod.sec >> 4) + '0';    //秒高
-  36   2                      tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低
-  37   2                      LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间
-  38   2              }
-  39   1              if(pDay != timeMod.day) //显示年、礼拜、农历
-  40   1              {
-  41   2                      pDay = timeMod.day;
-  42   2                      tStr[0] = '2';  //公元2000年
-  43   2                      tStr[1] = '0';
-  44   2                      tStr[2] = (timeMod.year >> 4) + '0';    //年高
-  45   2                      tStr[3] = (timeMod.year & 0x0F) + '0';//年低
-  46   2                      LCDShowStr(1,0,tStr,4);//第0行显示年份
-  47   2                      LCDShowCN(4,0,"礼拜",2);
-*** WARNING C182 IN LINE 47 OF ..\SOURCE\TIME.C: pointer to different objects
-  48   2                      LCDShowCN(6,0,weekCN[timeMod.week],1);
-  49   2                      lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
-  50   2                      lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
-  51   2                      lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
-  52   2                      lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
-  53   2                      LCDShowCN(1,2,lunar,lunarLen);
-C51 COMPILER V8.08   TIME                                                                  05/28/2017 17:02:46 PAGE 2   
+   5          #include "DHT11.h"
+   6          
+   7          uint16* code weekCN[] = {
+   8                  "*","一","二","三","四","五","六","天"
+   9          };
+  10          
+  11          void ShowCurrentTime()
+  12          {
+  13   1              static uint8 pSec = 0xAA;
+  14   1              static uint8 pDay = 0xAA;
+  15   1              uint8  tStr[20];
+  16   1              uint8  lunarLen, lday, lyear, lmonth;
+  17   1              uint16 lunar[7];
+  18   1      
+  19   1              DS1302BurstRead(&timeMod); 
+  20   1              if(pSec != timeMod.sec)
+  21   1              {
+  22   2                      pSec = timeMod.sec;
+  23   2                      tStr[0] = ' ';
+  24   2                      tStr[1] = (timeMod.month >> 4) + '0';   //月高
+  25   2                      tStr[2] = (timeMod.month & 0x0F) + '0';//月低
+  26   2                      tStr[3] = '-';//日期分隔符
+  27   2                      tStr[4] = (timeMod.day >> 4) + '0';     //日高
+  28   2                      tStr[5] = (timeMod.day & 0x0F) + '0';//日低
+  29   2                      tStr[6] = ' '; 
+  30   2                      tStr[7] = (timeMod.hour >> 4) + '0';    //时高
+  31   2                      tStr[8] = (timeMod.hour & 0x0F) + '0';//时低
+  32   2                      tStr[9] = ':';//时间分隔符
+  33   2                      tStr[10] = (timeMod.min >> 4) + '0';    //分高
+  34   2                      tStr[11] = (timeMod.min & 0x0F) + '0';//分低
+  35   2                      tStr[12] = ':';//时间分隔符
+  36   2                      tStr[13] = (timeMod.sec >> 4) + '0';    //秒高
+  37   2                      tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低
+  38   2                      LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间
+  39   2              }
+  40   1              if(pDay != timeMod.day) //显示年、礼拜、农历
+  41   1              {
+  42   2                      pDay = timeMod.day;
+  43   2                      tStr[0] = '2';  //公元2000年
+  44   2                      tStr[1] = '0';
+  45   2                      tStr[2] = (timeMod.year >> 4) + '0';    //年高
+  46   2                      tStr[3] = (timeMod.year & 0x0F) + '0';//年低
+  47   2                      LCDShowStr(1,0,tStr,4);//第0行显示年份
+  48   2                      LCDShowCN(4,0,"礼拜",2);
+*** WARNING C182 IN LINE 48 OF ..\SOURCE\TIME.C: pointer to different objects
+  49   2                      LCDShowCN(6,0,weekCN[timeMod.week],1);
+  50   2                      lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
+  51   2                      lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
+  52   2                      lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
+  53   2                      lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 18:48:26 PAGE 2   
 
-  54   2              }  
-  55   1      }
+  54   2                      LCDShowCN(1,2,lunar,lunarLen);
+  55   2              }  
+  56   1      }
+  57          
+  58          void ShowTemp()
+  59          {
+  60   1              uint8 temp,humi;
+  61   1              uint8 dat[16] = "  30    45%RH   ";
+  62   1              uint16 symbol = 0xA1E6;
+  63   1      
+  64   1              DHT11GetData(&humi, &temp);
+  65   1              dat[2] = temp/10 + '0';
+  66   1              dat[3] = temp%10 + '0';
+  67   1              dat[8] = humi/10 + '0';
+  68   1              dat[9] = humi%10 + '0';
+  69   1      
+  70   1              LCDShowStr(0,3,dat,16);
+  71   1              LCDShowCN(2,3,&symbol,1);
+  72   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    313    ----
-   CONSTANT SIZE    =     51    ----
+   CODE SIZE        =    432    ----
+   CONSTANT SIZE    =     67    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2      32
+   DATA SIZE        =      2      54
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
