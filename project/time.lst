@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  05/28/2017 16:50:35 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 17:02:46 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -23,7 +23,7 @@ line level    source
   13   1              static uint8 pDay = 0xAA;
   14   1              uint8  tStr[20];
   15   1              uint8  lunarLen, lday, lyear, lmonth;
-  16   1              uint16 lunar[5];
+  16   1              uint16 lunar[6];
   17   1      
   18   1              DS1302BurstRead(&timeMod); 
   19   1              if(pSec != timeMod.sec)
@@ -57,12 +57,12 @@ line level    source
   47   2                      LCDShowCN(4,0,"РёАн",2);
 *** WARNING C182 IN LINE 47 OF ..\SOURCE\TIME.C: pointer to different objects
   48   2                      LCDShowCN(6,0,weekCN[timeMod.week],1);
-  49   2                      lyear = (timeMod.year & 0xF0) * 10 + (timeMod.year >> 4);
-  50   2                      lmonth = (timeMod.month & 0xF0) * 10 + (timeMod.month >> 4);
-  51   2                      lday = (timeMod.day & 0xF0) * 10 + (timeMod.day >> 4); 
+  49   2                      lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
+  50   2                      lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
+  51   2                      lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
   52   2                      lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
   53   2                      LCDShowCN(1,2,lunar,lunarLen);
-C51 COMPILER V8.08   TIME                                                                  05/28/2017 16:50:35 PAGE 2   
+C51 COMPILER V8.08   TIME                                                                  05/28/2017 17:02:46 PAGE 2   
 
   54   2              }  
   55   1      }
@@ -73,7 +73,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =     51    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2      30
+   DATA SIZE        =      2      32
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

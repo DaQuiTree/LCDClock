@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 1   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LUNAR
@@ -62,7 +62,7 @@ line level    source
   42          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
   43          {  
   44   1          uint16 Spring_NY,Sun_NY;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 2   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 2   
 
   45   1          uint8 index,flag,StaticDayCount;  
   46   1          //Spring_NY 记录春节离当年元旦的天数。  
@@ -126,7 +126,7 @@ line level    source
  104   2              while (Spring_NY > StaticDayCount)  
  105   2              {  
  106   3                  Spring_NY -= StaticDayCount;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 3   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 3   
 
  107   3                  index--;  
  108   3                  if (flag == 0)  
@@ -191,7 +191,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 4   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 17:02:46 PAGE 4   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

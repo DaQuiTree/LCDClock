@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.05                                                        05/28/2017  16:50:35  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.05                                                        05/28/2017  17:02:46  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
@@ -50,8 +50,8 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
             BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
             BIT     0020H.1   0000H.1   UNIT         ?BI?LUNAR
                     0020H.2   0000H.6                *** GAP ***
-            DATA    0021H     002FH     UNIT         _DATA_GROUP_
-            IDATA   0050H     0001H     UNIT         ?STACK
+            DATA    0021H     0031H     UNIT         _DATA_GROUP_
+            IDATA   0052H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
             CODE    0008H     0002H     UNIT         ?CO?LCD12864
                     000AH     0001H                  *** GAP ***
             CODE    000BH     0003H     ABSOLUTE     
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 2
 
 
             CODE    000EH     034FH     UNIT         ?PR?_LUNARCALENDAR?LUNAR
@@ -119,7 +119,7 @@ SEGMENT                                 DATA_GROUP
   +--> ?PR?DS1302READBYTE?DS1302
 
 ?PR?_DS1302SINGLEWRITE?DS1302         -----    -----
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 3
 
 
   +--> ?PR?_DS1302WRITEBYTE?DS1302
@@ -135,7 +135,7 @@ SEGMENT                                 DATA_GROUP
 ?PR?_LCDWRITECMD?LCD12864             -----    -----
   +--> ?PR?LCDWAITREADY?LCD12864
 
-?PR?_LCDSHOWSTR?LCD12864              003FH    0006H
+?PR?_LCDSHOWSTR?LCD12864              0041H    0006H
   +--> ?PR?_LCDSETCURSOR?LCD12864
   +--> ?PR?_LCDWRITEDATA?LCD12864
 
@@ -145,7 +145,7 @@ SEGMENT                                 DATA_GROUP
 ?PR?_LCDWRITEDATA?LCD12864            -----    -----
   +--> ?PR?LCDWAITREADY?LCD12864
 
-?PR?SHOWCURRENTTIME?TIME              0021H    001EH
+?PR?SHOWCURRENTTIME?TIME              0021H    0020H
   +--> ?PR?_DS1302BURSTREAD?DS1302
   +--> ?PR?_LCDSHOWSTR?LCD12864
   +--> ?CO?TIME
@@ -156,15 +156,15 @@ SEGMENT                                 DATA_GROUP
   +--> ?PR?_DS1302WRITEBYTE?DS1302
   +--> ?PR?DS1302READBYTE?DS1302
 
-?PR?_LCDSHOWCN?LCD12864               003FH    0006H
+?PR?_LCDSHOWCN?LCD12864               0041H    0006H
   +--> ?PR?_LCDSETCURSOR?LCD12864
   +--> ?PR?_LCDWRITEDATA?LCD12864
 
-?PR?_GETLUNARDATE?LUNAR               003FH    0007H
+?PR?_GETLUNARDATE?LUNAR               0041H    0007H
   +--> ?PR?_LUNARCALENDAR?LUNAR
   +--> ?CO?LUNAR
 
-?PR?_LUNARCALENDAR?LUNAR              0046H    000AH
+?PR?_LUNARCALENDAR?LUNAR              0048H    000AH
   +--> ?CO?LUNAR
 
 
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0090H         PUBLIC        P1
   C:0BDDH         PUBLIC        _DS1302BurstWrite
   D:00A0H         PUBLIC        P2
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 4
 
 
   D:00B0H         PUBLIC        P3
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0D20H         LINE#         31
   C:0D22H         LINE#         32
   C:0D24H         LINE#         33
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 5
 
 
   C:0D26H         LINE#         34
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0007H         SYMBOL        reg
   D:0005H         SYMBOL        dat
   C:0DAFH         LINE#         83
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 6
 
 
   C:0DAFH         LINE#         84
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:00C8H         PUBLIC        T2CON
   C:0CF6H         PUBLIC        InitLCD12864
   C:0DF7H         PUBLIC        _LCDWriteCmd
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 7
 
 
   C:0003H         PUBLIC        LCDShowCursor
@@ -419,12 +419,12 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         ENDPROC       INITLCD12864
   -------         PROC          _LCDSHOWSTR
   D:0007H         SYMBOL        x
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 8
 
 
   D:0005H         SYMBOL        y
-  D:0041H         SYMBOL        str
-  D:0044H         SYMBOL        strlen
+  D:0043H         SYMBOL        str
+  D:0046H         SYMBOL        strlen
   C:0CD4H         LINE#         48
   C:0CDAH         LINE#         49
   C:0CDAH         LINE#         50
@@ -435,10 +435,10 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0CF5H         LINE#         55
   -------         ENDPROC       _LCDSHOWSTR
   -------         PROC          _LCDSHOWCN
-  D:003FH         SYMBOL        x
-  D:0040H         SYMBOL        y
-  D:0041H         SYMBOL        str
-  D:0044H         SYMBOL        strlen
+  D:0041H         SYMBOL        x
+  D:0042H         SYMBOL        y
+  D:0043H         SYMBOL        str
+  D:0046H         SYMBOL        strlen
   -------         DO            
   D:0003H         SYMBOL        msb
   D:0005H         SYMBOL        lsb
@@ -479,7 +479,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0CC5H         LINE#         87
   C:0CC7H         LINE#         88
   C:0CC7H         LINE#         89
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 9
 
 
   C:0CCBH         LINE#         90
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0B48H         LINE#         142
   -------         ENDPROC       _LCDSHOWIMAGE
   -------         ENDMOD        LCD12864
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 10
 
 
 
@@ -599,7 +599,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0CA4H         LINE#         45
   C:0CA6H         LINE#         46
   C:0CA8H         LINE#         47
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 11
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 11
 
 
   -------         ENDPROC       _CONFIGURETIMERZERO
@@ -659,7 +659,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0941H         LINE#         28
   C:0944H         LINE#         29
   C:094DH         LINE#         30
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 12
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 12
 
 
   C:0955H         LINE#         31
@@ -711,18 +711,18 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          _LUNARCALENDAR
-  D:0046H         SYMBOL        year
-  D:0047H         SYMBOL        month
-  D:0048H         SYMBOL        day
+  D:0048H         SYMBOL        year
+  D:0049H         SYMBOL        month
+  D:004AH         SYMBOL        day
   -------         DO            
-  D:0049H         SYMBOL        Spring_NY
-  D:004BH         SYMBOL        Sun_NY
-  D:004DH         SYMBOL        index
-  D:004EH         SYMBOL        flag
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 13
+  D:004BH         SYMBOL        Spring_NY
+  D:004DH         SYMBOL        Sun_NY
+  D:004FH         SYMBOL        index
+  D:0050H         SYMBOL        flag
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 13
 
 
-  D:004FH         SYMBOL        StaticDayCount
+  D:0051H         SYMBOL        StaticDayCount
   -------         ENDDO         
   C:000EH         LINE#         42
   C:0014H         LINE#         43
@@ -779,7 +779,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0269H         LINE#         109
   C:026BH         LINE#         110
   C:02A0H         LINE#         111
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 14
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 14
 
 
   C:02A3H         LINE#         112
@@ -796,12 +796,12 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:035CH         LINE#         125
   -------         ENDPROC       _LUNARCALENDAR
   -------         PROC          _GETLUNARDATE
-  D:003FH         SYMBOL        year
+  D:0041H         SYMBOL        year
   D:0005H         SYMBOL        month
   D:0003H         SYMBOL        day
-  D:0042H         SYMBOL        lunarDate
+  D:0044H         SYMBOL        lunarDate
   -------         DO            
-  D:0045H         SYMBOL        i
+  D:0047H         SYMBOL        i
   D:0007H         SYMBOL        aniPos
   -------         ENDDO         
   C:07A1H         LINE#         127
@@ -839,7 +839,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:05C7H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 15
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 15
 
 
   -------         MODULE        ?C?CLDOPTR
@@ -899,7 +899,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:50:35  PAGE 16
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  17:02:46  PAGE 16
 
 
 
@@ -909,5 +909,5 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
 
-Program Size: data=76.2 xdata=0 code=3595
+Program Size: data=78.2 xdata=0 code=3595
 LINK/LOCATE RUN COMPLETE.  4 WARNING(S),  0 ERROR(S)

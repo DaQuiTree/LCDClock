@@ -13,7 +13,7 @@ void ShowCurrentTime()
 	static uint8 pDay = 0xAA;
 	uint8  tStr[20];
 	uint8  lunarLen, lday, lyear, lmonth;
-	uint16 lunar[5];
+	uint16 lunar[6];
 
 	DS1302BurstRead(&timeMod); 
 	if(pSec != timeMod.sec)
@@ -46,9 +46,9 @@ void ShowCurrentTime()
 		LCDShowStr(1,0,tStr,4);//第0行显示年份
 		LCDShowCN(4,0,"礼拜",2);
 		LCDShowCN(6,0,weekCN[timeMod.week],1);
-		lyear = (timeMod.year & 0xF0) * 10 + (timeMod.year >> 4);
-		lmonth = (timeMod.month & 0xF0) * 10 + (timeMod.month >> 4);
-		lday = (timeMod.day & 0xF0) * 10 + (timeMod.day >> 4); 
+		lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
+		lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
+		lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
 		lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
 		LCDShowCN(1,2,lunar,lunarLen);
 	}  
