@@ -7,23 +7,13 @@ uint16* code weekCN[] = {
 	"*","一","二","三","四","五","六","天"
 };
 
-uint8 ClockGetLunar(struct sTime* curTime, uint16* lunarDate)
-{
-	uint32 year,month,day;
-	
-	year = (curTime->year & 0xF0) * 10 + (curTime->year >> 4);
-	month = (curTime->month & 0xF0) * 10 + (curTime->month >> 4);
-	day = (curTime->day & 0xF0) * 10 + (curTime->day >> 4); 
-	return(GetLunarDate(year, month, day, lunarDate));
-}
-
 void ShowCurrentTime()
 {
 	static uint8 pSec = 0xAA;
 	static uint8 pDay = 0xAA;
 	uint8  tStr[20];
-	uint8  lunarLen;
-	uint16 lunar[8];
+	uint8  lunarLen, lday, lyear, lmonth;
+	uint16 lunar[5];
 
 	DS1302BurstRead(&timeMod); 
 	if(pSec != timeMod.sec)
@@ -46,7 +36,7 @@ void ShowCurrentTime()
 		tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低
 		LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间
 	}
-/*	if(pDay != timeMod.day)	//显示年、礼拜、农历
+	if(pDay != timeMod.day)	//显示年、礼拜、农历
 	{
 		pDay = timeMod.day;
 		tStr[0] = '2';	//公元2000年
@@ -56,7 +46,10 @@ void ShowCurrentTime()
 		LCDShowStr(1,0,tStr,4);//第0行显示年份
 		LCDShowCN(4,0,"礼拜",2);
 		LCDShowCN(6,0,weekCN[timeMod.week],1);
-		lunarLen = ClockGetLunar(&timeMod, lunar);
+		lyear = (timeMod.year & 0xF0) * 10 + (timeMod.year >> 4);
+		lmonth = (timeMod.month & 0xF0) * 10 + (timeMod.month >> 4);
+		lday = (timeMod.day & 0xF0) * 10 + (timeMod.day >> 4); 
+		lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
 		LCDShowCN(1,2,lunar,lunarLen);
-	}  */
+	}  
 }

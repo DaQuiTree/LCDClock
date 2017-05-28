@@ -1,10 +1,10 @@
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 14:35:01 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 16:50:34 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN ..\output\main.obj
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\main.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(.
-                    -.\output\main.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(..\outp
+                    -ut\main.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1              TH0 = T0RH;
   54   1              TL0 = T0RL;     
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 14:35:01 PAGE 2   
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 16:50:34 PAGE 2   
 
   55   1      
   56   1              cnt++;
@@ -75,11 +75,11 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    120    ----
+   CODE SIZE        =     97    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =      3    ----
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      3    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.

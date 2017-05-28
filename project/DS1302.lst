@@ -1,10 +1,10 @@
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 1   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 16:50:34 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DS1302
 OBJECT MODULE PLACED IN ..\output\DS1302.obj
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DS1302.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\DS1302.lst) OBJE
-                    -CT(..\output\DS1302.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DS1302.c BROWSE DEBUG OBJECTEXTEND PRINT(.\DS1302.lst) OBJECT(..\
+                    -output\DS1302.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1              DS1302_CE = 0;
   53   1      
   54   1              time->sec &= 0x7F;
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 2   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 16:50:34 PAGE 2   
 
   55   1      }
   56          
@@ -126,13 +126,13 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 3   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 16:50:34 PAGE 3   
 
-   CODE SIZE        =    276    ----
+   CODE SIZE        =    267    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =      8       8
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      8       8
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

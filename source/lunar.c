@@ -1,5 +1,5 @@
-#include <config.h>
-#include <lcd12864.h>
+#include "config.h"
+#include "lcd12864.h"
  
 uint32 code LunarCalendarTable[99] =  
 {    

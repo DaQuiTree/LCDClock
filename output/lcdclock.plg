@@ -3,8 +3,8 @@
 <pre>
 <h1>µVision3 Build Log</h1>
 <h2>Project:</h2>
-G:\new keil\LCDClock\project\lcdclock.uv2
-Project File Date:  05/21/2017
+G:\GitHub Project\LCDClock\project\lcdclock.uv2
+Project File Date:  05/24/2017
 
 <h2>Output:</h2>
 Build target 'Target 1'
@@ -12,97 +12,9 @@ compiling DS1302.c...
 compiling LCD12864.c...
 compiling main.c...
 compiling time.c...
-..\SOURCE\TIME.C(10): error C141: syntax error near '*', expected ')'
-..\SOURCE\TIME.C(14): error C202: 'curTime': undefined identifier
-..\SOURCE\TIME.C(15): error C202: 'curTime': undefined identifier
-..\SOURCE\TIME.C(16): error C202: 'curTime': undefined identifier
-..\SOURCE\TIME.C(17): error C202: 'lunarDate': undefined identifier
-Target not created
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(17): error C202: 'lunarDate': undefined identifier
-Target not created
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 027EH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0281H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0284H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0287H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0289H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 028BH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 028EH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0291H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0294H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0297H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 029AH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 02A4H
-Program Size: data=79.1 xdata=0 code=1650
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 19 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
+..\SOURCE\TIME.C(23): warning C280: 'pDay': unreferenced local variable
+..\SOURCE\TIME.C(25): warning C280: 'lunarLen': unreferenced local variable
+..\SOURCE\TIME.C(26): warning C280: 'lunar': unreferenced local variable
 compiling lunar.c...
 ..\source\lunar.c(1): warning C318: can't open file 'config.h'
 ..\source\lunar.c(2): warning C318: can't open file 'lcd12864.h'
@@ -124,18 +36,45 @@ linking...
     SEGMENT: ?PR?LCDCLEARALL?LCD12864
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: _DATA_GROUP_
-    LENGTH:  0066H
-Program Size: data=131.2 xdata=0 code=4789
+Program Size: data=100.2 xdata=0 code=3679
+creating hex file from "..\output\lcdclock"...
+"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+compiling DS1302.c...
+compiling LCD12864.c...
+compiling main.c...
+compiling time.c...
+..\SOURCE\TIME.C(55): warning C182: pointer to different objects
+compiling lunar.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDCLEARALL?LCD12864
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
+Program Size: data=76.2 xdata=0 code=3553
+creating hex file from "..\output\lcdclock"...
+"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+compiling DS1302.c...
+compiling LCD12864.c...
+compiling main.c...
+compiling time.c...
+..\SOURCE\TIME.C(47): warning C182: pointer to different objects
+..\SOURCE\TIME.C(49): error C202: 'curTime': undefined identifier
+..\SOURCE\TIME.C(50): error C202: 'curTime': undefined identifier
+..\SOURCE\TIME.C(51): error C202: 'curTime': undefined identifier
+compiling lunar.c...
 Target not created
 Build target 'Target 1'
 compiling DS1302.c...
 compiling LCD12864.c...
 compiling main.c...
 compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
+..\SOURCE\TIME.C(47): warning C182: pointer to different objects
 compiling lunar.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -146,487 +85,6 @@ linking...
     SEGMENT: ?PR?LCDCLEARALL?LCD12864
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
+Program Size: data=76.2 xdata=0 code=3595
 creating hex file from "..\output\lcdclock"...
 "..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 030BH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 031FH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 032FH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0348H
-Program Size: data=9.1 xdata=70 code=1875
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 11 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 030BH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 031FH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  ?_GETLUNARDATE?BYTE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 032FH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _GETLUNARDATE
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0348H
-Program Size: data=9.1 xdata=70 code=1875
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 11 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-..\SOURCE\TIME.C(60): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=123 code=5602
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 6 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-..\SOURCE\TIME.C(60): warning C182: pointer to different objects
-..\SOURCE\TIME.C(25): warning C280: 'lunarLen': unreferenced local variable
-..\SOURCE\TIME.C(26): warning C280: 'lunar': unreferenced local variable
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_CLOCKGETLUNAR?TIME
-Program Size: data=9.2 xdata=129 code=5574
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 9 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5592
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-..\source\lunar.c(1): warning C318: can't open file 'config.h'
-..\source\lunar.c(2): warning C318: can't open file 'lcd12864.h'
-..\SOURCE\LUNAR.C(4): error C129: missing ';' before 'code'
-Target not created
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: _DATA_GROUP_
-    LENGTH:  0066H
-Program Size: data=131.2 xdata=0 code=4389
-Target not created
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5192
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(57): warning C182: pointer to different objects
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-Program Size: data=9.2 xdata=122 code=5051
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(23): warning C280: 'pDay': unreferenced local variable
-..\SOURCE\TIME.C(25): warning C280: 'lunarLen': unreferenced local variable
-..\SOURCE\TIME.C(26): warning C280: 'lunar': unreferenced local variable
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWCN?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_CLOCKGETLUNAR?TIME
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?CO?TIME
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?DS1302
-    LENGTH:  0008H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?_LCDSHOWIMAGE?LCD12864
-    LENGTH:  0003H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?MAIN
-    LENGTH:  0003H
-*** ERROR L107: ADDRESS SPACE OVERFLOW
-    SPACE:   DATA    
-    SEGMENT: ?DT?TIME
-    LENGTH:  0002H
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  TIMEMOD
-    SEGMENT: ?DT?DS1302
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  T0RL
-    SEGMENT: ?DT?MAIN
-*** ERROR L105: PUBLIC REFERS TO IGNORED SEGMENT
-    SYMBOL:  T0RH
-    SEGMENT: ?DT?MAIN
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CDAH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CDCH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CE3H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CE7H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CEDH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0CF6H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D01H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D0AH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D15H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D1EH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D29H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D32H
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D3DH
-*** ERROR L118: REFERENCE MADE TO ERRONEOUS EXTERNAL
-    SYMBOL:  TIMEMOD
-    MODULE:  ..\output\time.obj (TIME)
-    ADDRESS: 0D46H
-Program Size: data=144.2 xdata=0 code=4248
-Target not created
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-..\SOURCE\TIME.C(23): warning C280: 'pDay': unreferenced local variable
-..\SOURCE\TIME.C(25): warning C280: 'lunarLen': unreferenced local variable
-..\SOURCE\TIME.C(26): warning C280: 'lunar': unreferenced local variable
-compiling lunar.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWCN?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCLEARALL?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_CLOCKGETLUNAR?TIME
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?CO?TIME
-Program Size: data=9.2 xdata=135 code=5019
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 10 Warning(s).

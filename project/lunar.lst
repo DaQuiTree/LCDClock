@@ -1,10 +1,10 @@
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 14:35:01 PAGE 1   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LUNAR
 OBJECT MODULE PLACED IN ..\output\lunar.obj
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\lunar.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\lunar.lst) OBJECT
-                    -(..\output\lunar.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\lunar.c BROWSE DEBUG OBJECTEXTEND PRINT(.\lunar.lst) OBJECT(..\ou
+                    -tput\lunar.obj)
 
 line level    source
 
@@ -59,18 +59,18 @@ line level    source
   39          uint32 LunarCalendarDay;
   40          bit animalNewYear; 
   41          
-  42          bit LunarCalendar(uint32 year,int32 month,int32 day)  
+  42          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
   43          {  
-  44   1          int32 Spring_NY,Sun_NY,StaticDayCount;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 14:35:01 PAGE 2   
+  44   1          uint16 Spring_NY,Sun_NY;  
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 2   
 
-  45   1          int32 index,flag;  
+  45   1          uint8 index,flag,StaticDayCount;  
   46   1          //Spring_NY 记录春节离当年元旦的天数。  
   47   1          //Sun_NY 记录阳历日离当年元旦的天数。  
-  48   1          if ( ((LunarCalendarTable[year-2001] & 0x0060) >> 5) == 1)  
-  49   1              Spring_NY = (LunarCalendarTable[year-2001] & 0x001F) - 1;  
+  48   1          if ( ((LunarCalendarTable[year-1] & 0x0060) >> 5) == 1)  
+  49   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1;  
   50   1          else  
-  51   1              Spring_NY = (LunarCalendarTable[year-2001] & 0x001F) - 1 + 31;  
+  51   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1 + 31;  
   52   1          Sun_NY = MonthAdd[month-1] + day - 1;  
   53   1          if ( (!(year % 4)) && (month > 2))  
   54   1              Sun_NY++;  
@@ -85,7 +85,7 @@ line level    source
   63   2              month = 1;  
   64   2              index = 1;  
   65   2              flag = 0;  
-  66   2              if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+  66   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
   67   2                  StaticDayCount = 29;  
   68   2              else  
   69   2                  StaticDayCount = 30;  
@@ -93,7 +93,7 @@ line level    source
   71   2              {  
   72   3                  Sun_NY -= StaticDayCount;  
   73   3                  index++;  
-  74   3                  if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20) )  
+  74   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) )  
   75   3                  {  
   76   4                      flag = ~flag;  
   77   4                      if (flag == 0)  
@@ -101,7 +101,7 @@ line level    source
   79   4                  }  
   80   3                  else  
   81   3                      month++;  
-  82   3                  if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+  82   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
   83   3                      StaticDayCount=29;  
   84   3                  else  
   85   3                      StaticDayCount=30;  
@@ -114,41 +114,41 @@ line level    source
   92   2              Spring_NY -= Sun_NY;  
   93   2              year--;  
   94   2              month = 12;  
-  95   2              if ( ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20) == 0)  
+  95   2              if ( ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) == 0)  
   96   2                  index = 12;  
   97   2              else  
   98   2                  index = 13;  
   99   2              flag = 0;  
- 100   2              if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+ 100   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
  101   2                  StaticDayCount = 29;  
  102   2              else  
  103   2                  StaticDayCount = 30;  
  104   2              while (Spring_NY > StaticDayCount)  
  105   2              {  
  106   3                  Spring_NY -= StaticDayCount;  
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 14:35:01 PAGE 3   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 3   
 
  107   3                  index--;  
  108   3                  if (flag == 0)  
  109   3                      month--;  
- 110   3                  if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20))  
+ 110   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
  111   3                      flag = ~flag;  
- 112   3                  if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+ 112   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) == 0)  
  113   3                      StaticDayCount = 29;  
  114   3                  else  
  115   3                      StaticDayCount = 30;  
  116   3              }  
  117   2              day = StaticDayCount - Spring_NY + 1;  
  118   2          }  
- 119   1          LunarCalendarDay |= day;  
- 120   1          LunarCalendarDay |= (month << 6);
- 121   1          if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20))  
+ 119   1          LunarCalendarDay |= (uint32)day;  
+ 120   1          LunarCalendarDay |= (uint32)(month << 6);
+ 121   1          if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
  122   1              return 1;  
  123   1          else  
  124   1              return 0;  
  125   1      }
  126          
- 127          uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate)  
+ 127          uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate)  
  128          {    
  129   1              uint8 i = 0;
  130   1              uint8 aniPos;  
@@ -163,7 +163,7 @@ line level    source
  139   1              lunarDate[i++] = 0xD4C2;
  140   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
  141   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
- 142   1              aniPos = (year - 1900)%12;
+ 142   1              aniPos = (year + 2000 - 1900)%12;
  143   1              if(animalNewYear)
  144   1              {
  145   2                      lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
@@ -182,16 +182,16 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2245    ----
+   CODE SIZE        =   1205    ----
    CONSTANT SIZE    =    618    ----
-   XDATA SIZE       =      4      48
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      4      17
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 14:35:01 PAGE 4   
+C51 COMPILER V8.08   LUNAR                                                                 05/28/2017 16:50:35 PAGE 4   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
