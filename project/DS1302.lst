@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 18:48:26 PAGE 1   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 19:15:25 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DS1302
@@ -62,7 +62,7 @@ line level    source
   52   1              DS1302_CE = 0;
   53   1      
   54   1              time->sec &= 0x7F;
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 18:48:26 PAGE 2   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 19:15:25 PAGE 2   
 
   55   1      }
   56          
@@ -126,7 +126,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 18:48:26 PAGE 3   
+C51 COMPILER V8.08   DS1302                                                                05/28/2017 19:15:25 PAGE 3   
 
    CODE SIZE        =    267    ----
    CONSTANT SIZE    =   ----    ----

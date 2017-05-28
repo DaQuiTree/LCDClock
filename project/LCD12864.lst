@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              05/28/2017 18:48:26 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 19:15:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -62,7 +62,7 @@ line level    source
   52   2                      LCDWriteData(*str++);
   53   2                      strlen--;       
   54   2              }while(strlen > 0);
-C51 COMPILER V8.08   LCD12864                                                              05/28/2017 18:48:26 PAGE 2   
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 19:15:26 PAGE 2   
 
   55   1      }
   56          
@@ -126,7 +126,7 @@ line level    source
  114   1              LCDShowStr(0,0," ",1);
  115   1      }
  116          
-C51 COMPILER V8.08   LCD12864                                                              05/28/2017 18:48:26 PAGE 3   
+C51 COMPILER V8.08   LCD12864                                                              05/28/2017 19:15:26 PAGE 3   
 
  117          void LCDShowImage(uint8* image)
  118          {

@@ -12,7 +12,7 @@ void ShowCurrentTime()
 {
 	static uint8 pSec = 0xAA;
 	static uint8 pDay = 0xAA;
-	uint8  tStr[20];
+	uint8  tStr[16];
 	uint8  lunarLen, lday, lyear, lmonth;
 	uint16 lunar[7];
 
@@ -20,7 +20,7 @@ void ShowCurrentTime()
 	if(pSec != timeMod.sec)
 	{
 		pSec = timeMod.sec;
-		tStr[0] = ' ';
+/*		tStr[0] = ' ';
 		tStr[1] = (timeMod.month >> 4) + '0';	//月高
 		tStr[2] = (timeMod.month & 0x0F) + '0';//月低
 		tStr[3] = '-';//日期分隔符
@@ -34,9 +34,28 @@ void ShowCurrentTime()
 		tStr[11] = (timeMod.min & 0x0F) + '0';//分低
 		tStr[12] = ':';//时间分隔符
 		tStr[13] = (timeMod.sec >> 4) + '0';	//秒高
-		tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低
-		LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间
+		tStr[14] = (timeMod.sec & 0x0F) + '0';//秒低 
+		LCDShowStr(0,1,tStr,15);//液晶第1行显示日期时间	*/
+		
+		tStr[0] = ' ';
+		tStr[1] = ' ';
+		tStr[2] = (timeMod.month >> 4) + '0';	//月高
+		tStr[3] = (timeMod.month & 0x0F) + '0';//月低
+		tStr[4] = '-';//日期分隔符
+		tStr[5] = (timeMod.day >> 4) + '0';	//日高
+		tStr[6] = (timeMod.day & 0x0F) + '0';//日低
+		tStr[7] = ' '; 
+		tStr[8] = (timeMod.hour >> 4) + '0';	//时高
+		tStr[9] = (timeMod.hour & 0x0F) + '0';//时低
+		tStr[10] = ':';//时间分隔符
+		tStr[11] = (timeMod.min >> 4) + '0';	//分高
+		tStr[12] = (timeMod.min & 0x0F) + '0';//分低
+		tStr[13] = ':';//时间分隔符
+		tStr[14] = (timeMod.sec >> 4) + '0';	//秒高
+		tStr[15] = (timeMod.sec & 0x0F) + '0';//秒低 
+		LCDShowStr(0,1,tStr,16);//液晶第1行显示日期时间
 	}
+
 	if(pDay != timeMod.day)	//显示年、礼拜、农历
 	{
 		pDay = timeMod.day;

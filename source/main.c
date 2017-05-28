@@ -20,6 +20,7 @@ void main()
 	InitLCD12864();
 	ConfigureTimerZero(10);
 	ConfigureDHT11();
+	ShowTemp();
 
 	while(1)
 	{
