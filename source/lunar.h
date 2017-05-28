@@ -7,6 +7,6 @@
  #ifndef _DHT11_H
  #define _DHT11_H
 
- uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate);
+ uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate);
 
  #endif

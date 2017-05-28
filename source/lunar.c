@@ -1,5 +1,5 @@
-#include "config.h"
-#include "lcd12864.h"
+#include <config.h>
+#include <lcd12864.h>
  
 uint32 code LunarCalendarTable[99] =  
 {    
@@ -39,16 +39,16 @@ uint16  code ChAnimal[] = {
 uint32 LunarCalendarDay;
 bit animalNewYear; 
 
-bit LunarCalendar(uint32 year,int32 month,int32 day)  
+bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
 {  
-    int32 Spring_NY,Sun_NY,StaticDayCount;  
-    int32 index,flag;  
+    uint16 Spring_NY,Sun_NY;  
+    uint8 index,flag,StaticDayCount;  
     //Spring_NY 记录春节离当年元旦的天数。  
     //Sun_NY 记录阳历日离当年元旦的天数。  
-    if ( ((LunarCalendarTable[year-2001] & 0x0060) >> 5) == 1)  
-        Spring_NY = (LunarCalendarTable[year-2001] & 0x001F) - 1;  
+    if ( ((LunarCalendarTable[year-1] & 0x0060) >> 5) == 1)  
+        Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1;  
     else  
-        Spring_NY = (LunarCalendarTable[year-2001] & 0x001F) - 1 + 31;  
+        Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1 + 31;  
     Sun_NY = MonthAdd[month-1] + day - 1;  
     if ( (!(year % 4)) && (month > 2))  
         Sun_NY++;  
@@ -63,7 +63,7 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
         month = 1;  
         index = 1;  
         flag = 0;  
-        if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+        if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
             StaticDayCount = 29;  
         else  
             StaticDayCount = 30;  
@@ -71,7 +71,7 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
         {  
             Sun_NY -= StaticDayCount;  
             index++;  
-            if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20) )  
+            if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) )  
             {  
                 flag = ~flag;  
                 if (flag == 0)  
@@ -79,7 +79,7 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
             }  
             else  
                 month++;  
-            if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+            if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
                 StaticDayCount=29;  
             else  
                 StaticDayCount=30;  
@@ -92,12 +92,12 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
         Spring_NY -= Sun_NY;  
         year--;  
         month = 12;  
-        if ( ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20) == 0)  
+        if ( ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) == 0)  
             index = 12;  
         else  
             index = 13;  
         flag = 0;  
-        if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+        if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
             StaticDayCount = 29;  
         else  
             StaticDayCount = 30;  
@@ -107,24 +107,24 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
             index--;  
             if (flag == 0)  
                 month--;  
-            if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20))  
+            if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
                 flag = ~flag;  
-            if ( ( LunarCalendarTable[year - 2001] & (0x80000 >> (index-1)) ) ==0)  
+            if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) == 0)  
                 StaticDayCount = 29;  
             else  
                 StaticDayCount = 30;  
         }  
         day = StaticDayCount - Spring_NY + 1;  
     }  
-    LunarCalendarDay |= day;  
-    LunarCalendarDay |= (month << 6);
-    if (month == ((LunarCalendarTable[year - 2001] & 0xF00000) >> 20))  
+    LunarCalendarDay |= (uint32)day;  
+    LunarCalendarDay |= (uint32)(month << 6);
+    if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
         return 1;  
     else  
         return 0;  
 }
 
-uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate)  
+uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate)  
 {    
 	uint8 i = 0;
 	uint8 aniPos;  
@@ -139,7 +139,7 @@ uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate)
 	lunarDate[i++] = 0xD4C2;
 	lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
 	lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
-	aniPos = (year - 1900)%12;
+	aniPos = (year + 2000 - 1900)%12;
 	if(animalNewYear)
 	{
 		lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
