@@ -27,11 +27,15 @@ void main()
 				ShowCurrentTime();
 			}
 		}
-	/*	if(flag1s)
-		{
-			flag1s = 0;
-			ShowTemp();
-		}  */
+		if(mMode == ReadInfo){
+			if(flag5s)
+			{
+				flag5s = 0;
+				EA = 0;
+				ShowTemp();
+				EA = 1;
+			} 
+		} 
 		KeyDriver();
 	}
 }

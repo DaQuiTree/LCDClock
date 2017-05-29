@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  05/29/2017 18:18:29 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  05/29/2017 19:32:55 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -37,18 +37,22 @@ line level    source
   27   4                                      ShowCurrentTime();
   28   4                              }
   29   3                      }
-  30   2              /*      if(flag1s)
-  31   2                      {
-  32   2                              flag1s = 0;
-  33   2                              ShowTemp();
-  34   2                      }  */
-  35   2                      KeyDriver();
-  36   2              }
-  37   1      }
+  30   2                      if(mMode == ReadInfo){
+  31   3                              if(flag5s)
+  32   3                              {
+  33   4                                      flag5s = 0;
+  34   4                                      EA = 0;
+  35   4                                      ShowTemp();
+  36   4                                      EA = 1;
+  37   4                              } 
+  38   3                      } 
+  39   2                      KeyDriver();
+  40   2              }
+  41   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     36    ----
+   CODE SIZE        =     53    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

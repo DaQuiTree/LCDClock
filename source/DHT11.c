@@ -31,6 +31,7 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 	uint8 cnt = 32;
 	uint32 mdat = 0;
 
+//	EA = 0;
 	ack = DHT11GetACK();
 	if(!ack)return ack;  //读数失败
 	while(!DHT11_DATA);	  //等待DHT11拉高电平
@@ -52,6 +53,7 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 
 	*humi = (uint8)(mdat >> 24);
 	*temp = (uint8)(mdat >> 8);
+//	EA = 1;
 	return 1;	
 }
 

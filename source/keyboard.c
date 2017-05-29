@@ -5,6 +5,7 @@
 
 bit flag200ms = 0;
 bit flag1s = 0;
+bit flag5s = 0;
 
 uint8 T0RH = 0;
 uint8 T0RL = 0;
@@ -106,7 +107,7 @@ void ConfigTimerZero(uint8 ms)
 
 void InterruptTimerZero() interrupt 1
 {
-	static uint8 cnt200ms = 0, cnt1s = 0;
+	static uint8 cnt200ms = 0, cnt1s = 0, cnt5s = 0;
 
 	TH0 = T0RH;
 	TL0 = T0RL;
@@ -121,6 +122,12 @@ void InterruptTimerZero() interrupt 1
 		{
 			cnt1s = 0;
 			flag1s = 1;
+		}
+		cnt5s++;
+		if(cnt5s >= 25)
+		{
+			cnt5s = 0;
+			flag5s = 1;
 		}
 	}
 	ClearTremble();

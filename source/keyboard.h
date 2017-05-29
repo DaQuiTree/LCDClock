@@ -10,6 +10,7 @@
  #ifndef _KEYBOARD_C
  extern bit flag200ms;
  extern bit flag1s;
+ extern bit flag5s;
  #endif
 
 void ConfigTimerZero(uint8 ms);

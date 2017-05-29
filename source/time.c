@@ -7,6 +7,10 @@
 #include "keyboard.h"
 #include "main.h"
 
+uint8 pSec = 0xAA;
+uint8 pDay = 0xAA;
+uint8 pHour = 0xAA;
+
 uint16 code weekCN[8][2] = {
 	{0x0000,0x0000},{0xD6DC,0xD2BB},
 	{0xD6DC,0xB6FE},{0xD6DC,0xC8FD},
@@ -26,10 +30,6 @@ void ClearInforArea()  //清空屏幕下三行,保留标题栏
 
 void ShowCurrentTime()
 {
-	static uint8 pSec = 0xAA;
-	static uint8 pDay = 0xAA;
-	static uint8 pHour = 0xAA;
-	static bit bDay = 0;
 	uint16 pdata tStr[8];
 	uint8  pdata dStr[16];
 	uint16 pdata dSplit;
@@ -51,17 +51,9 @@ void ShowCurrentTime()
 			pHour = timeMod.hour;
 			if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)	//若在白天，显示太阳图标
 			{
-				if(!bDay)
-				{
-					bDay = ~bDay;
-					LCDDrawArea(5,0,sunImage);
-				}
+				LCDDrawArea(5,0,sunImage);
 			}else{	  //若在黑夜，显示月亮图标
-				if(!bDay)
-				{
-					bDay = ~bDay;
-					LCDDrawArea(5,0,sunImage);
-				}
+				LCDDrawArea(5,0,sunImage);
 			}
 		}
 	}
@@ -125,8 +117,9 @@ void ShowInfo()
 	LCDShowCN(0,1,iPrompt[0],3);  //p温度：
 	LCDShowCN(0,2,iPrompt[1],3);  //p湿度：
 	LCDShowCN(0,3,iPrompt[2],3);  //p闹钟：
+	EA = 0;
 	ShowTemp();				   //显示数值
-
+	EA = 1;
 	lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
 	lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
 	lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
@@ -140,8 +133,11 @@ void KeyAction(uint8 keyCode)
 	{
 		mMode++;
 		mMode &= 0x01;//改变mMode状态
-		if(mMode == ReadDate){	
-
+		if(mMode == ReadDate){
+			LCDClearAll();	//清屏
+		   	pSec = 0xAA;	//强制显示时间
+			pDay = 0xAA;
+			pHour = 0xAA;
 		}else if(mMode == ReadInfo){
 			ShowInfo();
 		}
