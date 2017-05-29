@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DHT11                                                                 05/28/2017 19:15:26 PAGE 1   
+C51 COMPILER V8.08   DHT11                                                                 05/29/2017 16:06:48 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
@@ -62,7 +62,7 @@ line level    source
   52   2              }
   53   1      
   54   1              *humi = (uint8)(mdat >> 24);
-C51 COMPILER V8.08   DHT11                                                                 05/28/2017 19:15:26 PAGE 2   
+C51 COMPILER V8.08   DHT11                                                                 05/29/2017 16:06:48 PAGE 2   
 
   55   1              *temp = (uint8)(mdat >> 8);
   56   1              return 1;       

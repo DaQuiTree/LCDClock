@@ -18,9 +18,9 @@ void main()
 	EA = 1;	
 	InitDS1302();										  
 	InitLCD12864();
+	LCDInitImage();
 	ConfigureTimerZero(10);
 	ConfigureDHT11();
-	ShowTemp();
 
 	while(1)
 	{
@@ -29,11 +29,11 @@ void main()
 			ShowCurrentTime();
 		}
 
-		if(flag2s)
+	/*	if(flag2s)
 		{
 			flag2s = 0;
 			ShowTemp();
-		}
+		}  */
 	}
 }
 

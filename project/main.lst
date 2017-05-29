@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 19:15:26 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  05/29/2017 16:06:47 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -28,9 +28,9 @@ line level    source
   18   1              EA = 1; 
   19   1              InitDS1302();                                                                             
   20   1              InitLCD12864();
-  21   1              ConfigureTimerZero(10);
-  22   1              ConfigureDHT11();
-  23   1              ShowTemp();
+  21   1              LCDInitImage();
+  22   1              ConfigureTimerZero(10);
+  23   1              ConfigureDHT11();
   24   1      
   25   1              while(1)
   26   1              {
@@ -39,11 +39,11 @@ line level    source
   29   3                              ShowCurrentTime();
   30   3                      }
   31   2      
-  32   2                      if(flag2s)
+  32   2              /*      if(flag2s)
   33   2                      {
-  34   3                              flag2s = 0;
-  35   3                              ShowTemp();
-  36   3                      }
+  34   2                              flag2s = 0;
+  35   2                              ShowTemp();
+  36   2                      }  */
   37   2              }
   38   1      }
   39          
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1              TH0 = T0RH;
   54   1              TL0 = T0RL;
-C51 COMPILER V8.08   MAIN                                                                  05/28/2017 19:15:26 PAGE 2   
+C51 COMPILER V8.08   MAIN                                                                  05/29/2017 16:06:47 PAGE 2   
 
   55   1      
   56   1              TR0 = 1;
@@ -95,7 +95,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    125    ----
+   CODE SIZE        =    117    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
