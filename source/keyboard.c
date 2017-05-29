@@ -1,8 +1,7 @@
+#define _KEYBOARD_C
 #include "config.h"
 #include "keyboard.h"
 #include "time.h"
-
-#define _KEYBOARD_C
 
 bit flag200ms = 0;
 bit flag1s = 0;
@@ -10,7 +9,7 @@ bit flag1s = 0;
 uint8 T0RH = 0;
 uint8 T0RL = 0;
 
-uint8 keySta[4][4]={
+uint8 pdata keySta[4][4]={
 	{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}
 };
 
@@ -26,7 +25,7 @@ void ClearTremble()
 	uint8 i;
 	static uint8 queue = 0; 
 
-	static uint8 state[4][4] = 
+	static uint8 pdata state[4][4] = 
 	{
 		{0x0F,0x0F,0x0F,0x0F},
 		{0x0F,0x0F,0x0F,0x0F},
@@ -65,7 +64,7 @@ void ClearTremble()
 
 void KeyDriver()
 {
-	static uint8 keyBuf[4][4]={
+	static uint8 pdata keyBuf[4][4]={
 		{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}	
 	};
 	uint8 i,j;

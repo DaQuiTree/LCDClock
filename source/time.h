@@ -13,5 +13,6 @@
 
  void ShowCurrentTime();
  void ShowTemp();
+ void KeyAction(uint8 keyCode);
 
  #endif

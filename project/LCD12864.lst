@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              05/29/2017 16:06:47 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              05/29/2017 18:18:29 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -8,271 +8,279 @@ COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\LCD12864.c BROWSE DEBUG O
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "lcd12864.h"
-   3          
-   4          #define _LCD12864_C
-   5          
-   6          uint8 code clockImage[32] ={
-   7                  0x3C,0x1C,0x7C,0x1E,0xFF,0xFF,0xFF,0xFF,0xFE,0x3F,0xF9,0x8F,0x79,0x8E,0x71,0x86,
-   8                  0x71,0xF6,0x71,0xF6,0x78,0x0E,0x38,0x0E,0x3E,0x3C,0x1F,0xFC,0x1F,0xFC,0x1C,0x1C,
-   9          };
-  10          
-  11          uint8 code sunImage[32] = {
-  12                  0x00,0x00,0x01,0x00,0x41,0x04,0x20,0x08,0x13,0x90,0x07,0xC0,0x0F,0xE0,0xDF,0xF6,
-  13                  0x1F,0xF0,0x0F,0xE0,0x07,0xC0,0x13,0x90,0x20,0x08,0x41,0x04,0x01,0x00,0x00,0x00,
-  14          };
-  15          
-  16          uint8 code moonImage[32] = {
-  17                  0x00,0x00,0x07,0x80,0x03,0xC0,0x01,0xE0,0x01,0xF0,0x00,0xF8,0x00,0xF8,0x00,0xF8,
-  18                  0x00,0xF8,0x00,0xF8,0x01,0xF0,0x03,0xF0,0x07,0xE0,0x0F,0xC0,0x1F,0x00,0x00,0x00,
-  19          };
-  20          
-  21          void LCDWaitReady()
-  22          {
-  23   1              uint8 tmp = 0xFF;
-  24   1      
-  25   1              LCD12864_RS = 0;
-  26   1              LCD12864_RW = 1;
-  27   1              do{
-  28   2                      LCD12864_EN = 1;
-  29   2                      tmp = LCD12864_DB & 0x80;
-  30   2                      LCD12864_EN = 0;        
-  31   2              }while(tmp != 0x00);
-  32   1              LCD12864_EN = 0;        
-  33   1      }
-  34          
-  35          void LCDWriteCmd(uint8 cmd)
-  36          {
-  37   1              LCDWaitReady();
-  38   1              LCD12864_RS = 0;
-  39   1              LCD12864_RW = 0;
-  40   1              LCD12864_EN = 1;
-  41   1              LCD12864_DB = cmd;
-  42   1              LCD12864_EN = 0;        
-  43   1      }
-  44          
-  45          void LCDWriteData(uint8 dat)
-  46          {
-  47   1              LCDWaitReady();
-  48   1              LCD12864_RS = 1;
-  49   1              LCD12864_RW = 0;
-  50   1              LCD12864_EN = 1;
-  51   1              LCD12864_DB = dat;
-  52   1              LCD12864_EN = 0;
-  53   1      }
-  54          
-C51 COMPILER V8.08   LCD12864                                                              05/29/2017 16:06:47 PAGE 2   
+   1          #define _LCD12864_C
+   2          #include "config.h"
+   3          #include "lcd12864.h"
+   4          
+   5          uint8 code clockImage[32] ={
+   6                  0x3C,0x1C,0x7C,0x1E,0xFF,0xFF,0xFF,0xFF,0xFE,0x3F,0xF9,0x8F,0x79,0x8E,0x71,0x86,
+   7                  0x71,0xF6,0x71,0xF6,0x78,0x0E,0x38,0x0E,0x3E,0x3C,0x1F,0xFC,0x1F,0xFC,0x1C,0x1C,
+   8          };
+   9          
+  10          uint8 code sunImage[32] = {
+  11                  0x00,0x00,0x01,0x00,0x41,0x04,0x20,0x08,0x13,0x90,0x07,0xC0,0x0F,0xE0,0xDF,0xF6,
+  12                  0x1F,0xF0,0x0F,0xE0,0x07,0xC0,0x13,0x90,0x20,0x08,0x41,0x04,0x01,0x00,0x00,0x00,
+  13          };
+  14          
+  15          uint8 code moonImage[32] = {
+  16                  0x00,0x00,0x07,0x80,0x03,0xC0,0x01,0xE0,0x01,0xF0,0x00,0xF8,0x00,0xF8,0x00,0xF8,
+  17                  0x00,0xF8,0x00,0xF8,0x01,0xF0,0x03,0xF0,0x07,0xE0,0x0F,0xC0,0x1F,0x00,0x00,0x00,
+  18          };
+  19          
+  20          void LCDWaitReady()
+  21          {
+  22   1              uint8 tmp = 0xFF;
+  23   1      
+  24   1              LCD12864_RS = 0;
+  25   1              LCD12864_RW = 1;
+  26   1              do{
+  27   2                      LCD12864_EN = 1;
+  28   2                      tmp = LCD12864_DB & 0x80;
+  29   2                      LCD12864_EN = 0;        
+  30   2              }while(tmp != 0x00);
+  31   1              LCD12864_EN = 0;        
+  32   1      }
+  33          
+  34          void LCDWriteCmd(uint8 cmd)
+  35          {
+  36   1              LCDWaitReady();
+  37   1              LCD12864_RS = 0;
+  38   1              LCD12864_RW = 0;
+  39   1              LCD12864_EN = 1;
+  40   1              LCD12864_DB = cmd;
+  41   1              LCD12864_EN = 0;        
+  42   1      }
+  43          
+  44          void LCDWriteData(uint8 dat)
+  45          {
+  46   1              LCDWaitReady();
+  47   1              LCD12864_RS = 1;
+  48   1              LCD12864_RW = 0;
+  49   1              LCD12864_EN = 1;
+  50   1              LCD12864_DB = dat;
+  51   1              LCD12864_EN = 0;
+  52   1      }
+  53          
+  54          void InitLCD12864()
+C51 COMPILER V8.08   LCD12864                                                              05/29/2017 18:18:29 PAGE 2   
 
-  55          void InitLCD12864()
-  56          {
-  57   1              LCDWriteCmd(0x30);
-  58   1              LCDWriteCmd(0x0C);
-  59   1              LCDWriteCmd(0x01); //清屏，(0,0)位置字符设定成空格
-  60   1              LCDShowStr(0,0," ",1);
-  61   1      }
-  62          
-  63          void LCDShowStr(uint8 x, uint8 y, uint8* str, uint8 strlen)     //写入字符串
-  64          {
-  65   1              LCDSetCursor(x,y);
-  66   1              do{
-  67   2                      LCDWriteData(*str++);
-  68   2                      strlen--;       
-  69   2              }while(strlen > 0);
-  70   1      }
-  71          
-  72          void LCDShowCN(uint8 x, uint8 y, uint16* str, uint8 strlen)     //写入字符串
-  73          {
-  74   1              uint8 msb,lsb;
-  75   1      
-  76   1              while(strlen-- > 0){
-  77   2                      LCDSetCursor(x,y);
-  78   2                      x++;
-  79   2                      if(x > 7){
-  80   3                              x = 0;
-  81   3                              y++;
-  82   3                      }                       //先写入地址
-  83   2                      msb = (uint8)(*str >> 8);       //写入数据
-  84   2                      lsb = (uint8)(*str); 
-  85   2                      LCDWriteData(msb);
-  86   2                      LCDWriteData(lsb);
-  87   2                      str++;                                          
-  88   2              }
-  89   1      }
-  90          
-  91          void LCDSetCursor(uint8 x, uint8 y)
-  92          {
-  93   1              uint8 pos = 0;
-  94   1      
-  95   1              switch(y)
-  96   1              {
-  97   2                      case 0:
-  98   2                              pos = 0x80 + x;
-  99   2                              break;
- 100   2                      case 1:
- 101   2                              pos = 0x90 + x;
- 102   2                              break;
- 103   2                      case 2:
- 104   2                              pos = 0x88 + x;
- 105   2                              break;
- 106   2                      case 3:
- 107   2                              pos = 0x98 + x;
- 108   2                              break;
- 109   2                      default:
- 110   2                              break;
- 111   2              }
- 112   1              LCDWriteCmd(pos);
- 113   1      }
- 114          
- 115          void LCDShowCursor()
- 116          {
-C51 COMPILER V8.08   LCD12864                                                              05/29/2017 16:06:47 PAGE 3   
+  55          {
+  56   1              LCDWriteCmd(0x30);
+  57   1              LCDWriteCmd(0x0C);
+  58   1              LCDWriteCmd(0x01); //清屏，(0,0)位置字符设定成空格
+  59   1              LCDShowStr(0,0," ",1);
+  60   1      }
+  61          
+  62          void LCDShowStr(uint8 x, uint8 y, uint8* str, uint8 strlen)     //写入字符串
+  63          {
+  64   1              LCDSetCursor(x,y);
+  65   1              do{
+  66   2                      LCDWriteData(*str++);
+  67   2                      strlen--;       
+  68   2              }while(strlen > 0);
+  69   1      }
+  70          
+  71          void LCDShowCN(uint8 x, uint8 y, uint16* str, uint8 strlen)     //写入字符串
+  72          {
+  73   1              uint8 msb,lsb;
+  74   1      
+  75   1              while(strlen-- > 0){
+  76   2                      LCDSetCursor(x,y);
+  77   2                      x++;
+  78   2                      if(x > 7){
+  79   3                              x = 0;
+  80   3                              y++;
+  81   3                      }                       //先写入地址
+  82   2                      msb = (uint8)(*str >> 8);       //写入数据
+  83   2                      lsb = (uint8)(*str); 
+  84   2                      LCDWriteData(msb);
+  85   2                      LCDWriteData(lsb);
+  86   2                      str++;                                          
+  87   2              }
+  88   1      }
+  89          
+  90          void LCDSetCursor(uint8 x, uint8 y)
+  91          {
+  92   1              uint8 pos = 0;
+  93   1      
+  94   1              switch(y)
+  95   1              {
+  96   2                      case 0:
+  97   2                              pos = 0x80 + x;
+  98   2                              break;
+  99   2                      case 1:
+ 100   2                              pos = 0x90 + x;
+ 101   2                              break;
+ 102   2                      case 2:
+ 103   2                              pos = 0x88 + x;
+ 104   2                              break;
+ 105   2                      case 3:
+ 106   2                              pos = 0x98 + x;
+ 107   2                              break;
+ 108   2                      default:
+ 109   2                              break;
+ 110   2              }
+ 111   1              LCDWriteCmd(pos);
+ 112   1      }
+ 113          
+ 114          void LCDShowCursor()
+ 115          {
+ 116   1              LCDWriteCmd(0x0F);
+C51 COMPILER V8.08   LCD12864                                                              05/29/2017 18:18:29 PAGE 3   
 
- 117   1              LCDWriteCmd(0x0F);
- 118   1      }
- 119          
- 120          void LCDCancelCursor()
- 121          {
- 122   1              LCDWriteCmd(0x0C);
- 123   1      }
- 124          
- 125          void LCDClearAll()
- 126          {
- 127   1              LCDWriteCmd(0x30);
- 128   1              LCDWriteCmd(0x01);
- 129   1              LCDShowStr(0,0," ",1);
- 130   1      }
- 131          
- 132          void LCDShowImage(uint8* image)
- 133          {
- 134   1              uint8 i,j;
- 135   1      
- 136   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
- 137   1              LCDWriteCmd(0x34);
- 138   1              for(i = 0; i < 32; i++){
- 139   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
- 140   2                      LCDWriteCmd(0x80);
- 141   2                      for( j = 0; j < 8; j++)
- 142   2                      {
+ 117   1      }
+ 118          
+ 119          void LCDCancelCursor()
+ 120          {
+ 121   1              LCDWriteCmd(0x0C);
+ 122   1      }
+ 123          
+ 124          void LCDClearAll()
+ 125          {
+ 126   1              LCDWriteCmd(0x30);
+ 127   1              LCDWriteCmd(0x01);
+ 128   1              LCDShowStr(0,0," ",1);
+ 129   1      }
+ 130          
+ 131          void LCDShowImage(uint8* image)
+ 132          {
+ 133   1              uint8 i,j;
+ 134   1      
+ 135   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
+ 136   1              LCDWriteCmd(0x34);
+ 137   1              for(i = 0; i < 32; i++){
+ 138   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 139   2                      LCDWriteCmd(0x80);
+ 140   2                      for( j = 0; j < 8; j++)
+ 141   2                      {
+ 142   3                              LCDWriteData(*image++);
  143   3                              LCDWriteData(*image++);
- 144   3                              LCDWriteData(*image++);
- 145   3                      }
- 146   2              }
- 147   1              
- 148   1              for(i = 0; i < 32; i++){
- 149   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
- 150   2                      LCDWriteCmd(0x88);
- 151   2                      for( j = 0; j < 8; j++)
- 152   2                      {
+ 144   3                      }
+ 145   2              }
+ 146   1              
+ 147   1              for(i = 0; i < 32; i++){
+ 148   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 149   2                      LCDWriteCmd(0x88);
+ 150   2                      for( j = 0; j < 8; j++)
+ 151   2                      {
+ 152   3                              LCDWriteData(*image++);
  153   3                              LCDWriteData(*image++);
- 154   3                              LCDWriteData(*image++);
- 155   3                      }
- 156   2              }       
- 157   1              LCDWriteCmd(0x36); //打开绘图显示
- 158   1              LCDWriteCmd(0x30);      //进入基本指令操作
- 159   1      }
- 160          
- 161          void LCDDrawArea(uint8 x, uint8 y, uint8* image)//显示16*16图片
- 162          {
- 163   1              uint8 i;
- 164   1      
- 165   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
- 166   1              LCDWriteCmd(0x34);
- 167   1      
- 168   1              if(y < 2){                      //处于前两行
- 169   2                      for(i = 0; i < 16; i++){
- 170   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
- 171   3                              LCDWriteCmd(0x80 | x);//设置绘图水平地址
- 172   3      
- 173   3                              LCDWriteData(*image++);// 写入一行
- 174   3                              LCDWriteData(*image++);
- 175   3                      }
- 176   2              }else{                  //处于后两行
- 177   2                      for(i = 0; i < 16; i++){
- 178   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
-C51 COMPILER V8.08   LCD12864                                                              05/29/2017 16:06:47 PAGE 4   
+ 154   3                      }
+ 155   2              }       
+ 156   1              LCDWriteCmd(0x36); //打开绘图显示
+ 157   1              LCDWriteCmd(0x30);      //进入基本指令操作
+ 158   1      }
+ 159          
+ 160          void LCDDrawArea(uint8 x, uint8 y, uint8* image)//显示16*16图片
+ 161          {
+ 162   1              uint8 i;
+ 163   1      
+ 164   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
+ 165   1              LCDWriteCmd(0x34);
+ 166   1      
+ 167   1              if(y < 2){                      //处于前两行
+ 168   2                      for(i = 0; i < 16; i++){
+ 169   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
+ 170   3                              LCDWriteCmd(0x80 | x);//设置绘图水平地址
+ 171   3      
+ 172   3                              LCDWriteData(*image++);// 写入一行
+ 173   3                              LCDWriteData(*image++);
+ 174   3                      }
+ 175   2              }else{                  //处于后两行
+ 176   2                      for(i = 0; i < 16; i++){
+ 177   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
+ 178   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
+C51 COMPILER V8.08   LCD12864                                                              05/29/2017 18:18:29 PAGE 4   
 
- 179   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
- 180   3      
- 181   3                              LCDWriteData(*image++);// 写入一行
- 182   3                              LCDWriteData(*image++);
- 183   3                      }
- 184   2              }
- 185   1      
- 186   1              LCDWriteCmd(0x80 | y*16); //归于原点
- 187   1              LCDWriteCmd(0x80 | x);
- 188   1      
- 189   1              LCDWriteCmd(0x36);
- 190   1              LCDWriteCmd(0x30);
- 191   1      }
- 192          
- 193          void LCDInitImage()
- 194          {
- 195   1              uint8 i,j;
- 196   1      
- 197   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
- 198   1              LCDWriteCmd(0x34);
- 199   1              for(i = 0; i < 32; i++){
- 200   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
- 201   2                      LCDWriteCmd(0x80);
- 202   2                      for( j = 0; j < 8; j++)
- 203   2                      {
+ 179   3      
+ 180   3                              LCDWriteData(*image++);// 写入一行
+ 181   3                              LCDWriteData(*image++);
+ 182   3                      }
+ 183   2              }
+ 184   1      
+ 185   1              LCDWriteCmd(0x80 | y*16); //归于原点
+ 186   1              LCDWriteCmd(0x80 | x);
+ 187   1      
+ 188   1              LCDWriteCmd(0x36);
+ 189   1              LCDWriteCmd(0x30);
+ 190   1      }
+ 191          
+ 192          void LCDInitImage()
+ 193          {
+ 194   1              uint8 i,j;
+ 195   1      
+ 196   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
+ 197   1              LCDWriteCmd(0x34);
+ 198   1              for(i = 0; i < 32; i++){
+ 199   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 200   2                      LCDWriteCmd(0x80);
+ 201   2                      for( j = 0; j < 8; j++)
+ 202   2                      {
+ 203   3                              LCDWriteData(0x00);
  204   3                              LCDWriteData(0x00);
- 205   3                              LCDWriteData(0x00);
- 206   3                      }
- 207   2              }
- 208   1              
- 209   1              for(i = 0; i < 32; i++){
- 210   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
- 211   2                      LCDWriteCmd(0x88);
- 212   2                      for( j = 0; j < 8; j++)
- 213   2                      {
+ 205   3                      }
+ 206   2              }
+ 207   1              
+ 208   1              for(i = 0; i < 32; i++){
+ 209   2                      LCDWriteCmd(0x80 | i); //设置绘图垂直地址
+ 210   2                      LCDWriteCmd(0x88);
+ 211   2                      for( j = 0; j < 8; j++)
+ 212   2                      {
+ 213   3                              LCDWriteData(0x00);
  214   3                              LCDWriteData(0x00);
- 215   3                              LCDWriteData(0x00);
- 216   3                      }
- 217   2              }       
- 218   1              LCDWriteCmd(0x36);
- 219   1              LCDWriteCmd(0x30);              
- 220   1      }
- 221          
- 222          void LCDClearImage(uint8 x, uint8 y)
- 223          {
- 224   1              uint8 i;
- 225   1      
- 226   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
- 227   1              LCDWriteCmd(0x34);
- 228   1      
- 229   1              if(y < 2){                      //处于前两行
- 230   2                      for(i = 0; i < 16; i++){
- 231   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
- 232   3                              LCDWriteCmd(0x80 | x);//设置绘图水平地址
- 233   3      
- 234   3                              LCDWriteData(0x00);// 写入一行
- 235   3                              LCDWriteData(0x00);
- 236   3                      }
- 237   2              }else{                  //处于后两行
- 238   2                      for(i = 0; i < 16; i++){
- 239   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
- 240   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
-C51 COMPILER V8.08   LCD12864                                                              05/29/2017 16:06:47 PAGE 5   
+ 215   3                      }
+ 216   2              }       
+ 217   1              LCDWriteCmd(0x36);
+ 218   1              LCDWriteCmd(0x30);              
+ 219   1      }
+ 220          
+ 221          void LCDClearImage(uint8 x, uint8 y)
+ 222          {
+ 223   1              uint8 i;
+ 224   1      
+ 225   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
+ 226   1              LCDWriteCmd(0x34);
+ 227   1      
+ 228   1              if(y < 2){                      //处于前两行
+ 229   2                      for(i = 0; i < 16; i++){
+ 230   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
+ 231   3                              LCDWriteCmd(0x80 | x);//设置绘图水平地址
+ 232   3      
+ 233   3                              LCDWriteData(0x00);// 写入一行
+ 234   3                              LCDWriteData(0x00);
+ 235   3                      }
+ 236   2              }else{                  //处于后两行
+ 237   2                      for(i = 0; i < 16; i++){
+ 238   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
+ 239   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
+ 240   3      
+C51 COMPILER V8.08   LCD12864                                                              05/29/2017 18:18:29 PAGE 5   
 
- 241   3      
- 242   3                              LCDWriteData(0x00);// 写入一行
- 243   3                              LCDWriteData(0x00);
- 244   3                      }
- 245   2              }
- 246   1      
- 247   1              LCDWriteCmd(0x80 | y*16); //归于原点
- 248   1              LCDWriteCmd(0x80 | x);
- 249   1      
- 250   1              LCDWriteCmd(0x36);
- 251   1              LCDWriteCmd(0x30);      
- 252   1      }
+ 241   3                              LCDWriteData(0x00);// 写入一行
+ 242   3                              LCDWriteData(0x00);
+ 243   3                      }
+ 244   2              }
+ 245   1      
+ 246   1              LCDWriteCmd(0x80 | y*16); //归于原点
+ 247   1              LCDWriteCmd(0x80 | x);
+ 248   1      
+ 249   1              LCDWriteCmd(0x36);
+ 250   1              LCDWriteCmd(0x30);      
+ 251   1      }
+ 252          
+ 253          void LCDClearArea(uint8 x, uint8 y)
+ 254          {
+ 255   1              uint16 code clearDat[] = {
+ 256   1                      0xA1A0,0xA1A0,0xA1A0,0xA1A0,0xA1A0,0xA1A0,0xA1A0,0xA1A0,
+ 257   1              };
+ 258   1      
+ 259   1              LCDShowCN(x,y,clearDat,8-x);
+ 260   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    767    ----
-   CONSTANT SIZE    =     98    ----
+   CODE SIZE        =    782    ----
+   CONSTANT SIZE    =    114    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----      19

@@ -1,7 +1,6 @@
+#define _DHT11_C
 #include "config.h"
 #include "dht11.h"
-
-#define _DHT11_C
 
 void DelayX10us(uint16 x)
 {
@@ -62,5 +61,4 @@ void ConfigureDHT11()
 	TMOD |= 0x10;
 
 	ET1 = 0;
-	PT1 = 1;	//定时器1设置高优先级
 }

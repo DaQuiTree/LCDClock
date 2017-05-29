@@ -1,3 +1,4 @@
+#define _LUNAR_C
 #include "config.h"
 #include "lcd12864.h"
  

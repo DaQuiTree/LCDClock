@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  05/29/2017 16:06:47 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  05/29/2017 18:18:29 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -8,100 +8,53 @@ COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\main.c BROWSE DEBUG OBJEC
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "ds1302.h"
-   3          #include "lcd12864.h"
-   4          #include "keyboard.h"
-   5          #include "time.h"
-   6          #include "DHT11.h"
-   7          
-   8          bit flag200ms = 0;
-   9          bit flag2s = 0;
+   1          #define _MAIN_C
+   2          #include "config.h"
+   3          #include "ds1302.h"
+   4          #include "lcd12864.h"
+   5          #include "keyboard.h"
+   6          #include "time.h"
+   7          #include "DHT11.h"
+   8          #include "keyboard.h"
+   9          #include "main.h"
   10          
-  11          uint8 T0RH = 0;
-  12          uint8 T0RL = 0;
-  13          
-  14          void ConfigureTimerZero(uint8 ms);
-  15          
-  16          void main()
-  17          {
-  18   1              EA = 1; 
-  19   1              InitDS1302();                                                                             
-  20   1              InitLCD12864();
-  21   1              LCDInitImage();
-  22   1              ConfigureTimerZero(10);
-  23   1              ConfigureDHT11();
-  24   1      
-  25   1              while(1)
-  26   1              {
-  27   2                      if(flag200ms){
-  28   3                              flag200ms = 0;
-  29   3                              ShowCurrentTime();
-  30   3                      }
-  31   2      
-  32   2              /*      if(flag2s)
-  33   2                      {
-  34   2                              flag2s = 0;
-  35   2                              ShowTemp();
-  36   2                      }  */
-  37   2              }
-  38   1      }
-  39          
-  40          void ConfigureTimerZero(uint8 ms)
-  41          {
-  42   1              uint16 tmp;
-  43   1      
-  44   1              tmp = 11059200/12/1000*ms;
-  45   1              tmp = 65536 - tmp+18;
-  46   1      
-  47   1              T0RH = (uint8)(tmp >> 8);
-  48   1              T0RL = (uint8) tmp;
-  49   1      
-  50   1              TMOD &= 0xF0;
-  51   1              TMOD |= 0x01;
-  52   1      
-  53   1              TH0 = T0RH;
-  54   1              TL0 = T0RL;
-C51 COMPILER V8.08   MAIN                                                                  05/29/2017 16:06:47 PAGE 2   
-
-  55   1      
-  56   1              TR0 = 1;
-  57   1              ET0 = 1;
-  58   1      }
-  59          
-  60          void InterruptTimerZero() interrupt 1
-  61          {
-  62   1              static uint8 cnt200ms = 0;
-  63   1              static uint8 cnt2s = 0;
-  64   1      
-  65   1              TH0 = T0RH;
-  66   1              TL0 = T0RL;     
-  67   1      
-  68   1              cnt200ms++;
-  69   1              if(cnt200ms >= 20)
-  70   1              {
-  71   2                      cnt200ms = 0;
-  72   2                      flag200ms = 1;
-  73   2              }
-  74   1      
-  75   1              cnt2s++;
-  76   1              if(cnt2s >= 200)
-  77   1              {
-  78   2                      cnt2s = 0;
-  79   2                      flag2s = 1;
-  80   2              }
-  81   1      
-  82   1      } 
+  11          SystemMode mMode = ReadDate;
+  12          
+  13          void main()
+  14          {
+  15   1              EA = 1; 
+  16   1              InitDS1302();                                                                             
+  17   1              InitLCD12864();
+  18   1              LCDInitImage();
+  19   1              ConfigTimerZero(1);
+  20   1              ConfigureDHT11();
+  21   1              
+  22   1              while(1)
+  23   1              {
+  24   2                      if(mMode == ReadDate){
+  25   3                              if(flag200ms){
+  26   4                                      flag200ms = 0;
+  27   4                                      ShowCurrentTime();
+  28   4                              }
+  29   3                      }
+  30   2              /*      if(flag1s)
+  31   2                      {
+  32   2                              flag1s = 0;
+  33   2                              ShowTemp();
+  34   2                      }  */
+  35   2                      KeyDriver();
+  36   2              }
+  37   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    117    ----
+   CODE SIZE        =     36    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      4    ----
+   DATA SIZE        =      1    ----
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      2    ----
+   BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 

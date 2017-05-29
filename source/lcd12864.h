@@ -8,10 +8,10 @@
 #ifndef _LCD12864_H
 #define _LCD12864_H
 
-#ifndef _LCD12864_C	//extern 变量
+#ifndef _LCD12864_C //extern 变量
 extern uint8 code clockImage[32];
-extern uint8 code sunImage[32];
 extern uint8 code moonImage[32];
+extern uint8 code sunImage[32];
 #endif
 
 void InitLCD12864();//初始化液晶
@@ -20,6 +20,7 @@ void LCDClearAll();//清屏
 /*字符显示*/
 void LCDShowStr(uint8 x, uint8 y, uint8* str, uint8 strlen);	//写入字符串
 void LCDShowCN(uint8 x, uint8 y, uint16* str, uint8 strlen);	//写入中文
+void LCDClearArea(uint8 x, uint8 y);
 
 /*光标设置*/
 void LCDSetCursor(uint8 x, uint8 y);//设定光标

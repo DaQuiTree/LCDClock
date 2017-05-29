@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 16:06:48 PAGE 1   
+C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 18:18:30 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LUNAR
@@ -8,178 +8,179 @@ COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\lunar.c BROWSE DEBUG OBJE
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "lcd12864.h"
-   3           
-   4          uint32 code LunarCalendarTable[99] =  
-   5          {    
-   6              0x4D4AB8,0x0D4A4C,0x0DA541,0x25AAB6,0x056A49,0x7AADBD,0x025D52,0x092D47,0x5C95BA,0x0A954E,/*2001-2010*
+   1          #define _LUNAR_C
+   2          #include "config.h"
+   3          #include "lcd12864.h"
+   4           
+   5          uint32 code LunarCalendarTable[99] =  
+   6          {    
+   7              0x4D4AB8,0x0D4A4C,0x0DA541,0x25AAB6,0x056A49,0x7AADBD,0x025D52,0x092D47,0x5C95BA,0x0A954E,/*2001-2010*
              -/  
-   7              0x0B4A43,0x4B5537,0x0AD54A,0x955ABF,0x04BA53,0x0A5B48,0x652BBC,0x052B50,0x0A9345,0x474AB9,/*2011-2020*
+   8              0x0B4A43,0x4B5537,0x0AD54A,0x955ABF,0x04BA53,0x0A5B48,0x652BBC,0x052B50,0x0A9345,0x474AB9,/*2011-2020*
              -/  
-   8              0x06AA4C,0x0AD541,0x24DAB6,0x04B64A,0x69573D,0x0A4E51,0x0D2646,0x5E933A,0x0D534D,0x05AA43,/*2021-2030*
+   9              0x06AA4C,0x0AD541,0x24DAB6,0x04B64A,0x69573D,0x0A4E51,0x0D2646,0x5E933A,0x0D534D,0x05AA43,/*2021-2030*
              -/  
-   9              0x36B537,0x096D4B,0xB4AEBF,0x04AD53,0x0A4D48,0x6D25BC,0x0D254F,0x0D5244,0x5DAA38,0x0B5A4C,/*2031-2040*
+  10              0x36B537,0x096D4B,0xB4AEBF,0x04AD53,0x0A4D48,0x6D25BC,0x0D254F,0x0D5244,0x5DAA38,0x0B5A4C,/*2031-2040*
              -/  
-  10              0x056D41,0x24ADB6,0x049B4A,0x7A4BBE,0x0A4B51,0x0AA546,0x5B52BA,0x06D24E,0x0ADA42,0x355B37,/*2041-2050*
+  11              0x056D41,0x24ADB6,0x049B4A,0x7A4BBE,0x0A4B51,0x0AA546,0x5B52BA,0x06D24E,0x0ADA42,0x355B37,/*2041-2050*
              -/  
-  11              0x09374B,0x8497C1,0x049753,0x064B48,0x66A53C,0x0EA54F,0x06B244,0x4AB638,0x0AAE4C,0x092E42,/*2051-2060*
+  12              0x09374B,0x8497C1,0x049753,0x064B48,0x66A53C,0x0EA54F,0x06B244,0x4AB638,0x0AAE4C,0x092E42,/*2051-2060*
              -/  
-  12              0x3C9735,0x0C9649,0x7D4ABD,0x0D4A51,0x0DA545,0x55AABA,0x056A4E,0x0A6D43,0x452EB7,0x052D4B,/*2061-2070*
+  13              0x3C9735,0x0C9649,0x7D4ABD,0x0D4A51,0x0DA545,0x55AABA,0x056A4E,0x0A6D43,0x452EB7,0x052D4B,/*2061-2070*
              -/  
-  13              0x8A95BF,0x0A9553,0x0B4A47,0x6B553B,0x0AD54F,0x055A45,0x4A5D38,0x0A5B4C,0x052B42,0x3A93B6,/*2071-2080*
+  14              0x8A95BF,0x0A9553,0x0B4A47,0x6B553B,0x0AD54F,0x055A45,0x4A5D38,0x0A5B4C,0x052B42,0x3A93B6,/*2071-2080*
              -/  
-  14              0x069349,0x7729BD,0x06AA51,0x0AD546,0x54DABA,0x04B64E,0x0A5743,0x452738,0x0D264A,0x8E933E,/*2081-2090*
+  15              0x069349,0x7729BD,0x06AA51,0x0AD546,0x54DABA,0x04B64E,0x0A5743,0x452738,0x0D264A,0x8E933E,/*2081-2090*
              -/  
-  15              0x0D5252,0x0DAA47,0x66B53B,0x056D4F,0x04AE45,0x4A4EB9,0x0A4D4C,0x0D1541,0x2D92B5          /*2091-2099*
+  16              0x0D5252,0x0DAA47,0x66B53B,0x056D4F,0x04AE45,0x4A4EB9,0x0A4D4C,0x0D1541,0x2D92B5          /*2091-2099*
              -/   
-  16          }; 
-  17           
-  18          uint32 code MonthAdd[12] = {0,31,59,90,120,151,181,212,243,273,304,334};
-  19           
-  20          uint16 code ChDay[31][2] = {
-  21          {0x0000,0x0000},{0xB3F5,0xD2BB},{0xB3F5,0xB6FE},{0xB3F5,0xC8FD},{0xB3F5,0xCBC4},{0xB3F5,0xCEE5},
-  22                                          {0xB3F5,0xC1F9},{0xB3F5,0xC6DF},{0xB3F5,0xB0CB},{0xB3F5,0xBEC5},{0xB3F5,0xCAAE},//初一~初十
-  23                                          {0xCAAE,0xD2BB},{0xCAAE,0xB6FE},{0xCAAE,0xC8FD},{0xCAAE,0xCBC4},{0xCAAE,0xCEE5},
-  24                                          {0xCAAE,0xC1F9},{0xCAAE,0xC6DF},{0xCAAE,0xB0CB},{0xCAAE,0xBEC5},{0xB6FE,0xCAAE},//十一~二十
-  25                                          {0xD8A5,0xD2BB},{0xD8A5,0xB6FE},{0xD8A5,0xC8FD},{0xD8A5,0xCBC4},{0xD8A5,0xCEE5},
-  26                                          {0xD8A5,0xC1F9},{0xD8A5,0xC6DF},{0xD8A5,0xB0CB},{0xD8A5,0xBEC5},{0xC8FD,0xCAAE},//廿一~三十
-  27                  };
-  28                                            
-  29          uint16 code ChMonth[] = {
-  30                  0x0000,0xD5FD,0xB6FE,0xC8FD,0xCBC4,0xCEE5,
-  31                  0xC1F9,0xC6DF,0xB0CB,0xBEC5,0xCAAE,0xB6AC,0xC0B0
-  32          };//正月到腊月
-  33          
-  34          uint16  code ChAnimal[] = {
-  35                  0xCAF3,0xC5A3,0xBBA2,0xCDC3,0xC1FA,0xC9DF,
-  36                  0xC2ED,0xD1F2,0xBAEF,0xBCA6,0xB9B7,0xD6ED
-  37          };              //{"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
-  38          
-  39          uint32 LunarCalendarDay;
-  40          bit animalNewYear; 
-  41          
-  42          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
-  43          {  
-  44   1          uint16 Spring_NY,Sun_NY;  
-C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 16:06:48 PAGE 2   
+  17          }; 
+  18           
+  19          uint32 code MonthAdd[12] = {0,31,59,90,120,151,181,212,243,273,304,334};
+  20           
+  21          uint16 code ChDay[31][2] = {
+  22          {0x0000,0x0000},{0xB3F5,0xD2BB},{0xB3F5,0xB6FE},{0xB3F5,0xC8FD},{0xB3F5,0xCBC4},{0xB3F5,0xCEE5},
+  23                                          {0xB3F5,0xC1F9},{0xB3F5,0xC6DF},{0xB3F5,0xB0CB},{0xB3F5,0xBEC5},{0xB3F5,0xCAAE},//初一~初十
+  24                                          {0xCAAE,0xD2BB},{0xCAAE,0xB6FE},{0xCAAE,0xC8FD},{0xCAAE,0xCBC4},{0xCAAE,0xCEE5},
+  25                                          {0xCAAE,0xC1F9},{0xCAAE,0xC6DF},{0xCAAE,0xB0CB},{0xCAAE,0xBEC5},{0xB6FE,0xCAAE},//十一~二十
+  26                                          {0xD8A5,0xD2BB},{0xD8A5,0xB6FE},{0xD8A5,0xC8FD},{0xD8A5,0xCBC4},{0xD8A5,0xCEE5},
+  27                                          {0xD8A5,0xC1F9},{0xD8A5,0xC6DF},{0xD8A5,0xB0CB},{0xD8A5,0xBEC5},{0xC8FD,0xCAAE},//廿一~三十
+  28                  };
+  29                                            
+  30          uint16 code ChMonth[] = {
+  31                  0x0000,0xD5FD,0xB6FE,0xC8FD,0xCBC4,0xCEE5,
+  32                  0xC1F9,0xC6DF,0xB0CB,0xBEC5,0xCAAE,0xB6AC,0xC0B0
+  33          };//正月到腊月
+  34          
+  35          uint16  code ChAnimal[] = {
+  36                  0xCAF3,0xC5A3,0xBBA2,0xCDC3,0xC1FA,0xC9DF,
+  37                  0xC2ED,0xD1F2,0xBAEF,0xBCA6,0xB9B7,0xD6ED
+  38          };              //{"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
+  39          
+  40          uint32 LunarCalendarDay;
+  41          bit animalNewYear; 
+  42          
+  43          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
+  44          {  
+C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 18:18:30 PAGE 2   
 
-  45   1          uint8 index,flag,StaticDayCount;  
-  46   1          //Spring_NY 记录春节离当年元旦的天数。  
-  47   1          //Sun_NY 记录阳历日离当年元旦的天数。  
-  48   1          if ( ((LunarCalendarTable[year-1] & 0x0060) >> 5) == 1)  
-  49   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1;  
-  50   1          else  
-  51   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1 + 31;  
-  52   1          Sun_NY = MonthAdd[month-1] + day - 1;  
-  53   1          if ( (!(year % 4)) && (month > 2))  
-  54   1              Sun_NY++;  
-  55   1          //StaticDayCount记录大小月的天数 29 或30  
-  56   1          //index 记录从哪个月开始来计算。  
-  57   1          //flag 是用来对闰月的特殊处理。  
-  58   1          //判断阳历日在春节前还是春节后  
-  59   1          if (Sun_NY >= Spring_NY)//阳历日在春节后（含春节那天）  
-  60   1          {  
-  61   2                      animalNewYear = 1;
-  62   2              Sun_NY -= Spring_NY;  
-  63   2              month = 1;  
-  64   2              index = 1;  
-  65   2              flag = 0;  
-  66   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
-  67   2                  StaticDayCount = 29;  
-  68   2              else  
-  69   2                  StaticDayCount = 30;  
-  70   2              while (Sun_NY >= StaticDayCount)  
-  71   2              {  
-  72   3                  Sun_NY -= StaticDayCount;  
-  73   3                  index++;  
-  74   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) )  
-  75   3                  {  
-  76   4                      flag = ~flag;  
-  77   4                      if (flag == 0)  
-  78   4                          month++;  
-  79   4                  }  
-  80   3                  else  
-  81   3                      month++;  
-  82   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
-  83   3                      StaticDayCount=29;  
-  84   3                  else  
-  85   3                      StaticDayCount=30;  
-  86   3              }  
-  87   2              day = Sun_NY + 1;  
-  88   2          }  
-  89   1          else //阳历日在春节前  
-  90   1          {  
-  91   2                      animalNewYear = 0;
-  92   2              Spring_NY -= Sun_NY;  
-  93   2              year--;  
-  94   2              month = 12;  
-  95   2              if ( ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) == 0)  
-  96   2                  index = 12;  
-  97   2              else  
-  98   2                  index = 13;  
-  99   2              flag = 0;  
- 100   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
- 101   2                  StaticDayCount = 29;  
- 102   2              else  
- 103   2                  StaticDayCount = 30;  
- 104   2              while (Spring_NY > StaticDayCount)  
- 105   2              {  
- 106   3                  Spring_NY -= StaticDayCount;  
-C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 16:06:48 PAGE 3   
+  45   1          uint16 Spring_NY,Sun_NY;  
+  46   1          uint8 index,flag,StaticDayCount;  
+  47   1          //Spring_NY 记录春节离当年元旦的天数。  
+  48   1          //Sun_NY 记录阳历日离当年元旦的天数。  
+  49   1          if ( ((LunarCalendarTable[year-1] & 0x0060) >> 5) == 1)  
+  50   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1;  
+  51   1          else  
+  52   1              Spring_NY = (LunarCalendarTable[year-1] & 0x001F) - 1 + 31;  
+  53   1          Sun_NY = MonthAdd[month-1] + day - 1;  
+  54   1          if ( (!(year % 4)) && (month > 2))  
+  55   1              Sun_NY++;  
+  56   1          //StaticDayCount记录大小月的天数 29 或30  
+  57   1          //index 记录从哪个月开始来计算。  
+  58   1          //flag 是用来对闰月的特殊处理。  
+  59   1          //判断阳历日在春节前还是春节后  
+  60   1          if (Sun_NY >= Spring_NY)//阳历日在春节后（含春节那天）  
+  61   1          {  
+  62   2                      animalNewYear = 1;
+  63   2              Sun_NY -= Spring_NY;  
+  64   2              month = 1;  
+  65   2              index = 1;  
+  66   2              flag = 0;  
+  67   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
+  68   2                  StaticDayCount = 29;  
+  69   2              else  
+  70   2                  StaticDayCount = 30;  
+  71   2              while (Sun_NY >= StaticDayCount)  
+  72   2              {  
+  73   3                  Sun_NY -= StaticDayCount;  
+  74   3                  index++;  
+  75   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) )  
+  76   3                  {  
+  77   4                      flag = ~flag;  
+  78   4                      if (flag == 0)  
+  79   4                          month++;  
+  80   4                  }  
+  81   3                  else  
+  82   3                      month++;  
+  83   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
+  84   3                      StaticDayCount=29;  
+  85   3                  else  
+  86   3                      StaticDayCount=30;  
+  87   3              }  
+  88   2              day = Sun_NY + 1;  
+  89   2          }  
+  90   1          else //阳历日在春节前  
+  91   1          {  
+  92   2                      animalNewYear = 0;
+  93   2              Spring_NY -= Sun_NY;  
+  94   2              year--;  
+  95   2              month = 12;  
+  96   2              if ( ((LunarCalendarTable[year - 1] & 0xF00000) >> 20) == 0)  
+  97   2                  index = 12;  
+  98   2              else  
+  99   2                  index = 13;  
+ 100   2              flag = 0;  
+ 101   2              if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) ==0)  
+ 102   2                  StaticDayCount = 29;  
+ 103   2              else  
+ 104   2                  StaticDayCount = 30;  
+ 105   2              while (Spring_NY > StaticDayCount)  
+ 106   2              {  
+C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 18:18:30 PAGE 3   
 
- 107   3                  index--;  
- 108   3                  if (flag == 0)  
- 109   3                      month--;  
- 110   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
- 111   3                      flag = ~flag;  
- 112   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) == 0)  
- 113   3                      StaticDayCount = 29;  
- 114   3                  else  
- 115   3                      StaticDayCount = 30;  
- 116   3              }  
- 117   2              day = StaticDayCount - Spring_NY + 1;  
- 118   2          }  
- 119   1          LunarCalendarDay |= (uint32)day;  
- 120   1          LunarCalendarDay |= (uint32)(month << 6);
- 121   1          if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
- 122   1              return 1;  
- 123   1          else  
- 124   1              return 0;  
- 125   1      }
- 126          
- 127          uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate)  
- 128          {    
- 129   1              uint8 i = 0;
- 130   1              uint8 aniPos;  
- 131   1      
- 132   1              if (LunarCalendar(year,month,day))  
- 133   1              {  
- 134   2                      lunarDate[i++] = 0xC8F2;  
- 135   2                      lunarDate[i++] = ChMonth[(LunarCalendarDay & 0x3C0) >> 6];  
- 136   2              }else{  
- 137   2                 lunarDate[i++] = ChMonth[(LunarCalendarDay & 0x3C0) >> 6]; 
- 138   2              } 
- 139   1              lunarDate[i++] = 0xD4C2;
- 140   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
- 141   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
- 142   1              lunarDate[i++] = 0xA1A0; //空格
- 143   1              aniPos = (year + 2000 - 1900)%12;
- 144   1              if(animalNewYear)
- 145   1              {
- 146   2                      lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
- 147   2              }else{
- 148   2                      if(aniPos == 0) 
- 149   2                      {
- 150   3                              aniPos = 11;
- 151   3                      }else{
- 152   3                              aniPos--;
- 153   3                      }
- 154   2                      lunarDate[i++] = ChAnimal[aniPos]; //未过春节属相计算
- 155   2              }
- 156   1              
- 157   1              return i;
- 158   1      } 
+ 107   3                  Spring_NY -= StaticDayCount;  
+ 108   3                  index--;  
+ 109   3                  if (flag == 0)  
+ 110   3                      month--;  
+ 111   3                  if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
+ 112   3                      flag = ~flag;  
+ 113   3                  if ( ( LunarCalendarTable[year - 1] & (0x80000 >> (index-1)) ) == 0)  
+ 114   3                      StaticDayCount = 29;  
+ 115   3                  else  
+ 116   3                      StaticDayCount = 30;  
+ 117   3              }  
+ 118   2              day = StaticDayCount - Spring_NY + 1;  
+ 119   2          }  
+ 120   1          LunarCalendarDay |= (uint32)day;  
+ 121   1          LunarCalendarDay |= (uint32)(month << 6);
+ 122   1          if (month == ((LunarCalendarTable[year - 1] & 0xF00000) >> 20))  
+ 123   1              return 1;  
+ 124   1          else  
+ 125   1              return 0;  
+ 126   1      }
+ 127          
+ 128          uint8 GetLunarDate(uint8 year, uint8 month, uint8 day, uint16 *lunarDate)  
+ 129          {    
+ 130   1              uint8 i = 0;
+ 131   1              uint8 aniPos;  
+ 132   1      
+ 133   1              if (LunarCalendar(year,month,day))  
+ 134   1              {  
+ 135   2                      lunarDate[i++] = 0xC8F2;  
+ 136   2                      lunarDate[i++] = ChMonth[(LunarCalendarDay & 0x3C0) >> 6];  
+ 137   2              }else{  
+ 138   2                 lunarDate[i++] = ChMonth[(LunarCalendarDay & 0x3C0) >> 6]; 
+ 139   2              } 
+ 140   1              lunarDate[i++] = 0xD4C2;
+ 141   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][0];
+ 142   1              lunarDate[i++] = ChDay[LunarCalendarDay & 0x3F][1];
+ 143   1              lunarDate[i++] = 0xA1A0; //空格
+ 144   1              aniPos = (year + 2000 - 1900)%12;
+ 145   1              if(animalNewYear)
+ 146   1              {
+ 147   2                      lunarDate[i++] = ChAnimal[aniPos]; //过了春节属相计算
+ 148   2              }else{
+ 149   2                      if(aniPos == 0) 
+ 150   2                      {
+ 151   3                              aniPos = 11;
+ 152   3                      }else{
+ 153   3                              aniPos--;
+ 154   3                      }
+ 155   2                      lunarDate[i++] = ChAnimal[aniPos]; //未过春节属相计算
+ 156   2              }
+ 157   1              
+ 158   1              return i;
+ 159   1      } 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -189,9 +190,9 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      4      17
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      1    ----
-C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 16:06:48 PAGE 4   
+C51 COMPILER V8.08   LUNAR                                                                 05/29/2017 18:18:30 PAGE 4   
 
+   BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
 

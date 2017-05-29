@@ -1,7 +1,6 @@
+#define _DS1302_C
 #include "config.h"
 #include "DS1302.h"
-
-#define _DS1302_C
 
 struct sTime timeMod;
 

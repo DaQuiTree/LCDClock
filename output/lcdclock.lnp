@@ -3,6 +3,7 @@
 "..\output\main.obj",
 "..\output\time.obj",
 "..\output\lunar.obj",
-"..\output\DHT11.obj" 
+"..\output\DHT11.obj",
+"..\output\keyboard.obj" 
 TO "..\output\lcdclock" 
 PRINT(".\lcdclock.m51") RAMSIZE(256) 
