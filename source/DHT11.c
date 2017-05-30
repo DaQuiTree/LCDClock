@@ -60,7 +60,7 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 			mdat[i] <<= 1;
 			if(DHT11_DATA){	//若为高电平
 				mdat[i] |= 0x01;
-				DelayX10us(2);//将高电平延时过去
+				DelayX10us(3);//将高电平延时过去
 			}
 		}	
 	}

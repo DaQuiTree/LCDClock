@@ -143,5 +143,8 @@ void KeyAction(uint8 keyCode)
 
 	}else if(keyCode == 0x26){//œÚ…œ
 
+	}else if(keyCode == 0xD0){
+			LCDClearAll();	//«Â∆¡
+			mMode 	
 	}
 }

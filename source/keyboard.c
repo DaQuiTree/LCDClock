@@ -52,7 +52,7 @@ void ClearTremble()
 	{
 		if((state[queue][i] & 0x0F) == 0x0F)
 		{
-			keySta[queue][i] = 1; 
+			keySta[queue][i] = 1;
 		}else if((state[queue][i] & 0x0F) == 0x00){
 			keySta[queue][i] = 0;
 		}else{
@@ -68,16 +68,30 @@ void KeyDriver()
 	static uint8 pdata keyBuf[4][4]={
 		{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}	
 	};
+	static uint16 ethBuf = 0, enterThreshold = 1000;
+
 	uint8 i,j;
 
 	for(i = 0; i < 4; i++)
 	{
 		for(j = 0; j < 4; j++)
 		{
+			if(keyCodeMap[i][j] == 0x0D) //ÉèÖÃÃÜÂë
+			{
+				if(keyBuf[i][j] == 0){
+					ethBuf += 1;
+					if(ethBuf > enterThreshold){
+						KeyAction(0xD0);
+						ethBuf = 0;
+					}
+				}else{
+					ethBuf = 0;
+				}		
+			}
+
 			if(keyBuf[i][j] != keySta[i][j])
 			{
-				
-				if(keyBuf[i][j] == 0x00)
+				if(keyBuf[i][j] == 0x01)
 				{
 					KeyAction(keyCodeMap[i][j]);
 				}
