@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.05                                                        05/29/2017  19:32:56  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.05                                                        05/30/2017  11:31:35  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
@@ -56,12 +56,13 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
             DATA    0033H     0003H     UNIT         ?DT?TIME
             DATA    0036H     0001H     UNIT         ?DT?MAIN
             DATA    0037H     0001H     UNIT         ?DT?CLEARINFORAREA?TIME
-            IDATA   0038H     0001H     UNIT         ?STACK
+            DATA    0038H     0001H     UNIT         ?DT?DHT11
+            IDATA   0039H     0001H     UNIT         ?STACK
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 2
+
 
             * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 2
-
-
             XDATA   0000H     0030H     INPAGE       ?PD?KEYBOARD
             XDATA   0030H     0022H     INPAGE       _PDATA_GROUP_
 
@@ -75,51 +76,51 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
             CODE    05C7H     01EDH     UNIT         ?C?LIB_CODE
             CODE    07B4H     017CH     UNIT         ?PR?_GETLUNARDATE?LUNAR
             CODE    0930H     0162H     UNIT         ?PR?SHOWCURRENTTIME?TIME
-            CODE    0A92H     00D8H     UNIT         ?PR?CLEARTREMBLE?KEYBOARD
-            CODE    0B6AH     00A6H     UNIT         ?PR?_DHT11GETDATA?DHT11
-            CODE    0C10H     0092H     UNIT         ?PR?_LCDDRAWAREA?LCD12864
-            CODE    0CA2H     0092H     UNIT         ?PR?SHOWINFO?TIME
-            CODE    0D34H     008CH     UNIT         ?C_C51STARTUP
-            CODE    0DC0H     0086H     UNIT         ?PR?_LCDSHOWIMAGE?LCD12864
-            CODE    0E46H     007EH     UNIT         ?PR?SHOWTEMP?TIME
-            CODE    0EC4H     0073H     UNIT         ?PR?_LCDCLEARIMAGE?LCD12864
-            CODE    0F37H     0073H     UNIT         ?PR?KEYDRIVER?KEYBOARD
-            CODE    0FAAH     0072H     UNIT         ?CO?LCD12864
-            CODE    101CH     005BH     UNIT         ?C_INITSEG
-            CODE    1077H     0058H     UNIT         ?PR?LCDINITIMAGE?LCD12864
-            CODE    10CFH     004DH     UNIT         ?PR?_LCDSHOWCN?LCD12864
-            CODE    111CH     004AH     UNIT         ?PR?INTERRUPTTIMERZERO?KEYBOARD
-            CODE    1166H     0043H     UNIT         ?PR?_DS1302BURSTREAD?DS1302
-            CODE    11A9H     003AH     UNIT         ?PR?_DS1302BURSTWRITE?DS1302
-            CODE    11E3H     0035H     UNIT         ?PR?MAIN?MAIN
-            CODE    1218H     0032H     UNIT         ?PR?INITDS1302?DS1302
-            CODE    124AH     0032H     UNIT         ?CO?TIME
-            CODE    127CH     002CH     UNIT         ?PR?_CONFIGTIMERZERO?KEYBOARD
-            CODE    12A8H     002BH     UNIT         ?PR?_LCDSETCURSOR?LCD12864
-            CODE    12D3H     0022H     UNIT         ?PR?_LCDSHOWSTR?LCD12864
-            CODE    12F5H     0022H     UNIT         ?PR?_KEYACTION?TIME
-            CODE    1317H     001EH     UNIT         ?PR?INITLCD12864?LCD12864
-            CODE    1335H     001DH     UNIT         ?PR?_DS1302WRITEBYTE?DS1302
-            CODE    1352H     001BH     UNIT         ?PR?DS1302READBYTE?DS1302
-            CODE    136DH     001AH     UNIT         ?PR?DHT11GETACK?DHT11
-            CODE    1387H     0019H     UNIT         ?PR?_LCDWRITECMD?LCD12864
-            CODE    13A0H     0019H     UNIT         ?PR?LCDCLEARALL?LCD12864
-            CODE    13B9H     0016H     UNIT         ?PR?_LCDWRITEDATA?LCD12864
-            CODE    13CFH     0016H     UNIT         ?PR?CLEARINFORAREA?TIME
-            CODE    13E5H     0013H     UNIT         ?PR?_DS1302SINGLEWRITE?DS1302
-            CODE    13F8H     0012H     UNIT         ?PR?LCDWAITREADY?LCD12864
-            CODE    140AH     0011H     UNIT         ?PR?_DS1302SINGLEREAD?DS1302
-            CODE    141BH     0010H     UNIT         ?CO?KEYBOARD
-            CODE    142BH     000FH     UNIT         ?PR?_LCDCLEARAREA?LCD12864
-            CODE    143AH     000CH     UNIT         ?PR?_DELAYX10US?DHT11
-            CODE    1446H     0009H     UNIT         ?PR?CONFIGUREDHT11?DHT11
-            CODE    144FH     0005H     UNIT         ?PR?LCDCANCELCURSOR?LCD12864
+            CODE    0A92H     00DFH     UNIT         ?PR?_DHT11GETDATA?DHT11
+            CODE    0B71H     00D8H     UNIT         ?PR?CLEARTREMBLE?KEYBOARD
+            CODE    0C49H     0092H     UNIT         ?PR?_LCDDRAWAREA?LCD12864
+            CODE    0CDBH     008EH     UNIT         ?PR?SHOWINFO?TIME
+            CODE    0D69H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0DF5H     0086H     UNIT         ?PR?_LCDSHOWIMAGE?LCD12864
+            CODE    0E7BH     007EH     UNIT         ?PR?SHOWTEMP?TIME
+            CODE    0EF9H     0073H     UNIT         ?PR?_LCDCLEARIMAGE?LCD12864
+            CODE    0F6CH     0073H     UNIT         ?PR?KEYDRIVER?KEYBOARD
+            CODE    0FDFH     0072H     UNIT         ?CO?LCD12864
+            CODE    1051H     005EH     UNIT         ?C_INITSEG
+            CODE    10AFH     0058H     UNIT         ?PR?LCDINITIMAGE?LCD12864
+            CODE    1107H     004DH     UNIT         ?PR?_LCDSHOWCN?LCD12864
+            CODE    1154H     004AH     UNIT         ?PR?INTERRUPTTIMERZERO?KEYBOARD
+            CODE    119EH     0043H     UNIT         ?PR?_DS1302BURSTREAD?DS1302
+            CODE    11E1H     003AH     UNIT         ?PR?_DS1302BURSTWRITE?DS1302
+            CODE    121BH     0033H     UNIT         ?PR?MAIN?MAIN
+            CODE    124EH     0032H     UNIT         ?PR?INITDS1302?DS1302
+            CODE    1280H     0032H     UNIT         ?CO?TIME
+            CODE    12B2H     002CH     UNIT         ?PR?_CONFIGTIMERZERO?KEYBOARD
+            CODE    12DEH     002BH     UNIT         ?PR?_LCDSETCURSOR?LCD12864
+            CODE    1309H     0022H     UNIT         ?PR?_LCDSHOWSTR?LCD12864
+            CODE    132BH     0022H     UNIT         ?PR?_KEYACTION?TIME
+            CODE    134DH     001EH     UNIT         ?PR?INITLCD12864?LCD12864
+            CODE    136BH     001DH     UNIT         ?PR?_DS1302WRITEBYTE?DS1302
+            CODE    1388H     001BH     UNIT         ?PR?DS1302READBYTE?DS1302
+            CODE    13A3H     001AH     UNIT         ?PR?DHT11GETACK?DHT11
+            CODE    13BDH     0019H     UNIT         ?PR?_LCDWRITECMD?LCD12864
+            CODE    13D6H     0019H     UNIT         ?PR?LCDCLEARALL?LCD12864
+            CODE    13EFH     0016H     UNIT         ?PR?_LCDWRITEDATA?LCD12864
+            CODE    1405H     0016H     UNIT         ?PR?CLEARINFORAREA?TIME
+            CODE    141BH     0013H     UNIT         ?PR?_DS1302SINGLEWRITE?DS1302
+            CODE    142EH     0012H     UNIT         ?PR?LCDWAITREADY?LCD12864
+            CODE    1440H     0011H     UNIT         ?PR?_DS1302SINGLEREAD?DS1302
+            CODE    1451H     0010H     UNIT         ?CO?KEYBOARD
+            CODE    1461H     000FH     UNIT         ?PR?_LCDCLEARAREA?LCD12864
+            CODE    1470H     000CH     UNIT         ?PR?_DELAYX10US?DHT11
+            CODE    147CH     0009H     UNIT         ?PR?CONFIGUREDHT11?DHT11
+            CODE    1485H     0005H     UNIT         ?PR?LCDCANCELCURSOR?LCD12864
 
 
 
 OVERLAY MAP OF MODULE:   ..\output\lcdclock (DS1302)
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 3
 
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 3
 
 
 
@@ -178,10 +179,10 @@ SEGMENT                                    BIT_GROUP          DATA_GROUP        
 ?PR?_LCDWRITEDATA?LCD12864              -----    -----      -----    -----      -----    -----
   +--> ?PR?LCDWAITREADY?LCD12864
 
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 4
+
+
 ?PR?LCDINITIMAGE?LCD12864               -----    -----      -----    -----      -----    -----
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 4
-
-
   +--> ?PR?_LCDWRITECMD?LCD12864
   +--> ?PR?_LCDWRITEDATA?LCD12864
 
@@ -238,10 +239,10 @@ SEGMENT                                    BIT_GROUP          DATA_GROUP        
 
 ?PR?_GETLUNARDATE?LUNAR                 -----    -----      000AH    0007H      -----    -----
   +--> ?PR?_LUNARCALENDAR?LUNAR
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 5
+
+
   +--> ?CO?LUNAR
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 5
-
-
 
 ?PR?_LUNARCALENDAR?LUNAR                -----    -----      0011H    000AH      -----    -----
   +--> ?CO?LUNAR
@@ -256,158 +257,158 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         MODULE        DS1302
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
-  C:11A9H         PUBLIC        _DS1302BurstWrite
+  C:11E1H         PUBLIC        _DS1302BurstWrite
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:1339H         PUBLIC        _DS1302WriteByte
+  C:136FH         PUBLIC        _DS1302WriteByte
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:140AH         PUBLIC        _DS1302SingleRead
+  C:1440H         PUBLIC        _DS1302SingleRead
   B:0090H.7       PUBLIC        DS1302_CE
   B:00B0H.5       PUBLIC        DS1302_CK
   D:0021H         PUBLIC        timeMod
-  C:13E5H         PUBLIC        _DS1302SingleWrite
+  C:141BH         PUBLIC        _DS1302SingleWrite
   B:00B0H.4       PUBLIC        DS1302_IO
   D:00C8H         PUBLIC        T2CON
-  C:1166H         PUBLIC        _DS1302BurstRead
-  C:1356H         PUBLIC        DS1302ReadByte
-  C:1218H         PUBLIC        InitDS1302
+  C:119EH         PUBLIC        _DS1302BurstRead
+  C:138CH         PUBLIC        DS1302ReadByte
+  C:124EH         PUBLIC        InitDS1302
   D:00D0H         PUBLIC        PSW
-  C:1352H         SYMBOL        L?0019
+  C:1388H         SYMBOL        L?0019
   -------         PROC          L?0018
   -------         ENDPROC       L?0018
-  C:1352H         SYMBOL        L?0019
+  C:1388H         SYMBOL        L?0019
   -------         PROC          DS1302READBYTE
   -------         DO            
   D:0006H         SYMBOL        mask
   D:0007H         SYMBOL        dat
   -------         ENDDO         
-  C:1356H         LINE#         7
-  C:1356H         LINE#         8
-  C:1356H         LINE#         10
-  C:1358H         LINE#         12
-  C:135DH         LINE#         13
-  C:135DH         LINE#         14
-  C:1360H         LINE#         15
-  C:1362H         LINE#         16
-  C:1362H         LINE#         17
-  C:1364H         LINE#         18
-  C:1366H         LINE#         19
-  C:136CH         LINE#         20
-  C:136CH         LINE#         21
+  C:138CH         LINE#         7
+  C:138CH         LINE#         8
+  C:138CH         LINE#         10
+  C:138EH         LINE#         12
+  C:1393H         LINE#         13
+  C:1393H         LINE#         14
+  C:1396H         LINE#         15
+  C:1398H         LINE#         16
+  C:1398H         LINE#         17
+  C:139AH         LINE#         18
+  C:139CH         LINE#         19
+  C:13A2H         LINE#         20
+  C:13A2H         LINE#         21
   -------         ENDPROC       DS1302READBYTE
-  C:1335H         SYMBOL        L?0021
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 6
 
 
+  C:136BH         SYMBOL        L?0021
   -------         PROC          L?0020
   -------         ENDPROC       L?0020
-  C:1335H         SYMBOL        L?0021
+  C:136BH         SYMBOL        L?0021
   -------         PROC          _DS1302WRITEBYTE
   D:0007H         SYMBOL        dat
   -------         DO            
   D:0006H         SYMBOL        mask
   -------         ENDDO         
-  C:1339H         LINE#         23
-  C:1339H         LINE#         24
-  C:1339H         LINE#         27
-  C:133EH         LINE#         28
-  C:133EH         LINE#         29
-  C:1341H         LINE#         30
-  C:1343H         LINE#         31
-  C:1345H         LINE#         32
-  C:1347H         LINE#         33
-  C:1347H         LINE#         35
-  C:1349H         LINE#         36
-  C:134BH         LINE#         37
-  C:1351H         LINE#         38
+  C:136FH         LINE#         23
+  C:136FH         LINE#         24
+  C:136FH         LINE#         27
+  C:1374H         LINE#         28
+  C:1374H         LINE#         29
+  C:1377H         LINE#         30
+  C:1379H         LINE#         31
+  C:137BH         LINE#         32
+  C:137DH         LINE#         33
+  C:137DH         LINE#         35
+  C:137FH         LINE#         36
+  C:1381H         LINE#         37
+  C:1387H         LINE#         38
   -------         ENDPROC       _DS1302WRITEBYTE
   -------         PROC          _DS1302BURSTREAD
   D:0001H         SYMBOL        time
-  C:1166H         LINE#         40
-  C:1166H         LINE#         41
-  C:1166H         LINE#         42
-  C:1168H         LINE#         43
-  C:116DH         LINE#         44
-  C:1173H         LINE#         45
-  C:1179H         LINE#         46
-  C:117FH         LINE#         47
-  C:1185H         LINE#         48
-  C:118BH         LINE#         49
-  C:1191H         LINE#         50
-  C:1198H         LINE#         51
-  C:119AH         LINE#         53
+  C:119EH         LINE#         40
+  C:119EH         LINE#         41
+  C:119EH         LINE#         42
+  C:11A0H         LINE#         43
+  C:11A5H         LINE#         44
+  C:11ABH         LINE#         45
+  C:11B1H         LINE#         46
+  C:11B7H         LINE#         47
+  C:11BDH         LINE#         48
+  C:11C3H         LINE#         49
+  C:11C9H         LINE#         50
+  C:11D0H         LINE#         51
+  C:11D2H         LINE#         53
   -------         ENDPROC       _DS1302BURSTREAD
   -------         PROC          _DS1302BURSTWRITE
   D:0001H         SYMBOL        time
-  C:11A9H         LINE#         56
-  C:11A9H         LINE#         57
-  C:11A9H         LINE#         58
-  C:11ABH         LINE#         59
-  C:11B0H         LINE#         60
-  C:11B6H         LINE#         61
-  C:11BCH         LINE#         62
-  C:11C2H         LINE#         63
-  C:11C8H         LINE#         64
-  C:11CEH         LINE#         65
-  C:11D4H         LINE#         66
-  C:11DBH         LINE#         67
-  C:11E0H         LINE#         68
-  C:11E2H         LINE#         69
+  C:11E1H         LINE#         56
+  C:11E1H         LINE#         57
+  C:11E1H         LINE#         58
+  C:11E3H         LINE#         59
+  C:11E8H         LINE#         60
+  C:11EEH         LINE#         61
+  C:11F4H         LINE#         62
+  C:11FAH         LINE#         63
+  C:1200H         LINE#         64
+  C:1206H         LINE#         65
+  C:120CH         LINE#         66
+  C:1213H         LINE#         67
+  C:1218H         LINE#         68
+  C:121AH         LINE#         69
   -------         ENDPROC       _DS1302BURSTWRITE
   -------         PROC          _DS1302SINGLEREAD
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 7
+
+
   D:0007H         SYMBOL        reg
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 7
-
-
   -------         DO            
   D:0007H         SYMBOL        dat
   -------         ENDDO         
-  C:140AH         LINE#         71
-  C:140AH         LINE#         72
-  C:140AH         LINE#         75
-  C:140CH         LINE#         76
-  C:1415H         LINE#         77
-  C:1418H         LINE#         78
-  C:141AH         LINE#         79
-  C:141AH         LINE#         80
+  C:1440H         LINE#         71
+  C:1440H         LINE#         72
+  C:1440H         LINE#         75
+  C:1442H         LINE#         76
+  C:144BH         LINE#         77
+  C:144EH         LINE#         78
+  C:1450H         LINE#         79
+  C:1450H         LINE#         80
   -------         ENDPROC       _DS1302SINGLEREAD
   -------         PROC          _DS1302SINGLEWRITE
   D:0007H         SYMBOL        reg
   D:0005H         SYMBOL        dat
-  C:13E5H         LINE#         82
-  C:13E5H         LINE#         83
-  C:13E5H         LINE#         84
-  C:13E7H         LINE#         85
-  C:13F0H         LINE#         86
-  C:13F5H         LINE#         87
-  C:13F7H         LINE#         88
+  C:141BH         LINE#         82
+  C:141BH         LINE#         83
+  C:141BH         LINE#         84
+  C:141DH         LINE#         85
+  C:1426H         LINE#         86
+  C:142BH         LINE#         87
+  C:142DH         LINE#         88
   -------         ENDPROC       _DS1302SINGLEWRITE
   -------         PROC          INITDS1302
   -------         DO            
   D:0007H         SYMBOL        i
   D:0008H         SYMBOL        initTime
   -------         ENDDO         
-  C:1218H         LINE#         90
-  C:1218H         LINE#         91
-  C:1218H         LINE#         95
-  C:121BH         LINE#         96
-  C:121EH         LINE#         97
-  C:1221H         LINE#         98
-  C:1224H         LINE#         99
-  C:1227H         LINE#         100
-  C:122AH         LINE#         101
-  C:122DH         LINE#         103
-  C:122FH         LINE#         104
-  C:1231H         LINE#         106
-  C:1235H         LINE#         107
-  C:1239H         LINE#         108
-  C:1239H         LINE#         109
-  C:1240H         LINE#         110
-  C:1249H         LINE#         111
-  C:1249H         LINE#         112
+  C:124EH         LINE#         90
+  C:124EH         LINE#         91
+  C:124EH         LINE#         95
+  C:1251H         LINE#         96
+  C:1254H         LINE#         97
+  C:1257H         LINE#         98
+  C:125AH         LINE#         99
+  C:125DH         LINE#         100
+  C:1260H         LINE#         101
+  C:1263H         LINE#         103
+  C:1265H         LINE#         104
+  C:1267H         LINE#         106
+  C:126BH         LINE#         107
+  C:126FH         LINE#         108
+  C:126FH         LINE#         109
+  C:1276H         LINE#         110
+  C:127FH         LINE#         111
+  C:127FH         LINE#         112
   -------         ENDPROC       INITDS1302
   -------         ENDMOD        DS1302
 
@@ -417,107 +418,107 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:12A8H         PUBLIC        _LCDSetCursor
-  C:10CFH         PUBLIC        _LCDShowCN
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 8
+  C:12DEH         PUBLIC        _LCDSetCursor
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 8
 
 
+  C:1107H         PUBLIC        _LCDShowCN
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:144FH         PUBLIC        LCDCancelCursor
-  C:0FECH         PUBLIC        moonImage
-  C:0EC4H         PUBLIC        _LCDClearImage
-  C:12D3H         PUBLIC        _LCDShowStr
+  C:1485H         PUBLIC        LCDCancelCursor
+  C:1021H         PUBLIC        moonImage
+  C:0EF9H         PUBLIC        _LCDClearImage
+  C:1309H         PUBLIC        _LCDShowStr
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:142BH         PUBLIC        _LCDClearArea
-  C:0FCCH         PUBLIC        sunImage
+  C:1461H         PUBLIC        _LCDClearArea
+  C:1001H         PUBLIC        sunImage
   B:0090H.5       PUBLIC        LCD12864_EN
-  C:1077H         PUBLIC        LCDInitImage
-  C:13A0H         PUBLIC        LCDClearAll
-  C:0DC0H         PUBLIC        _LCDShowImage
-  C:13BFH         PUBLIC        _LCDWriteData
-  C:0C10H         PUBLIC        _LCDDrawArea
+  C:10AFH         PUBLIC        LCDInitImage
+  C:13D6H         PUBLIC        LCDClearAll
+  C:0DF5H         PUBLIC        _LCDShowImage
+  C:13F5H         PUBLIC        _LCDWriteData
+  C:0C49H         PUBLIC        _LCDDrawArea
   B:0090H.0       PUBLIC        LCD12864_RS
-  C:13F8H         PUBLIC        LCDWaitReady
+  C:142EH         PUBLIC        LCDWaitReady
   B:0090H.1       PUBLIC        LCD12864_RW
   D:00C8H         PUBLIC        T2CON
-  C:1317H         PUBLIC        InitLCD12864
-  C:0FACH         PUBLIC        clockImage
-  C:1390H         PUBLIC        _LCDWriteCmd
+  C:134DH         PUBLIC        InitLCD12864
+  C:0FE1H         PUBLIC        clockImage
+  C:13C6H         PUBLIC        _LCDWriteCmd
   C:0003H         PUBLIC        LCDShowCursor
   D:00D0H         PUBLIC        PSW
   -------         PROC          LCDWAITREADY
   -------         DO            
   D:0007H         SYMBOL        tmp
   -------         ENDDO         
-  C:13F8H         LINE#         20
-  C:13F8H         LINE#         21
-  C:13F8H         LINE#         22
-  C:13F8H         LINE#         24
-  C:13FAH         LINE#         25
-  C:13FCH         LINE#         26
-  C:13FCH         LINE#         27
-  C:13FEH         LINE#         28
-  C:1403H         LINE#         29
-  C:1405H         LINE#         30
-  C:1407H         LINE#         31
-  C:1409H         LINE#         32
+  C:142EH         LINE#         20
+  C:142EH         LINE#         21
+  C:142EH         LINE#         22
+  C:142EH         LINE#         24
+  C:1430H         LINE#         25
+  C:1432H         LINE#         26
+  C:1432H         LINE#         27
+  C:1434H         LINE#         28
+  C:1439H         LINE#         29
+  C:143BH         LINE#         30
+  C:143DH         LINE#         31
+  C:143FH         LINE#         32
   -------         ENDPROC       LCDWAITREADY
   -------         PROC          L?0082
   -------         ENDPROC       L?0082
   -------         PROC          _LCDWRITECMD
   D:0006H         SYMBOL        cmd
-  C:1390H         LINE#         34
-  C:1392H         LINE#         35
-  C:1392H         LINE#         36
-  C:1395H         LINE#         37
-  C:1397H         LINE#         38
-  C:1399H         LINE#         39
-  C:139BH         LINE#         40
-  C:139DH         LINE#         41
-  C:139FH         LINE#         42
+  C:13C6H         LINE#         34
+  C:13C8H         LINE#         35
+  C:13C8H         LINE#         36
+  C:13CBH         LINE#         37
+  C:13CDH         LINE#         38
+  C:13CFH         LINE#         39
+  C:13D1H         LINE#         40
+  C:13D3H         LINE#         41
+  C:13D5H         LINE#         42
   -------         ENDPROC       _LCDWRITECMD
-  C:13B9H         SYMBOL        L?0081
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 9
 
 
+  C:13EFH         SYMBOL        L?0081
   -------         PROC          L?0080
   -------         ENDPROC       L?0080
-  C:13B9H         SYMBOL        L?0081
+  C:13EFH         SYMBOL        L?0081
   -------         PROC          _LCDWRITEDATA
   D:0006H         SYMBOL        dat
-  C:13BFH         LINE#         44
-  C:13C1H         LINE#         45
-  C:13C1H         LINE#         46
-  C:13C4H         LINE#         47
-  C:13C6H         LINE#         48
-  C:13C8H         LINE#         49
-  C:13CAH         LINE#         50
-  C:13CCH         LINE#         51
-  C:13CEH         LINE#         52
+  C:13F5H         LINE#         44
+  C:13F7H         LINE#         45
+  C:13F7H         LINE#         46
+  C:13FAH         LINE#         47
+  C:13FCH         LINE#         48
+  C:13FEH         LINE#         49
+  C:1400H         LINE#         50
+  C:1402H         LINE#         51
+  C:1404H         LINE#         52
   -------         ENDPROC       _LCDWRITEDATA
   -------         PROC          INITLCD12864
-  C:1317H         LINE#         54
-  C:1317H         LINE#         55
-  C:1317H         LINE#         56
-  C:131CH         LINE#         57
-  C:1321H         LINE#         58
-  C:1326H         LINE#         59
+  C:134DH         LINE#         54
+  C:134DH         LINE#         55
+  C:134DH         LINE#         56
+  C:1352H         LINE#         57
+  C:1357H         LINE#         58
+  C:135CH         LINE#         59
   -------         ENDPROC       INITLCD12864
   -------         PROC          _LCDSHOWSTR
   D:0007H         SYMBOL        x
   D:0005H         SYMBOL        y
   D:000CH         SYMBOL        str
   D:000FH         SYMBOL        strlen
-  C:12D3H         LINE#         62
-  C:12D9H         LINE#         63
-  C:12D9H         LINE#         64
-  C:12DCH         LINE#         65
-  C:12DCH         LINE#         66
-  C:12EBH         LINE#         67
-  C:12EDH         LINE#         68
-  C:12F4H         LINE#         69
+  C:1309H         LINE#         62
+  C:130FH         LINE#         63
+  C:130FH         LINE#         64
+  C:1312H         LINE#         65
+  C:1312H         LINE#         66
+  C:1321H         LINE#         67
+  C:1323H         LINE#         68
+  C:132AH         LINE#         69
   -------         ENDPROC       _LCDSHOWSTR
   -------         PROC          _LCDSHOWCN
   D:0012H         SYMBOL        x
@@ -528,25 +529,25 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0003H         SYMBOL        msb
   D:0005H         SYMBOL        lsb
   -------         ENDDO         
-  C:10CFH         LINE#         71
-  C:10D9H         LINE#         72
-  C:10D9H         LINE#         75
-  C:10E3H         LINE#         76
-  C:10EAH         LINE#         77
-  C:10ECH         LINE#         78
-  C:10F3H         LINE#         79
-  C:10F6H         LINE#         80
-  C:10F8H         LINE#         81
-  C:10F8H         LINE#         82
-  C:1105H         LINE#         83
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 10
+  C:1107H         LINE#         71
+  C:1111H         LINE#         72
+  C:1111H         LINE#         75
+  C:111BH         LINE#         76
+  C:1122H         LINE#         77
+  C:1124H         LINE#         78
+  C:112BH         LINE#         79
+  C:112EH         LINE#         80
+  C:1130H         LINE#         81
+  C:1130H         LINE#         82
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 10
 
 
-  C:1105H         LINE#         84
-  C:1109H         LINE#         85
-  C:110EH         LINE#         86
-  C:1119H         LINE#         87
-  C:111BH         LINE#         88
+  C:113DH         LINE#         83
+  C:113DH         LINE#         84
+  C:1141H         LINE#         85
+  C:1146H         LINE#         86
+  C:1151H         LINE#         87
+  C:1153H         LINE#         88
   -------         ENDPROC       _LCDSHOWCN
   -------         PROC          _LCDSETCURSOR
   D:0006H         SYMBOL        x
@@ -554,27 +555,27 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         DO            
   D:0007H         SYMBOL        pos
   -------         ENDDO         
-  C:12A8H         LINE#         90
-  C:12AAH         LINE#         91
-  C:12AAH         LINE#         92
-  C:12ACH         LINE#         94
-  C:12BAH         LINE#         95
-  C:12BAH         LINE#         96
-  C:12BAH         LINE#         97
-  C:12BEH         LINE#         98
-  C:12C0H         LINE#         99
-  C:12C0H         LINE#         100
-  C:12C4H         LINE#         101
-  C:12C6H         LINE#         102
-  C:12C6H         LINE#         103
-  C:12CAH         LINE#         104
-  C:12CCH         LINE#         105
-  C:12CCH         LINE#         106
-  C:12D0H         LINE#         107
-  C:12D0H         LINE#         108
-  C:12D0H         LINE#         109
-  C:12D0H         LINE#         110
-  C:12D0H         LINE#         111
+  C:12DEH         LINE#         90
+  C:12E0H         LINE#         91
+  C:12E0H         LINE#         92
+  C:12E2H         LINE#         94
+  C:12F0H         LINE#         95
+  C:12F0H         LINE#         96
+  C:12F0H         LINE#         97
+  C:12F4H         LINE#         98
+  C:12F6H         LINE#         99
+  C:12F6H         LINE#         100
+  C:12FAH         LINE#         101
+  C:12FCH         LINE#         102
+  C:12FCH         LINE#         103
+  C:1300H         LINE#         104
+  C:1302H         LINE#         105
+  C:1302H         LINE#         106
+  C:1306H         LINE#         107
+  C:1306H         LINE#         108
+  C:1306H         LINE#         109
+  C:1306H         LINE#         110
+  C:1306H         LINE#         111
   -------         ENDPROC       _LCDSETCURSOR
   -------         PROC          LCDSHOWCURSOR
   C:0003H         LINE#         114
@@ -582,50 +583,50 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0003H         LINE#         116
   -------         ENDPROC       LCDSHOWCURSOR
   -------         PROC          LCDCANCELCURSOR
-  C:144FH         LINE#         119
-  C:144FH         LINE#         120
-  C:144FH         LINE#         121
+  C:1485H         LINE#         119
+  C:1485H         LINE#         120
+  C:1485H         LINE#         121
   -------         ENDPROC       LCDCANCELCURSOR
   -------         PROC          LCDCLEARALL
-  C:13A0H         LINE#         124
-  C:13A0H         LINE#         125
-  C:13A0H         LINE#         126
-  C:13A5H         LINE#         127
-  C:13AAH         LINE#         128
+  C:13D6H         LINE#         124
+  C:13D6H         LINE#         125
+  C:13D6H         LINE#         126
+  C:13DBH         LINE#         127
+  C:13E0H         LINE#         128
   -------         ENDPROC       LCDCLEARALL
   -------         PROC          _LCDSHOWIMAGE
   D:001DH         SYMBOL        image
   -------         DO            
   D:0004H         SYMBOL        i
   D:0005H         SYMBOL        j
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 11
+
+
   -------         ENDDO         
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 11
-
-
-  C:0DC0H         LINE#         131
-  C:0DC6H         LINE#         132
-  C:0DC6H         LINE#         135
-  C:0DCBH         LINE#         136
-  C:0DD0H         LINE#         137
-  C:0DD2H         LINE#         138
-  C:0DD9H         LINE#         139
-  C:0DDEH         LINE#         140
-  C:0DE0H         LINE#         141
-  C:0DE0H         LINE#         142
-  C:0DEFH         LINE#         143
-  C:0DFEH         LINE#         144
-  C:0E02H         LINE#         145
-  C:0E06H         LINE#         147
-  C:0E08H         LINE#         148
-  C:0E0FH         LINE#         149
-  C:0E14H         LINE#         150
-  C:0E16H         LINE#         151
-  C:0E16H         LINE#         152
-  C:0E25H         LINE#         153
-  C:0E34H         LINE#         154
-  C:0E38H         LINE#         155
-  C:0E3CH         LINE#         156
-  C:0E41H         LINE#         157
+  C:0DF5H         LINE#         131
+  C:0DFBH         LINE#         132
+  C:0DFBH         LINE#         135
+  C:0E00H         LINE#         136
+  C:0E05H         LINE#         137
+  C:0E07H         LINE#         138
+  C:0E0EH         LINE#         139
+  C:0E13H         LINE#         140
+  C:0E15H         LINE#         141
+  C:0E15H         LINE#         142
+  C:0E24H         LINE#         143
+  C:0E33H         LINE#         144
+  C:0E37H         LINE#         145
+  C:0E3BH         LINE#         147
+  C:0E3DH         LINE#         148
+  C:0E44H         LINE#         149
+  C:0E49H         LINE#         150
+  C:0E4BH         LINE#         151
+  C:0E4BH         LINE#         152
+  C:0E5AH         LINE#         153
+  C:0E69H         LINE#         154
+  C:0E6DH         LINE#         155
+  C:0E71H         LINE#         156
+  C:0E76H         LINE#         157
   -------         ENDPROC       _LCDSHOWIMAGE
   -------         PROC          _LCDDRAWAREA
   D:0008H         SYMBOL        x
@@ -634,62 +635,62 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         DO            
   D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:0C10H         LINE#         160
-  C:0C18H         LINE#         161
-  C:0C18H         LINE#         164
-  C:0C1DH         LINE#         165
-  C:0C22H         LINE#         167
-  C:0C28H         LINE#         168
-  C:0C2AH         LINE#         169
-  C:0C31H         LINE#         170
-  C:0C34H         LINE#         172
-  C:0C43H         LINE#         173
-  C:0C52H         LINE#         174
-  C:0C58H         LINE#         175
-  C:0C58H         LINE#         176
-  C:0C5AH         LINE#         177
-  C:0C65H         LINE#         178
-  C:0C6DH         LINE#         180
-  C:0C7CH         LINE#         181
-  C:0C8BH         LINE#         182
-  C:0C8FH         LINE#         183
-  C:0C8FH         LINE#         185
-  C:0C95H         LINE#         186
-  C:0C98H         LINE#         188
-  C:0C9DH         LINE#         189
+  C:0C49H         LINE#         160
+  C:0C51H         LINE#         161
+  C:0C51H         LINE#         164
+  C:0C56H         LINE#         165
+  C:0C5BH         LINE#         167
+  C:0C61H         LINE#         168
+  C:0C63H         LINE#         169
+  C:0C6AH         LINE#         170
+  C:0C6DH         LINE#         172
+  C:0C7CH         LINE#         173
+  C:0C8BH         LINE#         174
+  C:0C91H         LINE#         175
+  C:0C91H         LINE#         176
+  C:0C93H         LINE#         177
+  C:0C9EH         LINE#         178
+  C:0CA6H         LINE#         180
+  C:0CB5H         LINE#         181
+  C:0CC4H         LINE#         182
+  C:0CC8H         LINE#         183
+  C:0CC8H         LINE#         185
+  C:0CCEH         LINE#         186
+  C:0CD1H         LINE#         188
+  C:0CD6H         LINE#         189
   -------         ENDPROC       _LCDDRAWAREA
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 12
+
+
   -------         PROC          LCDINITIMAGE
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 12
-
-
   -------         DO            
   D:0004H         SYMBOL        i
   D:0005H         SYMBOL        j
   -------         ENDDO         
-  C:1077H         LINE#         192
-  C:1077H         LINE#         193
-  C:1077H         LINE#         196
-  C:107CH         LINE#         197
-  C:1081H         LINE#         198
-  C:1083H         LINE#         199
-  C:108AH         LINE#         200
-  C:108FH         LINE#         201
-  C:1091H         LINE#         202
-  C:1091H         LINE#         203
-  C:1096H         LINE#         204
-  C:109BH         LINE#         205
-  C:109FH         LINE#         206
-  C:10A3H         LINE#         208
-  C:10A5H         LINE#         209
-  C:10ACH         LINE#         210
-  C:10B1H         LINE#         211
-  C:10B3H         LINE#         212
-  C:10B3H         LINE#         213
-  C:10B8H         LINE#         214
-  C:10BDH         LINE#         215
-  C:10C1H         LINE#         216
-  C:10C5H         LINE#         217
-  C:10CAH         LINE#         218
+  C:10AFH         LINE#         192
+  C:10AFH         LINE#         193
+  C:10AFH         LINE#         196
+  C:10B4H         LINE#         197
+  C:10B9H         LINE#         198
+  C:10BBH         LINE#         199
+  C:10C2H         LINE#         200
+  C:10C7H         LINE#         201
+  C:10C9H         LINE#         202
+  C:10C9H         LINE#         203
+  C:10CEH         LINE#         204
+  C:10D3H         LINE#         205
+  C:10D7H         LINE#         206
+  C:10DBH         LINE#         208
+  C:10DDH         LINE#         209
+  C:10E4H         LINE#         210
+  C:10E9H         LINE#         211
+  C:10EBH         LINE#         212
+  C:10EBH         LINE#         213
+  C:10F0H         LINE#         214
+  C:10F5H         LINE#         215
+  C:10F9H         LINE#         216
+  C:10FDH         LINE#         217
+  C:1102H         LINE#         218
   -------         ENDPROC       LCDINITIMAGE
   -------         PROC          _LCDCLEARIMAGE
   D:0003H         SYMBOL        x
@@ -697,42 +698,42 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         DO            
   D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:0EC4H         LINE#         221
-  C:0EC6H         LINE#         222
-  C:0EC6H         LINE#         225
-  C:0ECBH         LINE#         226
-  C:0ED0H         LINE#         228
-  C:0ED6H         LINE#         229
-  C:0ED8H         LINE#         230
-  C:0EE3H         LINE#         231
-  C:0EEAH         LINE#         233
-  C:0EEFH         LINE#         234
-  C:0EF4H         LINE#         235
-  C:0EFAH         LINE#         236
-  C:0EFAH         LINE#         237
-  C:0EFCH         LINE#         238
-  C:0F07H         LINE#         239
-  C:0F0EH         LINE#         241
-  C:0F13H         LINE#         242
-  C:0F18H         LINE#         243
-  C:0F1CH         LINE#         244
-  C:0F1CH         LINE#         246
-  C:0F26H         LINE#         247
-  C:0F2DH         LINE#         249
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 13
+  C:0EF9H         LINE#         221
+  C:0EFBH         LINE#         222
+  C:0EFBH         LINE#         225
+  C:0F00H         LINE#         226
+  C:0F05H         LINE#         228
+  C:0F0BH         LINE#         229
+  C:0F0DH         LINE#         230
+  C:0F18H         LINE#         231
+  C:0F1FH         LINE#         233
+  C:0F24H         LINE#         234
+  C:0F29H         LINE#         235
+  C:0F2FH         LINE#         236
+  C:0F2FH         LINE#         237
+  C:0F31H         LINE#         238
+  C:0F3CH         LINE#         239
+  C:0F43H         LINE#         241
+  C:0F48H         LINE#         242
+  C:0F4DH         LINE#         243
+  C:0F51H         LINE#         244
+  C:0F51H         LINE#         246
+  C:0F5BH         LINE#         247
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 13
 
 
-  C:0F32H         LINE#         250
+  C:0F62H         LINE#         249
+  C:0F67H         LINE#         250
   -------         ENDPROC       _LCDCLEARIMAGE
   -------         PROC          _LCDCLEARAREA
   D:0007H         SYMBOL        x
   D:0005H         SYMBOL        y
   -------         DO            
-  C:100CH         SYMBOL        clearDat
+  C:1041H         SYMBOL        clearDat
   -------         ENDDO         
-  C:142BH         LINE#         253
-  C:142BH         LINE#         254
-  C:142BH         LINE#         259
+  C:1461H         LINE#         253
+  C:1461H         LINE#         254
+  C:1461H         LINE#         259
   -------         ENDPROC       _LCDCLEARAREA
   -------         ENDMOD        LCD12864
 
@@ -744,78 +745,74 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   B:00A8H.7       PUBLIC        EA
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:11E3H         PUBLIC        main
+  C:121BH         PUBLIC        main
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00C8H         PUBLIC        T2CON
   D:0036H         PUBLIC        mMode
   D:00D0H         PUBLIC        PSW
   -------         PROC          MAIN
-  C:11E3H         LINE#         13
-  C:11E3H         LINE#         14
-  C:11E3H         LINE#         15
-  C:11E5H         LINE#         16
-  C:11E8H         LINE#         17
-  C:11EBH         LINE#         18
-  C:11EEH         LINE#         19
-  C:11F3H         LINE#         20
-  C:11F6H         LINE#         22
-  C:11F6H         LINE#         23
-  C:11F6H         LINE#         24
-  C:11FAH         LINE#         25
-  C:11FDH         LINE#         26
-  C:11FFH         LINE#         27
-  C:1202H         LINE#         28
-  C:1202H         LINE#         29
-  C:1202H         LINE#         30
-  C:1207H         LINE#         31
-  C:120AH         LINE#         32
-  C:120AH         LINE#         33
-  C:120CH         LINE#         34
-  C:120EH         LINE#         35
-  C:1211H         LINE#         36
-  C:1213H         LINE#         37
-  C:1213H         LINE#         38
-  C:1213H         LINE#         39
-  C:1216H         LINE#         40
+  C:121BH         LINE#         13
+  C:121BH         LINE#         14
+  C:121BH         LINE#         15
+  C:121DH         LINE#         16
+  C:1220H         LINE#         17
+  C:1223H         LINE#         18
+  C:1226H         LINE#         19
+  C:122BH         LINE#         20
+  C:122EH         LINE#         22
+  C:122EH         LINE#         23
+  C:122EH         LINE#         24
+  C:1232H         LINE#         25
+  C:1235H         LINE#         26
+  C:1237H         LINE#         27
+  C:123AH         LINE#         28
+  C:123AH         LINE#         29
+  C:1241H         LINE#         30
+  C:1244H         LINE#         31
+  C:1244H         LINE#         32
+  C:1246H         LINE#         33
+  C:1249H         LINE#         34
+  C:1249H         LINE#         35
+  C:1249H         LINE#         36
+  C:124CH         LINE#         37
   -------         ENDPROC       MAIN
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 14
-
-
   -------         ENDMOD        MAIN
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 14
+
 
   -------         MODULE        TIME
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  B:00A8H.7       PUBLIC        EA
-  C:12F5H         PUBLIC        _KeyAction
+  C:132BH         PUBLIC        _KeyAction
   D:0033H         PUBLIC        pSec
   D:00A8H         PUBLIC        IE
   D:0034H         PUBLIC        pDay
   D:0035H         PUBLIC        pHour
   D:00B8H         PUBLIC        IP
   C:0930H         PUBLIC        ShowCurrentTime
-  C:0CA2H         PUBLIC        ShowInfo
+  C:0CDBH         PUBLIC        ShowInfo
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0E46H         PUBLIC        ShowTemp
-  C:124AH         PUBLIC        weekCN
-  C:13CFH         PUBLIC        ClearInforArea
+  C:0E7BH         PUBLIC        ShowTemp
+  C:1280H         PUBLIC        weekCN
+  C:1405H         PUBLIC        ClearInforArea
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          CLEARINFORAREA
   -------         DO            
   D:0037H         SYMBOL        i
   -------         ENDDO         
-  C:13CFH         LINE#         21
-  C:13CFH         LINE#         22
-  C:13CFH         LINE#         25
-  C:13D2H         LINE#         26
-  C:13D2H         LINE#         27
-  C:13DBH         LINE#         28
-  C:13E4H         LINE#         29
+  C:1405H         LINE#         21
+  C:1405H         LINE#         22
+  C:1405H         LINE#         25
+  C:1408H         LINE#         26
+  C:1408H         LINE#         27
+  C:1411H         LINE#         28
+  C:141AH         LINE#         29
   -------         ENDPROC       CLEARINFORAREA
   -------         PROC          SHOWCURRENTTIME
   -------         DO            
@@ -839,12 +836,12 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:09A0H         LINE#         48
   C:09AEH         LINE#         49
   C:09BEH         LINE#         50
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 15
-
-
   C:09C4H         LINE#         51
   C:09C7H         LINE#         52
   C:09D5H         LINE#         53
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 15
+
+
   C:09D5H         LINE#         54
   C:09D5H         LINE#         55
   C:09D7H         LINE#         56
@@ -882,65 +879,63 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:000BH         SYMBOL        humi
   D:000CH         SYMBOL        dat
   -------         ENDDO         
-  C:0E46H         LINE#         88
-  C:0E46H         LINE#         89
-  C:0E46H         LINE#         93
-  C:0E58H         LINE#         95
-  C:0E67H         LINE#         96
-  C:0E78H         LINE#         97
-  C:0E7EH         LINE#         98
-  C:0E8EH         LINE#         100
-  C:0E9DH         LINE#         101
-  C:0EAEH         LINE#         102
-  C:0EB4H         LINE#         103
+  C:0E7BH         LINE#         88
+  C:0E7BH         LINE#         89
+  C:0E7BH         LINE#         93
+  C:0E8DH         LINE#         95
+  C:0E9CH         LINE#         96
+  C:0EADH         LINE#         97
+  C:0EB3H         LINE#         98
+  C:0EC3H         LINE#         100
+  C:0ED2H         LINE#         101
+  C:0EE3H         LINE#         102
+  C:0EE9H         LINE#         103
   -------         ENDPROC       SHOWTEMP
   -------         PROC          SHOWINFO
   -------         DO            
   X:0030H         SYMBOL        lunar
   X:003EH         SYMBOL        lunarLen
   X:003FH         SYMBOL        lday
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 16
-
-
   X:0040H         SYMBOL        lyear
   X:0041H         SYMBOL        lmonth
-  C:126AH         SYMBOL        iPrompt
+  C:12A0H         SYMBOL        iPrompt
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 16
+
+
   -------         ENDDO         
-  C:0CA2H         LINE#         106
-  C:0CA2H         LINE#         107
-  C:0CA2H         LINE#         116
-  C:0CA5H         LINE#         117
-  C:0CB5H         LINE#         118
-  C:0CC5H         LINE#         119
-  C:0CD5H         LINE#         120
-  C:0CD7H         LINE#         121
-  C:0CDAH         LINE#         122
-  C:0CDCH         LINE#         123
-  C:0CEFH         LINE#         124
-  C:0D01H         LINE#         125
-  C:0D15H         LINE#         126
-  C:0D25H         LINE#         127
+  C:0CDBH         LINE#         106
+  C:0CDBH         LINE#         107
+  C:0CDBH         LINE#         116
+  C:0CDEH         LINE#         117
+  C:0CEEH         LINE#         118
+  C:0CFEH         LINE#         119
+  C:0D0EH         LINE#         120
+  C:0D11H         LINE#         121
+  C:0D24H         LINE#         122
+  C:0D36H         LINE#         123
+  C:0D4AH         LINE#         124
+  C:0D5AH         LINE#         125
   -------         ENDPROC       SHOWINFO
   -------         PROC          _KEYACTION
   D:0007H         SYMBOL        keyCode
-  C:12F5H         LINE#         130
-  C:12F5H         LINE#         131
-  C:12F5H         LINE#         132
-  C:12F8H         LINE#         133
-  C:12F8H         LINE#         134
-  C:12FAH         LINE#         135
-  C:12FDH         LINE#         136
-  C:1301H         LINE#         137
-  C:1304H         LINE#         138
-  C:1307H         LINE#         139
-  C:130AH         LINE#         140
-  C:130DH         LINE#         141
-  C:1313H         LINE#         142
-  C:1316H         LINE#         143
-  C:1316H         LINE#         144
-  C:1316H         LINE#         146
-  C:1316H         LINE#         148
-  C:1316H         LINE#         149
+  C:132BH         LINE#         128
+  C:132BH         LINE#         129
+  C:132BH         LINE#         130
+  C:132EH         LINE#         131
+  C:132EH         LINE#         132
+  C:1330H         LINE#         133
+  C:1333H         LINE#         134
+  C:1337H         LINE#         135
+  C:133AH         LINE#         136
+  C:133DH         LINE#         137
+  C:1340H         LINE#         138
+  C:1343H         LINE#         139
+  C:1349H         LINE#         140
+  C:134CH         LINE#         141
+  C:134CH         LINE#         142
+  C:134CH         LINE#         144
+  C:134CH         LINE#         146
+  C:134CH         LINE#         147
   -------         ENDPROC       _KEYACTION
   -------         ENDMOD        TIME
 
@@ -959,14 +954,14 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0098H         PUBLIC        SCON
   C:0595H         PUBLIC        ChMonth
   D:0088H         PUBLIC        TCON
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 17
-
-
   B:0020H.5       PUBLIC        animalNewYear
   D:002FH         PUBLIC        LunarCalendarDay
   C:0519H         PUBLIC        ChDay
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 17
+
+
   -------         PROC          _LUNARCALENDAR
   D:0011H         SYMBOL        year
   D:0012H         SYMBOL        month
@@ -1019,14 +1014,14 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:01D0H         LINE#         94
   C:01D2H         LINE#         95
   C:01D5H         LINE#         96
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 18
-
-
   C:0201H         LINE#         97
   C:0206H         LINE#         99
   C:0209H         LINE#         100
   C:020CH         LINE#         101
   C:0243H         LINE#         102
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 18
+
+
   C:0246H         LINE#         104
   C:0249H         LINE#         105
   C:0259H         LINE#         106
@@ -1079,14 +1074,14 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:08F6H         LINE#         148
   C:08F8H         LINE#         149
   C:08FBH         LINE#         150
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 19
-
-
   C:08FBH         LINE#         151
   C:08FDH         LINE#         152
   C:08FFH         LINE#         153
   C:0900H         LINE#         154
   C:0900H         LINE#         155
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 19
+
+
   C:092DH         LINE#         156
   C:092DH         LINE#         158
   C:092FH         LINE#         159
@@ -1098,96 +1093,115 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
   D:00A8H         PUBLIC        IE
-  C:143AH         PUBLIC        _DelayX10us
+  C:1470H         PUBLIC        _DelayX10us
   D:00B8H         PUBLIC        IP
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:136DH         PUBLIC        DHT11GetACK
+  C:13A3H         PUBLIC        DHT11GetACK
   B:00B0H.2       PUBLIC        DHT11_DATA
   B:00A8H.3       PUBLIC        ET1
   D:008BH         PUBLIC        TL1
   B:0088H.6       PUBLIC        TR1
-  C:0B6AH         PUBLIC        _DHT11GetData
+  C:0A92H         PUBLIC        _DHT11GetData
   D:00C8H         PUBLIC        T2CON
-  C:1446H         PUBLIC        ConfigureDHT11
+  C:147CH         PUBLIC        ConfigureDHT11
+  D:0038H         PUBLIC        cntThr
   D:00D0H         PUBLIC        PSW
   -------         PROC          _DELAYX10US
   D:0006H         SYMBOL        x
-  C:143AH         LINE#         5
-  C:143AH         LINE#         6
-  C:143AH         LINE#         8
-  C:143AH         LINE#         9
-  C:143BH         LINE#         10
-  C:143CH         LINE#         11
-  C:1445H         LINE#         12
+  C:1470H         LINE#         8
+  C:1470H         LINE#         9
+  C:1470H         LINE#         11
+  C:1470H         LINE#         12
+  C:1471H         LINE#         13
+  C:1472H         LINE#         14
+  C:147BH         LINE#         15
   -------         ENDPROC       _DELAYX10US
   -------         PROC          DHT11GETACK
   -------         DO            
   B:0020H.4       SYMBOL        ack
   -------         ENDDO         
-  C:136DH         LINE#         14
-  C:136DH         LINE#         15
-  C:136DH         LINE#         18
-  C:136FH         LINE#         19
-  C:1376H         LINE#         20
-  C:1378H         LINE#         21
-  C:137FH         LINE#         22
-  C:1383H         LINE#         24
-  C:1386H         LINE#         25
+  C:13A3H         LINE#         17
+  C:13A3H         LINE#         18
+  C:13A3H         LINE#         21
+  C:13A5H         LINE#         22
+  C:13ACH         LINE#         23
+  C:13AEH         LINE#         24
+  C:13B5H         LINE#         25
+  C:13B9H         LINE#         27
+  C:13BCH         LINE#         28
   -------         ENDPROC       DHT11GETACK
   -------         PROC          _DHT11GETDATA
   D:0001H         SYMBOL        humi
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 20
-
-
   D:0015H         SYMBOL        temp
   -------         DO            
   B:0020H.3       SYMBOL        ack
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 20
+
+
   D:0018H         SYMBOL        cnt
   D:0019H         SYMBOL        mdat
   -------         ENDDO         
-  C:0B6AH         LINE#         28
-  C:0B6AH         LINE#         29
-  C:0B6AH         LINE#         31
-  C:0B6DH         LINE#         32
-  C:0B76H         LINE#         35
-  C:0B7BH         LINE#         36
-  C:0B81H         LINE#         37
-  C:0B84H         LINE#         38
-  C:0B8BH         LINE#         40
-  C:0B92H         LINE#         41
-  C:0B95H         LINE#         42
-  C:0B98H         LINE#         43
-  C:0B9AH         LINE#         44
-  C:0B9DH         LINE#         45
-  C:0B9FH         LINE#         46
-  C:0BA6H         LINE#         47
-  C:0BBBH         LINE#         48
-  C:0BBDH         LINE#         49
-  C:0BD2H         LINE#         50
-  C:0BE4H         LINE#         51
-  C:0BE4H         LINE#         52
-  C:0BE6H         LINE#         54
-  C:0BF7H         LINE#         55
-  C:0C0EH         LINE#         57
-  C:0C0FH         LINE#         58
+  C:0A92H         LINE#         31
+  C:0A92H         LINE#         32
+  C:0A92H         LINE#         34
+  C:0A95H         LINE#         35
+  C:0A9EH         LINE#         37
+  C:0AA0H         LINE#         38
+  C:0AA5H         LINE#         39
+  C:0AABH         LINE#         40
+  C:0AAEH         LINE#         41
+  C:0ABBH         LINE#         42
+  C:0AC5H         LINE#         43
+  C:0AC5H         LINE#         44
+  C:0AC5H         LINE#         45
+  C:0AC7H         LINE#         46
+  C:0AC7H         LINE#         47
+  C:0ACEH         LINE#         49
+  C:0AD5H         LINE#         50
+  C:0AD8H         LINE#         51
+  C:0AE5H         LINE#         52
+  C:0AEFH         LINE#         53
+  C:0AF1H         LINE#         54
+  C:0AF3H         LINE#         55
+  C:0AF4H         LINE#         56
+  C:0AF4H         LINE#         57
+  C:0AF7H         LINE#         58
+  C:0AF9H         LINE#         59
+  C:0AFCH         LINE#         60
+  C:0AFEH         LINE#         61
+  C:0B05H         LINE#         62
+  C:0B1AH         LINE#         63
+  C:0B1CH         LINE#         64
+  C:0B31H         LINE#         65
+  C:0B43H         LINE#         66
+  C:0B43H         LINE#         67
+  C:0B45H         LINE#         69
+  C:0B56H         LINE#         70
+  C:0B6DH         LINE#         71
+  C:0B6FH         LINE#         72
+  C:0B70H         LINE#         73
   -------         ENDPROC       _DHT11GETDATA
   -------         PROC          CONFIGUREDHT11
-  C:1446H         LINE#         60
-  C:1446H         LINE#         61
-  C:1446H         LINE#         62
-  C:1449H         LINE#         63
-  C:144CH         LINE#         65
-  C:144EH         LINE#         66
+  C:147CH         LINE#         75
+  C:147CH         LINE#         76
+  C:147CH         LINE#         77
+  C:147FH         LINE#         78
+  C:1482H         LINE#         80
+  C:1484H         LINE#         81
   -------         ENDPROC       CONFIGUREDHT11
   -------         ENDMOD        DHT11
 
   -------         MODULE        KEYBOARD
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
-  C:127CH         PUBLIC        _ConfigTimerZero
+  C:12B2H         PUBLIC        _ConfigTimerZero
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 21
+
+
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
@@ -1199,18 +1213,15 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   B:00A0H.2       PUBLIC        KeyOut2
   B:00A0H.7       PUBLIC        KeyIn4
   B:00A0H.1       PUBLIC        KeyOut3
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 21
-
-
   B:00A0H.0       PUBLIC        KeyOut4
   D:00B8H         PUBLIC        IP
-  C:0F37H         PUBLIC        KeyDriver
+  C:0F6CH         PUBLIC        KeyDriver
   D:002DH         PUBLIC        T0RH
   D:002EH         PUBLIC        T0RL
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:0A92H         PUBLIC        ClearTremble
+  C:0B71H         PUBLIC        ClearTremble
   B:0020H.1       PUBLIC        flag1s
   B:0020H.2       PUBLIC        flag5s
   B:00A8H.1       PUBLIC        ET0
@@ -1218,88 +1229,88 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:008AH         PUBLIC        TL0
   B:0088H.4       PUBLIC        TR0
   D:00C8H         PUBLIC        T2CON
-  C:141BH         PUBLIC        keyCodeMap
+  C:1451H         PUBLIC        keyCodeMap
   X:0020H         PUBLIC        keySta
   D:00D0H         PUBLIC        PSW
-  C:111CH         PUBLIC        InterruptTimerZero
+  C:1154H         PUBLIC        InterruptTimerZero
   -------         PROC          CLEARTREMBLE
   -------         DO            
   D:0007H         SYMBOL        i
   D:0029H         SYMBOL        queue
   X:0000H         SYMBOL        state
   -------         ENDDO         
-  C:0A92H         LINE#         24
-  C:0A92H         LINE#         25
-  C:0A92H         LINE#         37
-  C:0AA1H         LINE#         38
-  C:0AA1H         LINE#         39
-  C:0AA7H         LINE#         40
-  C:0AADH         LINE#         41
-  C:0AB3H         LINE#         42
-  C:0AB7H         LINE#         43
-  C:0AB7H         LINE#         44
-  C:0AB7H         LINE#         46
-  C:0AD5H         LINE#         47
-  C:0AF3H         LINE#         48
-  C:0B11H         LINE#         49
-  C:0B2FH         LINE#         51
-  C:0B31H         LINE#         52
-  C:0B31H         LINE#         53
-  C:0B42H         LINE#         54
-  C:0B42H         LINE#         55
-  C:0B4FH         LINE#         56
-  C:0B54H         LINE#         57
-  C:0B60H         LINE#         58
-  C:0B60H         LINE#         59
-  C:0B60H         LINE#         60
-  C:0B64H         LINE#         62
-  C:0B66H         LINE#         63
-  C:0B69H         LINE#         64
+  C:0B71H         LINE#         24
+  C:0B71H         LINE#         25
+  C:0B71H         LINE#         37
+  C:0B80H         LINE#         38
+  C:0B80H         LINE#         39
+  C:0B86H         LINE#         40
+  C:0B8CH         LINE#         41
+  C:0B92H         LINE#         42
+  C:0B96H         LINE#         43
+  C:0B96H         LINE#         44
+  C:0B96H         LINE#         46
+  C:0BB4H         LINE#         47
+  C:0BD2H         LINE#         48
+  C:0BF0H         LINE#         49
+  C:0C0EH         LINE#         51
+  C:0C10H         LINE#         52
+  C:0C10H         LINE#         53
+  C:0C21H         LINE#         54
+  C:0C21H         LINE#         55
+  C:0C2EH         LINE#         56
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 22
+
+
+  C:0C33H         LINE#         57
+  C:0C3FH         LINE#         58
+  C:0C3FH         LINE#         59
+  C:0C3FH         LINE#         60
+  C:0C43H         LINE#         62
+  C:0C45H         LINE#         63
+  C:0C48H         LINE#         64
   -------         ENDPROC       CLEARTREMBLE
   -------         PROC          KEYDRIVER
   -------         DO            
   X:0010H         SYMBOL        keyBuf
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 22
-
-
   D:0008H         SYMBOL        i
   D:0009H         SYMBOL        j
   -------         ENDDO         
-  C:0F37H         LINE#         66
-  C:0F37H         LINE#         67
-  C:0F37H         LINE#         73
-  C:0F3AH         LINE#         74
-  C:0F3AH         LINE#         75
-  C:0F3DH         LINE#         76
-  C:0F3DH         LINE#         77
-  C:0F5AH         LINE#         78
-  C:0F5AH         LINE#         79
-  C:0F5DH         LINE#         80
-  C:0F5DH         LINE#         81
-  C:0F7DH         LINE#         82
-  C:0F7DH         LINE#         83
-  C:0F97H         LINE#         84
-  C:0F97H         LINE#         85
-  C:0FA0H         LINE#         86
-  C:0FA9H         LINE#         87
+  C:0F6CH         LINE#         66
+  C:0F6CH         LINE#         67
+  C:0F6CH         LINE#         73
+  C:0F6FH         LINE#         74
+  C:0F6FH         LINE#         75
+  C:0F72H         LINE#         76
+  C:0F72H         LINE#         77
+  C:0F8FH         LINE#         78
+  C:0F8FH         LINE#         79
+  C:0F92H         LINE#         80
+  C:0F92H         LINE#         81
+  C:0FB2H         LINE#         82
+  C:0FB2H         LINE#         83
+  C:0FCCH         LINE#         84
+  C:0FCCH         LINE#         85
+  C:0FD5H         LINE#         86
+  C:0FDEH         LINE#         87
   -------         ENDPROC       KEYDRIVER
   -------         PROC          _CONFIGTIMERZERO
   D:0007H         SYMBOL        ms
   -------         DO            
   D:0004H         SYMBOL        tmp
   -------         ENDDO         
-  C:127CH         LINE#         89
-  C:127CH         LINE#         90
-  C:127CH         LINE#         93
-  C:1290H         LINE#         95
-  C:1292H         LINE#         96
-  C:1297H         LINE#         98
-  C:129AH         LINE#         99
-  C:129DH         LINE#         101
-  C:12A0H         LINE#         102
-  C:12A3H         LINE#         104
-  C:12A5H         LINE#         105
-  C:12A7H         LINE#         106
+  C:12B2H         LINE#         89
+  C:12B2H         LINE#         90
+  C:12B2H         LINE#         93
+  C:12C6H         LINE#         95
+  C:12C8H         LINE#         96
+  C:12CDH         LINE#         98
+  C:12D0H         LINE#         99
+  C:12D3H         LINE#         101
+  C:12D6H         LINE#         102
+  C:12D9H         LINE#         104
+  C:12DBH         LINE#         105
+  C:12DDH         LINE#         106
   -------         ENDPROC       _CONFIGTIMERZERO
   -------         PROC          INTERRUPTTIMERZERO
   -------         DO            
@@ -1307,32 +1318,32 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:002BH         SYMBOL        cnt1s
   D:002CH         SYMBOL        cnt5s
   -------         ENDDO         
-  C:111CH         LINE#         108
-  C:1129H         LINE#         112
-  C:112CH         LINE#         113
-  C:112FH         LINE#         115
-  C:1131H         LINE#         116
-  C:1138H         LINE#         117
-  C:1138H         LINE#         118
-  C:113BH         LINE#         119
-  C:113DH         LINE#         120
-  C:113FH         LINE#         121
-  C:1145H         LINE#         122
-  C:1145H         LINE#         123
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 23
+  C:1154H         LINE#         108
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 23
 
 
-  C:1148H         LINE#         124
-  C:114AH         LINE#         125
-  C:114AH         LINE#         126
-  C:114CH         LINE#         127
-  C:1153H         LINE#         128
-  C:1153H         LINE#         129
-  C:1156H         LINE#         130
-  C:1158H         LINE#         131
-  C:1158H         LINE#         132
-  C:1158H         LINE#         133
-  C:115BH         LINE#         134
+  C:1161H         LINE#         112
+  C:1164H         LINE#         113
+  C:1167H         LINE#         115
+  C:1169H         LINE#         116
+  C:1170H         LINE#         117
+  C:1170H         LINE#         118
+  C:1173H         LINE#         119
+  C:1175H         LINE#         120
+  C:1177H         LINE#         121
+  C:117DH         LINE#         122
+  C:117DH         LINE#         123
+  C:1180H         LINE#         124
+  C:1182H         LINE#         125
+  C:1182H         LINE#         126
+  C:1184H         LINE#         127
+  C:118BH         LINE#         128
+  C:118BH         LINE#         129
+  C:118EH         LINE#         130
+  C:1190H         LINE#         131
+  C:1190H         LINE#         132
+  C:1190H         LINE#         133
+  C:1193H         LINE#         134
   -------         ENDPROC       INTERRUPTTIMERZERO
   -------         ENDMOD        KEYBOARD
 
@@ -1368,6 +1379,9 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:06EEH         PUBLIC        ?C?LMUL
   -------         ENDMOD        ?C?LMUL
 
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/30/2017  11:31:35  PAGE 24
+
+
   -------         MODULE        ?C?ULCMP
   C:073DH         PUBLIC        ?C?ULCMP
   -------         ENDMOD        ?C?ULCMP
@@ -1379,9 +1393,6 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         MODULE        ?C?SLSHR
   C:0761H         PUBLIC        ?C?SLSHR
   -------         ENDMOD        ?C?SLSHR
-BL51 BANKED LINKER/LOCATER V6.05                                                      05/29/2017  19:32:56  PAGE 24
-
-
 
   -------         MODULE        ?C?LSHL
   C:0775H         PUBLIC        ?C?LSHL
@@ -1414,5 +1425,5 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CLEARINFORAREA?TIME
 
-Program Size: data=56.6 xdata=82 code=5201
+Program Size: data=57.6 xdata=82 code=5255
 LINK/LOCATE RUN COMPLETE.  5 WARNING(S),  0 ERROR(S)

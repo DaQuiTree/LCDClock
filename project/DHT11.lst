@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DHT11                                                                 05/29/2017 19:32:55 PAGE 1   
+C51 COMPILER V8.08   DHT11                                                                 05/30/2017 11:31:34 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
@@ -12,78 +12,93 @@ line level    source
    2          #include "config.h"
    3          #include "dht11.h"
    4          
-   5          void DelayX10us(uint16 x)
-   6          {
-   7   1              
-   8   1              do{
-   9   2                      _nop_();
-  10   2                      _nop_();
-  11   2              }while(--x);    
-  12   1      }
-  13          
-  14          bit DHT11GetACK()
-  15          {
-  16   1              bit ack;
-  17   1      
-  18   1              DHT11_DATA = 0;
-  19   1              DelayX10us(2000);//延时20ms
-  20   1              DHT11_DATA = 1;                                                            
-  21   1              DelayX10us(4);
-  22   1              ack = DHT11_DATA;
-  23   1              
-  24   1              return ~ack;    
-  25   1      }
-  26          
-  27          
-  28          bit DHT11GetData(uint8* humi, uint8* temp) 
-  29          {
-  30   1              bit ack;
-  31   1              uint8 cnt = 32;
-  32   1              uint32 mdat = 0;
-  33   1      
-  34   1      //      EA = 0;
-  35   1              ack = DHT11GetACK();
-  36   1              if(!ack)return ack;  //读数失败
-  37   1              while(!DHT11_DATA);       //等待DHT11拉高电平
-  38   1              DelayX10us(8);  
-  39   1      
-  40   1              while(cnt--){
-  41   2                      while(!DHT11_DATA);     //等待高电平到来                  
-  42   2                      TL1 = 0;
-  43   2                      TR1 = 1;
-  44   2                      while(DHT11_DATA);      //等待高电平结束
-  45   2                      TR1 = 0;                        //结束计时
-  46   2                      if(TL1 < 30){  //低电平
-  47   3                              mdat <<= 1; 
-  48   3                      }else{                  //高电平
-  49   3                              mdat <<= 1;
-  50   3                              mdat |= 0x1;
-  51   3                      }               
-  52   2              }
-  53   1      
-  54   1              *humi = (uint8)(mdat >> 24);
-C51 COMPILER V8.08   DHT11                                                                 05/29/2017 19:32:55 PAGE 2   
+   5          #define NUMBER 20
+   6          uint8 cntThr = 0;
+   7          
+   8          void DelayX10us(uint16 x)
+   9          {
+  10   1              
+  11   1              do{
+  12   2                      _nop_();
+  13   2                      _nop_();
+  14   2              }while(--x);    
+  15   1      }
+  16          
+  17          bit DHT11GetACK()
+  18          {
+  19   1              bit ack;
+  20   1      
+  21   1              DHT11_DATA = 0;
+  22   1              DelayX10us(2000);//延时20ms
+  23   1              DHT11_DATA = 1;                                                            
+  24   1              DelayX10us(4);
+  25   1              ack = DHT11_DATA;
+  26   1              
+  27   1              return ~ack;    
+  28   1      }
+  29          
+  30          
+  31          bit DHT11GetData(uint8* humi, uint8* temp) 
+  32          {
+  33   1              bit ack;
+  34   1              uint8 cnt = 32;
+  35   1              uint32 mdat = 0;
+  36   1      
+  37   1              EA = 0;
+  38   1              ack = DHT11GetACK();
+  39   1              if(!ack)return ack;  //读数失败
+  40   1              cntThr = 0;
+  41   1              while(!DHT11_DATA && cntThr++ < NUMBER);          //等待DHT11拉高电平
+  42   1              if(cntThr++ >= NUMBER){
+  43   2                      DHT11_DATA = 1;
+  44   2                      EA = 1;
+  45   2                      return 0;
+  46   2              }
+  47   1              DelayX10us(8);  
+  48   1      
+  49   1              while(cnt--){
+  50   2                      cntThr = 0;
+  51   2                      while(!DHT11_DATA && cntThr++ < NUMBER);        //等待高电平到来
+  52   2                      if(cntThr++ >= NUMBER){
+  53   3                              DHT11_DATA = 1;
+  54   3                              EA = 1;
+C51 COMPILER V8.08   DHT11                                                                 05/30/2017 11:31:34 PAGE 2   
 
-  55   1              *temp = (uint8)(mdat >> 8);
-  56   1      //      EA = 1;
-  57   1              return 1;       
-  58   1      }
-  59          
-  60          void ConfigureDHT11()
-  61          {
-  62   1              TMOD &= 0x0F;
-  63   1              TMOD |= 0x10;
-  64   1      
-  65   1              ET1 = 0;
-  66   1      }
+  55   3                              return 0;
+  56   3                      }                 
+  57   2                      TL1 = 0;
+  58   2                      TR1 = 1;
+  59   2                      while(DHT11_DATA);      //等待高电平结束
+  60   2                      TR1 = 0;                        //结束计时
+  61   2                      if(TL1 < 30){  //低电平
+  62   3                              mdat <<= 1; 
+  63   3                      }else{                  //高电平
+  64   3                              mdat <<= 1;
+  65   3                              mdat |= 0x1;
+  66   3                      }               
+  67   2              }
+  68   1      
+  69   1              *humi = (uint8)(mdat >> 24);
+  70   1              *temp = (uint8)(mdat >> 8);
+  71   1              EA = 1;
+  72   1              return 1;       
+  73   1      }
+  74          
+  75          void ConfigureDHT11()
+  76          {
+  77   1              TMOD &= 0x0F;
+  78   1              TMOD |= 0x10;
+  79   1      
+  80   1              ET1 = 0;
+  81   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    213    ----
+   CODE SIZE        =    270    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      11
+   DATA SIZE        =      1      11
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----       2
 END OF MODULE INFORMATION.

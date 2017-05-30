@@ -2,6 +2,9 @@
 #include "config.h"
 #include "dht11.h"
 
+#define NUMBER 20
+uint8 cntThr = 0;
+
 void DelayX10us(uint16 x)
 {
 	
@@ -31,14 +34,26 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 	uint8 cnt = 32;
 	uint32 mdat = 0;
 
-//	EA = 0;
+	EA = 0;
 	ack = DHT11GetACK();
 	if(!ack)return ack;  //读数失败
-	while(!DHT11_DATA);	  //等待DHT11拉高电平
+	cntThr = 0;
+	while(!DHT11_DATA && cntThr++ < NUMBER);	  //等待DHT11拉高电平
+	if(cntThr++ >= NUMBER){
+		DHT11_DATA = 1;
+		EA = 1;
+		return 0;
+	}
 	DelayX10us(8);	
 
 	while(cnt--){
-		while(!DHT11_DATA);	//等待高电平到来		  
+		cntThr = 0;
+		while(!DHT11_DATA && cntThr++ < NUMBER);	//等待高电平到来
+		if(cntThr++ >= NUMBER){
+			DHT11_DATA = 1;
+			EA = 1;
+			return 0;
+		}		  
 		TL1 = 0;
 		TR1 = 1;
 		while(DHT11_DATA);	//等待高电平结束
@@ -53,7 +68,7 @@ bit DHT11GetData(uint8* humi, uint8* temp)
 
 	*humi = (uint8)(mdat >> 24);
 	*temp = (uint8)(mdat >> 8);
-//	EA = 1;
+	EA = 1;
 	return 1;	
 }
 

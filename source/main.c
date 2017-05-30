@@ -26,14 +26,11 @@ void main()
 				flag200ms = 0;
 				ShowCurrentTime();
 			}
-		}
-		if(mMode == ReadInfo){
+		}else if(mMode == ReadInfo){
 			if(flag5s)
 			{
 				flag5s = 0;
-				EA = 0;
 				ShowTemp();
-				EA = 1;
 			} 
 		} 
 		KeyDriver();

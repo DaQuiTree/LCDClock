@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DS1302                                                                05/29/2017 19:32:54 PAGE 1   
+C51 COMPILER V8.08   DS1302                                                                05/30/2017 11:31:33 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DS1302
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1              time->sec &= 0x7F;
   54   1      }
-C51 COMPILER V8.08   DS1302                                                                05/29/2017 19:32:54 PAGE 2   
+C51 COMPILER V8.08   DS1302                                                                05/30/2017 11:31:33 PAGE 2   
 
   55          
   56          void DS1302BurstWrite(struct sTime* time)
@@ -126,7 +126,7 @@ line level    source
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    267    ----
-C51 COMPILER V8.08   DS1302                                                                05/29/2017 19:32:54 PAGE 3   
+C51 COMPILER V8.08   DS1302                                                                05/30/2017 11:31:33 PAGE 3   
 
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----

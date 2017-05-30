@@ -91,7 +91,7 @@ void ShowTemp()
 	uint16 dat[3];
 
 	DHT11GetData(&humi, &temp);
-
+	
 	dat[0] = temp/10 + 0xA3B0;
 	dat[1] = temp%10 + 0xA3B0;
 	dat[2] = 0xA1E6; 
@@ -117,9 +117,7 @@ void ShowInfo()
 	LCDShowCN(0,1,iPrompt[0],3);  //p温度：
 	LCDShowCN(0,2,iPrompt[1],3);  //p湿度：
 	LCDShowCN(0,3,iPrompt[2],3);  //p闹钟：
-	EA = 0;
 	ShowTemp();				   //显示数值
-	EA = 1;
 	lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
 	lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
 	lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
