@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 11:31:34 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 15:32:59 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      if((state[queue][i] & 0x0F) == 0x0F)
   54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 11:31:34 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 15:32:59 PAGE 2   
 
   55   3                              keySta[queue][i] = 1; 
   56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1              cnt200ms++;                     
  116   1              if(cnt200ms >= 200) //200ms¶¨Ê±Æ÷
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 11:31:34 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 15:32:59 PAGE 3   
 
  117   1              {
  118   2                      cnt200ms = 0;

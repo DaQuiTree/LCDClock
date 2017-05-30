@@ -76,6 +76,7 @@ void KeyDriver()
 		{
 			if(keyBuf[i][j] != keySta[i][j])
 			{
+				
 				if(keyBuf[i][j] == 0x00)
 				{
 					KeyAction(keyCodeMap[i][j]);

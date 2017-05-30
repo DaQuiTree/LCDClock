@@ -17,7 +17,6 @@ void main()
 	InitLCD12864();
 	LCDInitImage();
 	ConfigTimerZero(1);
-	ConfigureDHT11();
 	
 	while(1)
 	{

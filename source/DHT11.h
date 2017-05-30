@@ -11,6 +11,7 @@
  //extern
  #endif
 
+ bit DHT11GetACK();
  bit DHT11GetData(uint8* humi, uint8* temp); 
  void ConfigureDHT11();
 
