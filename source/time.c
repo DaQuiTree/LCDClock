@@ -14,7 +14,7 @@ uint8 pHour = 0xAA; //时钟的初始值
 uint8 cHour = 0x00;
 uint8 cMin = 0x00; //闹钟初始值
 
-sTime timeBuf; //存储着十进制时间
+struct sTime timeBuf; //存储着十进制时间
 
 uint8 curPos = 0;
 
@@ -151,7 +151,7 @@ void RightShiftDate()
 		default: break;
 	}
 	curPos++;
-	if(curPos > 5) curPos = 0;
+	if(curPos > 6) curPos = 0;
 }
 
 void RightShiftClock()
@@ -173,52 +173,65 @@ void ShowAdjusted()
 
 	if(mMode == SetDate)
 	{
-		case 0:
-			strTmp[0] = (timeBuf.year >> 4) + '0';
-			strTmp[1] = (timeBuf.year & 0x0F) + '0';
-			LCDShowStr(2,1,strTmp,2);
-			break;
-		case 1:
-			strTmp[0] = (timeBuf.month >> 4) + '0';
-			strTmp[1] = (timeBuf.month & 0x0F) + '0';
-			LCDShowStr(4,1,strTmp,2);
-			break;
-		case 2:
-			strTmp[0] = (timeBuf.day >> 4) + '0';
-			strTmp[1] = (timeBuf.day & 0x0F) + '0';
-			LCDShowStr(6,1,strTmp,2);
-			break;
-		case 3:
-			LCDShowCN(3,2,weekCN[timeBuf.week],2);
-			break;			
-		case 4:
-			CNTmp[0] = (timeBuf.hour >> 4) + 0xA3B0;
-			CNTmp[1] = (timeBuf.hour & 0x0F) + 0xA3B0;
-			LCDShowStr(0,3,CNTmp,2);
-			break;
-		case 5:
-			CNTmp[0] = (timeBuf.min >> 4) + 0xA3B0;
-			CNTmp[1] = (timeBuf.min & 0x0F) + 0xA3B0;
-			LCDShowStr(3,3,CNTmp,2);
-			break;
-		case 6:
-			CNTmp[0] = (timeBuf.sec >> 4) + 0xA3B0;
-			CNTmp[1] = (timeBuf.sec & 0x0F) + 0xA3B0;
-			LCDShowStr(6,3,CNTmp,2);
-			break;
-		default: break;
+		switch(curPos){
+			case 0:
+				strTmp[0] = (timeBuf.year /10) + '0';
+				strTmp[1] = (timeBuf.year %10) + '0';
+				LCDShowStr(2,1,strTmp,2);
+				LCDSetCursor(2,1);	 //Cursor保持不动
+				break;
+			case 1:
+				strTmp[0] = (timeBuf.month /10) + '0';
+				strTmp[1] = (timeBuf.month %10) + '0';
+				LCDShowStr(4,1,strTmp,2);
+				LCDSetCursor(4,1);	 //Cursor保持不动
+				break;
+			case 2:
+				strTmp[0] = (timeBuf.day /10) + '0';
+				strTmp[1] = (timeBuf.day %10) + '0';
+				LCDShowStr(6,1,strTmp,2);
+				LCDSetCursor(6,1);	 //Cursor保持不动
+				break;
+			case 3:
+				LCDShowCN(3,2,weekCN[timeBuf.week],2);
+				LCDSetCursor(4,2);	 //Cursor保持不动
+				break;			
+			case 4:
+				CNTmp[0] = (timeBuf.hour /10) + 0xA3B0;
+				CNTmp[1] = (timeBuf.hour %10) + 0xA3B0;
+				LCDShowCN(0,3,CNTmp,2);
+				LCDSetCursor(1,3);	 //Cursor保持不动
+				break;
+			case 5:
+				CNTmp[0] = (timeBuf.min /10) + 0xA3B0;
+				CNTmp[1] = (timeBuf.min %10) + 0xA3B0;
+				LCDShowCN(3,3,CNTmp,2);
+				LCDSetCursor(4,3);	 //Cursor保持不动
+				break;
+			case 6:
+				CNTmp[0] = (timeBuf.sec /10) + 0xA3B0;
+				CNTmp[1] = (timeBuf.sec %10) + 0xA3B0;
+				LCDShowCN(6,3,CNTmp,2);
+				LCDSetCursor(7,3);	 //Cursor保持不动
+				break;
+			default: break;
+		}
 	}else if(mMode == SetClock){
-		case 0:
-			CNTmp[0] = (cHour >> 4) + 0xA3B0;
-			CNTmp[1] = (cHour & 0x0F) + 0xA3B0;
-			LCDShowStr(2,2,CNTmp,2);
-			break;
-		case 1:
-			CNTmp[0] = (cMin >> 4) + 0xA3B0;
-			CNTmp[1] = (cMin & 0x0F) + 0xA3B0;
-			LCDShowStr(5,2,CNTmp,2);
-			break;
-		default: break;
+		switch(curPos){
+			case 0:
+				CNTmp[0] = (cHour / 10) + 0xA3B0;
+				CNTmp[1] = (cHour % 10) + 0xA3B0;
+				LCDShowCN(2,2,CNTmp,2);
+				LCDSetCursor(3,2);	 //Cursor保持不动
+				break;
+			case 1:
+				CNTmp[0] = (cMin / 10) + 0xA3B0;
+				CNTmp[1] = (cMin % 10) + 0xA3B0;
+				LCDShowCN(5,2,CNTmp,2);
+				LCDSetCursor(6,2);	 //Cursor保持不动
+				break;
+			default: break;
+		}
 	}		
 }
 
@@ -284,13 +297,13 @@ void AdjustClock()
 
 void GetDecimalTime()
 {
-	timeBuf.year = (timeMod.year >> 4)*10 + (timeMode.year & 0x0F);
-	timeBuf.month = (timeMod.month >> 4)*10 + (timeMode.month & 0x0F);
-	timeBuf.day = (timeMod.day >> 4)*10 + (timeMode.day & 0x0F);
+	timeBuf.year = (timeMod.year >> 4)*10 + (timeMod.year & 0x0F);
+	timeBuf.month = (timeMod.month >> 4)*10 + (timeMod.month & 0x0F);
+	timeBuf.day = (timeMod.day >> 4)*10 + (timeMod.day & 0x0F);
 	timeBuf.week =  timeMod.week;
-	timeBuf.hour = (timeMod.hour >> 4)*10 + (timeMode.hour & 0x0F);
-	timeBuf.min = (timeMod.min >> 4)*10 + (timeMode.min & 0x0F);
-	timeBuf.sec = (timeMod.sec >> 4)*10 + (timeMode.sec & 0x0F);
+	timeBuf.hour = (timeMod.hour >> 4)*10 + (timeMod.hour & 0x0F);
+	timeBuf.min = (timeMod.min >> 4)*10 + (timeMod.min & 0x0F);
+	timeBuf.sec = (timeMod.sec >> 4)*10 + (timeMod.sec & 0x0F);
 }
 
 void KeyAction(uint8 keyCode)
@@ -317,8 +330,9 @@ void KeyAction(uint8 keyCode)
 			LCDClearAll();
 			clockStr[0] = 0xD0A3;
 			clockStr[1]	= 0xCAB1;
-			LCDShowCN(2,0,clockStr,2);//为节省内存借clockStr一用
-			LCDDrawArea(5,0,SaveButton);
+			LCDShowCN(3,0,clockStr,2);//为节省内存借clockStr一用
+			LCDClearImage(5,0);
+			LCDDrawArea(6,0,SaveButton);
 			pSec = 0xAA;
 			pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
 			ShowCurrentTime();

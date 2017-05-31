@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -24,190 +24,385 @@ line level    source
   14          uint8 cHour = 0x00;
   15          uint8 cMin = 0x00; //闹钟初始值
   16          
-  17          uint16 code weekCN[8][2] = {
-  18                  {0x0000,0x0000},{0xD6DC,0xD2BB},
-  19                  {0xD6DC,0xB6FE},{0xD6DC,0xC8FD},
-  20                  {0xD6DC,0xCBC4},{0xD6DC,0xCEE5},
-  21                  {0xD6DC,0xC1F9},{0xD6DC,0xC8D5}
-  22          };      /*空、周一~周日*/
-  23          
-  24          void ClearInforArea()  //清空屏幕下三行,保留标题栏
-  25          {
-  26   1              uint8 i;
-  27   1      
-  28   1              for(i = 0; i < 3; i++)
-  29   1              {
-  30   2                      LCDClearArea(0,i+1);
-  31   2              }
-  32   1      }
-  33          
-  34          void ShowCurrentTime()
-  35          {
-  36   1              uint16 pdata tStr[8];
-  37   1              uint8  pdata dStr[16];
-  38   1              uint16 pdata dSplit;
-  39   1      
-  40   1              DS1302BurstRead(&timeMod); 
-  41   1              if(pSec != timeMod.sec)
-  42   1              {
-  43   2                      pSec = timeMod.sec;
-  44   2                      tStr[0] = (timeMod.hour >> 4) + 0xA3B0; //时高
-  45   2                      tStr[1] = (timeMod.hour & 0x0F) + 0xA3B0;//时低
-  46   2                      tStr[2] = 0xA1C3;//时间分隔符
-  47   2                      tStr[3] = (timeMod.min >> 4) + 0xA3B0;  //分高
-  48   2                      tStr[4] = (timeMod.min & 0x0F) + 0xA3B0;//分低
-  49   2                      tStr[5] = 0xA1C3;//时间分隔符
-  50   2                      tStr[6] = (timeMod.sec >> 4) + 0xA3B0;  //秒高
-  51   2                      tStr[7] = (timeMod.sec & 0x0F) + 0xA3B0;//秒低 
-  52   2                      LCDShowCN(0,3,tStr,8);//液晶第1行显示日期时间
-  53   2                      if(pHour != timeMod.hour){
-  54   3                              pHour = timeMod.hour;
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 2   
+  17          struct sTime timeBuf; //存储着十进制时间
+  18          
+  19          uint8 curPos = 0;
+  20          
+  21          uint8 code DateMap[12][2] = {
+  22                  {1,31},{2,28},{3,31},{4,30},{5,31},{6,30},
+  23                  {7,31},{8,31},{9,30},{10,31},{11,30},{12,31}
+  24          };
+  25          
+  26          uint16 code weekCN[8][2] = {
+  27                  {0x0000,0x0000},{0xD6DC,0xD2BB},
+  28                  {0xD6DC,0xB6FE},{0xD6DC,0xC8FD},
+  29                  {0xD6DC,0xCBC4},{0xD6DC,0xCEE5},
+  30                  {0xD6DC,0xC1F9},{0xD6DC,0xC8D5}
+  31          };      /*空、周一~周日*/
+  32          
+  33          void ClearInforArea()  //清空屏幕下三行,保留标题栏
+  34          {
+  35   1              uint8 i;
+  36   1      
+  37   1              for(i = 0; i < 3; i++)
+  38   1              {
+  39   2                      LCDClearArea(0,i+1);
+  40   2              }
+  41   1      }
+  42          
+  43          void ShowCurrentTime()
+  44          {
+  45   1              uint16 pdata tStr[8];
+  46   1              uint8  pdata dStr[16];
+  47   1              uint16 pdata dSplit;
+  48   1      
+  49   1              DS1302BurstRead(&timeMod); 
+  50   1              if(pSec != timeMod.sec)
+  51   1              {
+  52   2                      pSec = timeMod.sec;
+  53   2                      tStr[0] = (timeMod.hour >> 4) + 0xA3B0; //时高
+  54   2                      tStr[1] = (timeMod.hour & 0x0F) + 0xA3B0;//时低
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 2   
 
-  55   3                              if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)        //若在白天，显示太阳图标
-  56   3                              {
-  57   4                                      LCDDrawArea(5,0,sunImage);
-  58   4                              }else{    //若在黑夜，显示月亮图标
-  59   4                                      LCDDrawArea(5,0,sunImage);
-  60   4                              }
-  61   3                      }
-  62   2              }
-  63   1      
-  64   1              if(pDay != timeMod.day) //若日期改变了
-  65   1              {
-  66   2                      pDay = timeMod.day;       //更新日期
-  67   2                      dStr[0] = ' ';
-  68   2                      dStr[1] = ' ';
-  69   2                      dStr[2] = '2';
-  70   2                      dStr[3] = '0';
-  71   2                      dStr[4] = (timeMod.year >> 4) + '0';    //年高
-  72   2                      dStr[5] = (timeMod.year & 0x0F) + '0';//年低
-  73   2                      dStr[6] = ' ';
-  74   2                      dStr[7] = ' ';
-  75   2                      dStr[8] = (timeMod.month >> 4) + '0';   //月高
-  76   2                      dStr[9] = (timeMod.month & 0x0F) + '0';//月低
-  77   2                      dStr[10] = ' ';
-  78   2                      dStr[11] = ' ';
-  79   2                      dStr[12] = (timeMod.day >> 4) + '0';    //日高
-  80   2                      dStr[13] = (timeMod.day & 0x0F) + '0';//日低
-  81   2                      dSplit = 0xA1A4;
-  82   2      
-  83   2                      LCDShowStr(0,1,dStr,14);//液晶第2行显示日期时间
-  84   2                      LCDShowCN(3,1,&dSplit,1);
-  85   2                      LCDShowCN(5,1,&dSplit,1);       //显示日期分隔符
-  86   2                      LCDShowCN(3,2,weekCN[timeMod.week],2);  //液晶第3行显示星期
-  87   2      
-  88   2              }  
-  89   1      }
-  90          
-  91          void ShowTemp()
-  92          {
-  93   1              uint8 temp,humi;
-  94   1              uint16 dat[3];
-  95   1      
-  96   1              DHT11GetData(&humi, &temp);
-  97   1              
-  98   1              dat[0] = temp/10 + 0xA3B0;
-  99   1              dat[1] = temp%10 + 0xA3B0;
- 100   1              dat[2] = 0xA1E6; 
- 101   1              LCDShowCN(3,1,dat,3);  //温度
- 102   1      
- 103   1              dat[0] = humi/10 + 0xA3B0;
- 104   1              dat[1] = humi%10 + 0xA3B0;
- 105   1              dat[2] = 0xA3A5; 
- 106   1              LCDShowCN(3,2,dat,3);  //湿度
- 107   1      }
- 108          
- 109          void ShowInfo()
- 110          {
- 111   1              uint16 pdata lunar[7];
- 112   1              uint8 pdata lunarLen, lday, lyear, lmonth;
- 113   1              uint16 code iPrompt[3][3] ={
- 114   1                      {0xCEC2,0xB6C8,0xA3BA},
- 115   1                      {0xCAAA,0xB6C8,0xA3BA},
- 116   1                      {0xC4D6,0xD6D3,0xA3BA}
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 3   
+  55   2                      tStr[2] = 0xA1C3;//时间分隔符
+  56   2                      tStr[3] = (timeMod.min >> 4) + 0xA3B0;  //分高
+  57   2                      tStr[4] = (timeMod.min & 0x0F) + 0xA3B0;//分低
+  58   2                      tStr[5] = 0xA1C3;//时间分隔符
+  59   2                      tStr[6] = (timeMod.sec >> 4) + 0xA3B0;  //秒高
+  60   2                      tStr[7] = (timeMod.sec & 0x0F) + 0xA3B0;//秒低 
+  61   2                      LCDShowCN(0,3,tStr,8);//液晶第1行显示日期时间
+  62   2                      if(pHour != timeMod.hour){
+  63   3                              pHour = timeMod.hour;
+  64   3                              if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)        //若在白天，显示太阳图标
+  65   3                              {
+  66   4                                      LCDDrawArea(5,0,sunImage);
+  67   4                              }else{    //若在黑夜，显示月亮图标
+  68   4                                      LCDDrawArea(5,0,sunImage);
+  69   4                              }
+  70   3                      }
+  71   2              }
+  72   1      
+  73   1              if(pDay != timeMod.day) //若日期改变了
+  74   1              {
+  75   2                      pDay = timeMod.day;       //更新日期
+  76   2                      dStr[0] = ' ';
+  77   2                      dStr[1] = ' ';
+  78   2                      dStr[2] = '2';
+  79   2                      dStr[3] = '0';
+  80   2                      dStr[4] = (timeMod.year >> 4) + '0';    //年高
+  81   2                      dStr[5] = (timeMod.year & 0x0F) + '0';//年低
+  82   2                      dStr[6] = ' ';
+  83   2                      dStr[7] = ' ';
+  84   2                      dStr[8] = (timeMod.month >> 4) + '0';   //月高
+  85   2                      dStr[9] = (timeMod.month & 0x0F) + '0';//月低
+  86   2                      dStr[10] = ' ';
+  87   2                      dStr[11] = ' ';
+  88   2                      dStr[12] = (timeMod.day >> 4) + '0';    //日高
+  89   2                      dStr[13] = (timeMod.day & 0x0F) + '0';//日低
+  90   2                      dSplit = 0xA1A4;
+  91   2      
+  92   2                      LCDShowStr(0,1,dStr,14);//液晶第2行显示日期时间
+  93   2                      LCDShowCN(3,1,&dSplit,1);
+  94   2                      LCDShowCN(5,1,&dSplit,1);       //显示日期分隔符
+  95   2                      LCDShowCN(3,2,weekCN[timeMod.week],2);  //液晶第3行显示星期
+  96   2      
+  97   2              }  
+  98   1      }
+  99          
+ 100          void ShowTemp()
+ 101          {
+ 102   1              uint8 temp,humi;
+ 103   1              uint16 dat[3];
+ 104   1      
+ 105   1              DHT11GetData(&humi, &temp);
+ 106   1              
+ 107   1              dat[0] = temp/10 + 0xA3B0;
+ 108   1              dat[1] = temp%10 + 0xA3B0;
+ 109   1              dat[2] = 0xA1E6; 
+ 110   1              LCDShowCN(3,1,dat,3);  //温度
+ 111   1      
+ 112   1              dat[0] = humi/10 + 0xA3B0;
+ 113   1              dat[1] = humi%10 + 0xA3B0;
+ 114   1              dat[2] = 0xA3A5; 
+ 115   1              LCDShowCN(3,2,dat,3);  //湿度
+ 116   1      }
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 3   
 
- 117   1              };
- 118   1              
- 119   1              LCDClearAll();    //清除显示区域
- 120   1              LCDShowCN(0,1,iPrompt[0],3);  //p温度：
- 121   1              LCDShowCN(0,2,iPrompt[1],3);  //p湿度：
- 122   1              LCDShowCN(0,3,iPrompt[2],3);  //p闹钟：
- 123   1              ShowTemp();                                //显示数值
- 124   1              lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
- 125   1              lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
- 126   1              lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
- 127   1              lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
- 128   1              LCDShowCN(1,0,lunar,lunarLen);
- 129   1      }
- 130          
- 131          void KeyAction(uint8 keyCode)
- 132          {
- 133   1              if(keyCode == 0x0D)//按回车键进入设定状态
- 134   1              {
- 135   2                      uint16 pdata clockStr[5];
- 136   2      
- 137   2                      if(mMode == SetDate){
- 138   3                              mMode = SetClock;
- 139   3                              LCDClearAll();
- 140   3                              LCDShowCN(0,0,"闹钟设定：",5);
-*** WARNING C182 IN LINE 140 OF ..\SOURCE\TIME.C: pointer to different objects
- 141   3                              clockStr[0] = (cHour >> 4) + 0xA3B0;
- 142   3                              clockStr[1] = (cHour & 0x0F) + 0xA3B0;
- 143   3                              clockStr[2] = 0xA1C3;
- 144   3                              clockStr[3] = (cMin >> 4) + 0xA3B0;
- 145   3                              clockStr[4] = (cMin & 0x0F) + 0xA3B0;
- 146   3                              LCDShowCN(2,2,clockStr,5);
- 147   3                              LCDSetCursor(3,2);
- 148   3                              LCDShowCursor();
- 149   3                      }else{
- 150   3                              mMode = SetDate;
- 151   3                              LCDClearAll();
- 152   3                              clockStr[0] = 0xD0A3;
- 153   3                              clockStr[1]     = 0xA1A0;
- 154   3                              clockStr[2]     = 0xA1A0;
- 155   3                              clockStr[3]     = 0xCAB1;
- 156   3                              LCDShowCN(2,0,clockStr,4);//为节省内存借clockStr一用
- 157   3                              pSec = 0xAA;
- 158   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
- 159   3                              ShowCurrentTime();
- 160   3                              LCDSetCursor(2,1);
- 161   3                              LCDShowCursor();
- 162   3                              
- 163   3                      }
- 164   2              }else if(keyCode == 0x1B){//取消
- 165   2      
- 166   2              }else if(keyCode == 0x26){//向上
- 167   2      
- 168   2              }else if(keyCode == 0x27){//向上、翻页
- 169   2                      if(mMode < SetDate) //处于信息展示状态时翻页
- 170   2                      {
- 171   3                              mMode++;
- 172   3                              mMode &= 0x01;//改变mMode状态
- 173   3                              if(mMode == ReadDate){ //时间界面
- 174   4                                      LCDClearAll();  //清屏
- 175   4                                      pSec = 0xAA;    //强制显示时间
- 176   4                                      pDay = 0xAA;
- 177   4                                      pHour = 0xAA;
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 4   
+ 117          
+ 118          void ShowInfo()
+ 119          {
+ 120   1              uint16 pdata lunar[7];
+ 121   1              uint8 pdata lunarLen, lday, lyear, lmonth;
+ 122   1              uint16 code iPrompt[3][3] ={
+ 123   1                      {0xCEC2,0xB6C8,0xA3BA},
+ 124   1                      {0xCAAA,0xB6C8,0xA3BA},
+ 125   1                      {0xC4D6,0xD6D3,0xA3BA}
+ 126   1              };
+ 127   1              
+ 128   1              LCDClearAll();    //清除显示区域
+ 129   1              LCDShowCN(0,1,iPrompt[0],3);  //p温度：
+ 130   1              LCDShowCN(0,2,iPrompt[1],3);  //p湿度：
+ 131   1              LCDShowCN(0,3,iPrompt[2],3);  //p闹钟：
+ 132   1              ShowTemp();                                //显示数值
+ 133   1              lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
+ 134   1              lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
+ 135   1              lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
+ 136   1              lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
+ 137   1              LCDShowCN(1,0,lunar,lunarLen);
+ 138   1      }
+ 139          
+ 140          void RightShiftDate()
+ 141          {
+ 142   1              switch(curPos)
+ 143   1              {
+ 144   2                      case 0: LCDSetCursor(4,1);break;
+ 145   2                      case 1: LCDSetCursor(6,1);break;
+ 146   2                      case 2: LCDSetCursor(4,2);break;
+ 147   2                      case 3: LCDSetCursor(1,3);break;
+ 148   2                      case 4: LCDSetCursor(4,3);break;
+ 149   2                      case 5: LCDSetCursor(7,3);break;
+ 150   2                      case 6: LCDSetCursor(2,1);break;
+ 151   2                      default: break;
+ 152   2              }
+ 153   1              curPos++;
+ 154   1              if(curPos > 6) curPos = 0;
+ 155   1      }
+ 156          
+ 157          void RightShiftClock()
+ 158          {
+ 159   1              switch(curPos)
+ 160   1              {
+ 161   2                      case 0: LCDSetCursor(6,2);break;
+ 162   2                      case 1: LCDSetCursor(3,2);break;
+ 163   2                      default: break;
+ 164   2              }
+ 165   1              curPos++;
+ 166   1              curPos &= 0x01; 
+ 167   1      }
+ 168          
+ 169          void ShowAdjusted()                               
+ 170          {
+ 171   1              uint8 pdata strTmp[2];
+ 172   1              uint16 pdata CNTmp[2];
+ 173   1      
+ 174   1              if(mMode == SetDate)
+ 175   1              {
+ 176   2                      switch(curPos){
+ 177   3                              case 0:
+ 178   3                                      strTmp[0] = (timeBuf.year /10) + '0';
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 4   
 
- 178   4                              }else if(mMode == ReadInfo){//温度等信息界面
- 179   4                                      ShowInfo();
- 180   4                              }
- 181   3                      }else{
- 182   3                              
- 183   3                      }               
- 184   2              }
- 185   1      }
+ 179   3                                      strTmp[1] = (timeBuf.year %10) + '0';
+ 180   3                                      LCDShowStr(2,1,strTmp,2);
+ 181   3                                      LCDSetCursor(2,1);       //Cursor保持不动
+ 182   3                                      break;
+ 183   3                              case 1:
+ 184   3                                      strTmp[0] = (timeBuf.month /10) + '0';
+ 185   3                                      strTmp[1] = (timeBuf.month %10) + '0';
+ 186   3                                      LCDShowStr(4,1,strTmp,2);
+ 187   3                                      LCDSetCursor(4,1);       //Cursor保持不动
+ 188   3                                      break;
+ 189   3                              case 2:
+ 190   3                                      strTmp[0] = (timeBuf.day /10) + '0';
+ 191   3                                      strTmp[1] = (timeBuf.day %10) + '0';
+ 192   3                                      LCDShowStr(6,1,strTmp,2);
+ 193   3                                      LCDSetCursor(6,1);       //Cursor保持不动
+ 194   3                                      break;
+ 195   3                              case 3:
+ 196   3                                      LCDShowCN(3,2,weekCN[timeBuf.week],2);
+ 197   3                                      LCDSetCursor(4,2);       //Cursor保持不动
+ 198   3                                      break;                  
+ 199   3                              case 4:
+ 200   3                                      CNTmp[0] = (timeBuf.hour /10) + 0xA3B0;
+ 201   3                                      CNTmp[1] = (timeBuf.hour %10) + 0xA3B0;
+ 202   3                                      LCDShowCN(0,3,CNTmp,2);
+ 203   3                                      LCDSetCursor(1,3);       //Cursor保持不动
+ 204   3                                      break;
+ 205   3                              case 5:
+ 206   3                                      CNTmp[0] = (timeBuf.min /10) + 0xA3B0;
+ 207   3                                      CNTmp[1] = (timeBuf.min %10) + 0xA3B0;
+ 208   3                                      LCDShowCN(3,3,CNTmp,2);
+ 209   3                                      LCDSetCursor(4,3);       //Cursor保持不动
+ 210   3                                      break;
+ 211   3                              case 6:
+ 212   3                                      CNTmp[0] = (timeBuf.sec /10) + 0xA3B0;
+ 213   3                                      CNTmp[1] = (timeBuf.sec %10) + 0xA3B0;
+ 214   3                                      LCDShowCN(6,3,CNTmp,2);
+ 215   3                                      LCDSetCursor(7,3);       //Cursor保持不动
+ 216   3                                      break;
+ 217   3                              default: break;
+ 218   3                      }
+ 219   2              }else if(mMode == SetClock){
+ 220   2                      switch(curPos){
+ 221   3                              case 0:
+ 222   3                                      CNTmp[0] = (cHour / 10) + 0xA3B0;
+ 223   3                                      CNTmp[1] = (cHour % 10) + 0xA3B0;
+ 224   3                                      LCDShowCN(2,2,CNTmp,2);
+ 225   3                                      LCDSetCursor(3,2);       //Cursor保持不动
+ 226   3                                      break;
+ 227   3                              case 1:
+ 228   3                                      CNTmp[0] = (cMin / 10) + 0xA3B0;
+ 229   3                                      CNTmp[1] = (cMin % 10) + 0xA3B0;
+ 230   3                                      LCDShowCN(5,2,CNTmp,2);
+ 231   3                                      LCDSetCursor(6,2);       //Cursor保持不动
+ 232   3                                      break;
+ 233   3                              default: break;
+ 234   3                      }
+ 235   2              }               
+ 236   1      }
+ 237          
+ 238          void AdjustDate()
+ 239          {
+ 240   1              switch(curPos)
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 5   
+
+ 241   1              {
+ 242   2                      case 0:                 //调整年
+ 243   2                              timeBuf.year++;
+ 244   2                              if(timeBuf.year > 99) timeBuf.year = 0;
+ 245   2                              break;
+ 246   2                      case 1:                  //调整月
+ 247   2                              timeBuf.month++;
+ 248   2                              if(timeBuf.month > 12) timeBuf.month = 1;
+ 249   2                              break;
+ 250   2                      case 2:                 //日
+ 251   2                              timeBuf.day++;
+ 252   2                              if(timeBuf.year % 4 == 0){      //闰年二月单独处理
+ 253   3                                      if(timeBuf.month == 2){
+ 254   4                                              if(timeBuf.day > 29) timeBuf.day = 1;
+ 255   4                                              break;
+ 256   4                                      }; 
+ 257   3                              }
+ 258   2                              if(timeBuf.day > DateMap[timeBuf.month-1][1]) timeBuf.day = 1;
+ 259   2                              break;
+ 260   2                      case 3:            //周
+ 261   2                              timeBuf.week++;
+ 262   2                              if(timeBuf.week > 7) timeBuf.week = 1;
+ 263   2                              break;
+ 264   2                      case 4:            //时
+ 265   2                              timeBuf.hour++;
+ 266   2                              if(timeBuf.hour > 23) timeBuf.hour = 0;
+ 267   2                              break;
+ 268   2                      case 5:            //分
+ 269   2                              timeBuf.min++;
+ 270   2                              if(timeBuf.min > 59) timeBuf.min = 0;
+ 271   2                              break;
+ 272   2                      case 6:            //秒
+ 273   2                              timeBuf.sec++;
+ 274   2                              if(timeBuf.sec > 59) timeBuf.sec = 0;
+ 275   2                              break;
+ 276   2                      default: break;
+ 277   2              }
+ 278   1              ShowAdjusted();
+ 279   1      }
+ 280          
+ 281          void AdjustClock()
+ 282          {
+ 283   1              switch(curPos)
+ 284   1              {
+ 285   2                      case 0:                 //调整Clock时
+ 286   2                              cHour++;
+ 287   2                              if(cHour > 23) cHour = 0;
+ 288   2                              break;
+ 289   2                      case 1:                  //调整Clock分
+ 290   2                              cMin++;
+ 291   2                              if(cMin > 59) cMin = 0;
+ 292   2                              break;
+ 293   2                      default: break;
+ 294   2              }
+ 295   1              ShowAdjusted();
+ 296   1      }
+ 297          
+ 298          void GetDecimalTime()
+ 299          {
+ 300   1              timeBuf.year = (timeMod.year >> 4)*10 + (timeMod.year & 0x0F);
+ 301   1              timeBuf.month = (timeMod.month >> 4)*10 + (timeMod.month & 0x0F);
+ 302   1              timeBuf.day = (timeMod.day >> 4)*10 + (timeMod.day & 0x0F);
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 6   
+
+ 303   1              timeBuf.week =  timeMod.week;
+ 304   1              timeBuf.hour = (timeMod.hour >> 4)*10 + (timeMod.hour & 0x0F);
+ 305   1              timeBuf.min = (timeMod.min >> 4)*10 + (timeMod.min & 0x0F);
+ 306   1              timeBuf.sec = (timeMod.sec >> 4)*10 + (timeMod.sec & 0x0F);
+ 307   1      }
+ 308          
+ 309          void KeyAction(uint8 keyCode)
+ 310          {
+ 311   1              if(keyCode == 0x0D)//按回车键进入设定状态
+ 312   1              {
+ 313   2                      uint16 pdata clockStr[5];
+ 314   2      
+ 315   2                      if(mMode == SetDate){
+ 316   3                              mMode = SetClock;
+ 317   3                              LCDClearAll();
+ 318   3                              LCDShowCN(0,0,"闹钟设定：",5);
+*** WARNING C182 IN LINE 318 OF ..\SOURCE\TIME.C: pointer to different objects
+ 319   3                              clockStr[0] = (cHour >> 4) + 0xA3B0;
+ 320   3                              clockStr[1] = (cHour & 0x0F) + 0xA3B0;
+ 321   3                              clockStr[2] = 0xA1C3;
+ 322   3                              clockStr[3] = (cMin >> 4) + 0xA3B0;
+ 323   3                              clockStr[4] = (cMin & 0x0F) + 0xA3B0;
+ 324   3                              LCDShowCN(2,2,clockStr,5);
+ 325   3                              curPos = 0;
+ 326   3                              LCDSetCursor(3,2);
+ 327   3                              LCDShowCursor();
+ 328   3                      }else{
+ 329   3                              mMode = SetDate;
+ 330   3                              LCDClearAll();
+ 331   3                              clockStr[0] = 0xD0A3;
+ 332   3                              clockStr[1]     = 0xCAB1;
+ 333   3                              LCDShowCN(3,0,clockStr,2);//为节省内存借clockStr一用
+ 334   3                              LCDClearImage(5,0);
+ 335   3                              LCDDrawArea(6,0,SaveButton);
+ 336   3                              pSec = 0xAA;
+ 337   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
+ 338   3                              ShowCurrentTime();
+ 339   3                              GetDecimalTime();//将BCD时间转换为十进制时间
+ 340   3                              curPos = 0;
+ 341   3                              LCDSetCursor(2,1);
+ 342   3                              LCDShowCursor();
+ 343   3                              
+ 344   3                      }
+ 345   2              }else if(keyCode == 0x1B){//取消
+ 346   2      
+ 347   2              }else if(keyCode == 0x26){//向上
+ 348   2                      if(mMode == SetDate){
+ 349   3                              AdjustDate();
+ 350   3                      }else if(mMode == SetClock){
+ 351   3                              AdjustClock();
+ 352   3                      }               
+ 353   2              }else if(keyCode == 0x27){//向右、翻页
+ 354   2                      if(mMode < SetDate) //处于信息展示状态时翻页
+ 355   2                      {
+ 356   3                              mMode++;
+ 357   3                              mMode &= 0x01;//改变mMode状态
+ 358   3                              if(mMode == ReadDate){ //时间界面
+ 359   4                                      LCDClearAll();  //清屏
+ 360   4                                      pSec = 0xAA;    //强制显示时间
+ 361   4                                      pDay = 0xAA;
+ 362   4                                      pHour = 0xAA;
+ 363   4                              }else if(mMode == ReadInfo){//温度等信息界面
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 12:37:33 PAGE 7   
+
+ 364   4                                      ShowInfo();
+ 365   4                              }
+ 366   3                      }else{   //处于设定状态右键相当于调整设定位置
+ 367   3                              if(mMode == SetDate){
+ 368   4                                      RightShiftDate();
+ 369   4                              }else if(mMode == SetClock){
+ 370   4                                      RightShiftClock();
+ 371   4                              }
+ 372   3                      }               
+ 373   2              }
+ 374   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    898    ----
-   CONSTANT SIZE    =     61    ----
+   CODE SIZE        =   1893    ----
+   CONSTANT SIZE    =     85    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----      62
-   DATA SIZE        =      5      10
+   PDATA SIZE       =   ----      68
+   DATA SIZE        =     14      10
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
