@@ -76,13 +76,13 @@ void KeyDriver()
 	{
 		for(j = 0; j < 4; j++)
 		{
-			if(keyCodeMap[i][j] == 0x0D) //设置密码
+			if(keyCodeMap[i][j] == 0x26) //长按向上键连续增加
 			{
 				if(keyBuf[i][j] == 0){
 					ethBuf += 1;
 					if(ethBuf > enterThreshold){
 						KeyAction(0xD0);
-						ethBuf = 0;
+						enterThreshold += 200;
 					}
 				}else{
 					ethBuf = 0;

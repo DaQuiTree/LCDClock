@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LUNAR                                                                 05/30/2017 18:02:55 PAGE 1   
+C51 COMPILER V8.08   LUNAR                                                                 05/31/2017 08:27:18 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LUNAR
@@ -62,7 +62,7 @@ line level    source
   42          
   43          bit LunarCalendar(uint8 year,uint8 month,uint8 day)  
   44          {  
-C51 COMPILER V8.08   LUNAR                                                                 05/30/2017 18:02:55 PAGE 2   
+C51 COMPILER V8.08   LUNAR                                                                 05/31/2017 08:27:18 PAGE 2   
 
   45   1          uint16 Spring_NY,Sun_NY;  
   46   1          uint8 index,flag,StaticDayCount;  
@@ -126,7 +126,7 @@ line level    source
  104   2                  StaticDayCount = 30;  
  105   2              while (Spring_NY > StaticDayCount)  
  106   2              {  
-C51 COMPILER V8.08   LUNAR                                                                 05/30/2017 18:02:55 PAGE 3   
+C51 COMPILER V8.08   LUNAR                                                                 05/31/2017 08:27:18 PAGE 3   
 
  107   3                  Spring_NY -= StaticDayCount;  
  108   3                  index--;  
@@ -190,7 +190,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      4      17
    IDATA SIZE       =   ----    ----
-C51 COMPILER V8.08   LUNAR                                                                 05/30/2017 18:02:55 PAGE 4   
+C51 COMPILER V8.08   LUNAR                                                                 05/31/2017 08:27:18 PAGE 4   
 
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.

@@ -9,7 +9,10 @@
 
 uint8 pSec = 0xAA;
 uint8 pDay = 0xAA;
-uint8 pHour = 0xAA;
+uint8 pHour = 0xAA; //时钟的初始值
+
+uint8 cHour = 0x00;
+uint8 cMin = 0x00; //闹钟初始值
 
 uint16 code weekCN[8][2] = {
 	{0x0000,0x0000},{0xD6DC,0xD2BB},
@@ -127,24 +130,52 @@ void ShowInfo()
 
 void KeyAction(uint8 keyCode)
 {
-	if(keyCode == 0x0D)//回车
+	if(keyCode == 0x0D)//按回车键进入设定状态
 	{
-		mMode++;
-		mMode &= 0x01;//改变mMode状态
-		if(mMode == ReadDate){
-			LCDClearAll();	//清屏
-		   	pSec = 0xAA;	//强制显示时间
-			pDay = 0xAA;
-			pHour = 0xAA;
-		}else if(mMode == ReadInfo){
-			ShowInfo();
+		uint16 pdata clockStr[5];
+
+		if(mMode == SetDate){
+			mMode = SetClock;
+			LCDClearAll();
+			LCDShowCN(0,0,"闹钟设定：",5);
+			clockStr[0] = (cHour >> 4) + 0xA3B0;
+			clockStr[1] = (cHour & 0x0F) + 0xA3B0;
+			clockStr[2] = 0xA1C3;
+			clockStr[3] = (cMin >> 4) + 0xA3B0;
+			clockStr[4] = (cMin & 0x0F) + 0xA3B0;
+			LCDShowCN(2,2,clockStr,5);
+			LCDSetCursor(3,2);
+			LCDShowCursor();
+		}else{
+			mMode = SetDate;
+			LCDClearAll();
+			LCDShowCN(0,0,"调整时钟：",5);
+			pSec = 0xAA;
+			pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
+			ShowCurrentTime();
+			LCDSetCursor(2,1);
+			LCDShowCursor();
+			
 		}
 	}else if(keyCode == 0x1B){//取消
 
 	}else if(keyCode == 0x26){//向上
 
-	}else if(keyCode == 0xD0){
-			LCDClearAll();	//清屏
-			mMode 	
+	}else if(keyCode == 0x27){//向上、翻页
+		if(mMode < SetDate) //处于信息展示状态时翻页
+		{
+			mMode++;
+			mMode &= 0x01;//改变mMode状态
+			if(mMode == ReadDate){ //时间界面
+				LCDClearAll();	//清屏
+			   	pSec = 0xAA;	//强制显示时间
+				pDay = 0xAA;
+				pHour = 0xAA;
+			}else if(mMode == ReadInfo){//温度等信息界面
+				ShowInfo();
+			}
+		}else{
+			
+		}		
 	}
 }

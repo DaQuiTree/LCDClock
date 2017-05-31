@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              05/30/2017 18:02:54 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              05/31/2017 08:27:17 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          
   54          void InitLCD12864()
-C51 COMPILER V8.08   LCD12864                                                              05/30/2017 18:02:54 PAGE 2   
+C51 COMPILER V8.08   LCD12864                                                              05/31/2017 08:27:17 PAGE 2   
 
   55          {
   56   1              LCDWriteCmd(0x30);
@@ -126,7 +126,7 @@ line level    source
  114          void LCDShowCursor()
  115          {
  116   1              LCDWriteCmd(0x0F);
-C51 COMPILER V8.08   LCD12864                                                              05/30/2017 18:02:54 PAGE 3   
+C51 COMPILER V8.08   LCD12864                                                              05/31/2017 08:27:17 PAGE 3   
 
  117   1      }
  118          
@@ -190,7 +190,7 @@ line level    source
  176   2                      for(i = 0; i < 16; i++){
  177   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
  178   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
-C51 COMPILER V8.08   LCD12864                                                              05/30/2017 18:02:54 PAGE 4   
+C51 COMPILER V8.08   LCD12864                                                              05/31/2017 08:27:17 PAGE 4   
 
  179   3      
  180   3                              LCDWriteData(*image++);// 写入一行
@@ -254,7 +254,7 @@ line level    source
  238   3                              LCDWriteCmd((0x80 | y*16)|i); //设置绘图垂直地址
  239   3                              LCDWriteCmd(0x88 | x);//设置绘图水平地址
  240   3      
-C51 COMPILER V8.08   LCD12864                                                              05/30/2017 18:02:54 PAGE 5   
+C51 COMPILER V8.08   LCD12864                                                              05/31/2017 08:27:17 PAGE 5   
 
  241   3                              LCDWriteData(0x00);// 写入一行
  242   3                              LCDWriteData(0x00);

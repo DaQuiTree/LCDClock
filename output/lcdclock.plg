@@ -4,7 +4,7 @@
 <h1>µVision3 Build Log</h1>
 <h2>Project:</h2>
 G:\GitHub Project\LCDClock\project\lcdclock.uv2
-Project File Date:  05/28/2017
+Project File Date:  05/30/2017
 
 <h2>Output:</h2>
 Build target 'Target 1'
@@ -12,72 +12,13 @@ compiling DS1302.c...
 compiling LCD12864.c...
 compiling main.c...
 compiling time.c...
-compiling lunar.c...
-compiling DHT11.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CLEARINFORAREA?TIME
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_KEYACTION?TIME
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _CONFIGTIMERZERO
-    MODULE:  ..\output\main.obj (MAIN)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  FLAG200MS
-    MODULE:  ..\output\main.obj (MAIN)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  KEYDRIVER
-    MODULE:  ..\output\main.obj (MAIN)
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  FLAG5S
-    MODULE:  ..\output\main.obj (MAIN)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _CONFIGTIMERZERO
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 1037H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  FLAG200MS
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 103EH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  FLAG200MS
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 1041H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  FLAG5S
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 104DH
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  FLAG5S
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 1050H
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  KEYDRIVER
-    MODULE:  ..\output\main.obj (MAIN)
-    ADDRESS: 1055H
-Program Size: data=67.3 xdata=52 code=4575
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 16 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
+..\SOURCE\TIME.C(140): warning C182: pointer to different objects
+..\SOURCE\TIME.C(152): warning C182: pointer to different objects
 compiling lunar.c...
 compiling DHT11.c...
 compiling keyboard.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
@@ -85,94 +26,6 @@ linking...
     SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=58.6 xdata=84 code=5285
+Program Size: data=64.6 xdata=92 code=5471
 creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-compiling lunar.c...
-compiling DHT11.c...
-compiling keyboard.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=58.6 xdata=86 code=5314
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-compiling lunar.c...
-compiling DHT11.c...
-compiling keyboard.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=62.6 xdata=82 code=5292
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-compiling lunar.c...
-compiling DHT11.c...
-compiling keyboard.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=62.6 xdata=82 code=5292
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
-Build target 'Target 1'
-compiling DS1302.c...
-compiling LCD12864.c...
-compiling main.c...
-compiling time.c...
-compiling lunar.c...
-compiling DHT11.c...
-compiling keyboard.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_LCDCLEARIMAGE?LCD12864
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=62.6 xdata=82 code=5290
-creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 5 Warning(s).
+"..\output\lcdclock" - 0 Error(s), 6 Warning(s).

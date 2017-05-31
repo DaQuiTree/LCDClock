@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 18:02:55 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      if((state[queue][i] & 0x0F) == 0x0F)
   54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 18:02:55 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 2   
 
   55   3                              keySta[queue][i] = 1;
   56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
@@ -88,13 +88,13 @@ line level    source
   76   1              {
   77   2                      for(j = 0; j < 4; j++)
   78   2                      {
-  79   3                              if(keyCodeMap[i][j] == 0x0D) //设置密码
+  79   3                              if(keyCodeMap[i][j] == 0x26) //长按向上键连续增加
   80   3                              {
   81   4                                      if(keyBuf[i][j] == 0){
   82   5                                              ethBuf += 1;
   83   5                                              if(ethBuf > enterThreshold){
   84   6                                                      KeyAction(0xD0);
-  85   6                                                      ethBuf = 0;
+  85   6                                                      enterThreshold += 200;
   86   6                                              }
   87   5                                      }else{
   88   5                                              ethBuf = 0;
@@ -126,7 +126,7 @@ line level    source
  114   1              TMOD |= 0x01;
  115   1      
  116   1              TH0 = T0RH;
-C51 COMPILER V8.08   KEYBOARD                                                              05/30/2017 18:02:55 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 3   
 
  117   1              TL0 = T0RL;
  118   1      
@@ -164,7 +164,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    531    ----
+   CODE SIZE        =    542    ----
    CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =     48    ----
