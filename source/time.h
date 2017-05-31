@@ -9,6 +9,9 @@
 
  #ifndef _TIME_C
  //extern
+ extern bit bClockOpen;
+ extern uint8 cHour;
+ extern uint8 cMin;
  #endif
 
  void ShowCurrentTime();

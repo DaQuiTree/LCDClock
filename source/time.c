@@ -47,6 +47,16 @@ void ShowCurrentTime()
 	uint8  pdata dStr[16];
 	uint16 pdata dSplit;
 
+	if(pHour == 0xAA) //显示小闹钟图标的时机和显示太阳/月亮时机相同
+	{
+		if(bClockOpen)
+		{
+			LCDDrawArea(1,0,clockImage);
+		}else{
+			LCDClearImage(1,0);
+		}		
+	}
+
 	DS1302BurstRead(&timeMod); 
 	if(pSec != timeMod.sec)
 	{
@@ -130,6 +140,20 @@ void ShowInfo()
 	LCDShowCN(0,1,iPrompt[0],3);  //p温度：
 	LCDShowCN(0,2,iPrompt[1],3);  //p湿度：
 	LCDShowCN(0,3,iPrompt[2],3);  //p闹钟：
+	if(bClockOpen)	   //为节省内存借用lunar   
+	{
+		lunar[0] = cHour/10 + 0xA3B0; //显示闹钟具体时间
+		lunar[1] = cHour%10 + 0xA3B0;
+		lunar[2] = 0xA1C3;			
+		lunar[3] = cMin/10 + 0xA3B0;
+		lunar[4] = cMin%10 + 0xA3B0;
+		LCDShowCN(3,3,lunar,5);
+	}else{						
+		lunar[0] = 0xCEB4;	// 显示“未启用”
+		lunar[1] = 0xBFAA;		
+		lunar[2] = 0xC6F4;		 
+		LCDShowCN(3,3,lunar,3);	  
+	}
 	ShowTemp();				   //显示数值
 	lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
 	lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
@@ -161,7 +185,7 @@ void RightShiftClock()
 	switch(curPos)
 	{
 		case 0: LCDSetCursor(6,2);break;
-		case 1: LCDSetCursor(6,0);break;
+		case 1: LCDSetCursor(5,0);break;
 		case 2: LCDSetCursor(3,2);break;
 		default: break;
 	}
@@ -204,7 +228,7 @@ void ShowAdjusted()
 	{
 		if(curPos < 7){
 			LCDClearArea(5,0);
-			LCDDrawArea(5,0,SaveButton); //数据已修改，保存图标复原	
+			LCDDrawArea(5,0,SaveButton); //数据已修改，save图标复原	
 		}
 		switch(curPos){
 			case 0:
@@ -270,9 +294,9 @@ void ShowAdjusted()
 				break;
 			case 2:
 				if(bClockOpen){
-					LCDDrawArea(6,0,OpenVolume);//显示开启闹钟图标
+					LCDDrawArea(5,0,OpenVolume);//显示开启闹钟图标
 				}else{
-					LCDDrawArea(6,0,StopVolume);//显示关闭闹钟图标
+					LCDDrawArea(5,0,StopVolume);//显示关闭闹钟图标
 				}
 				break;
 			default: break;
@@ -367,19 +391,25 @@ void KeyAction(uint8 keyCode)
 		if(mMode == SetDate){
 			mMode = SetClock;
 			LCDClearAll();
-			LCDShowCN(0,0,"闹钟设定：",5);
-			LCDClearImage(5,0);	 //清除其余图标
+			clockStr[0] = 0xC4D6;//"闹钟设定："
+			clockStr[1] = 0xD6D3;
+			clockStr[2] = 0xC9E8;
+			clockStr[3] = 0xB6A8;
+			clockStr[4] = 0xA3BA;
+			LCDShowCN(0,0,clockStr,5);
+			LCDClearImage(5,0);	 //清除太阳、月亮图标
+			LCDClearImage(0,1);	 //	清除小闹钟图标
 			if(bClockOpen)	//Clock是否开启？
 			{
-				LCDDrawArea(6,0,OpenVolume);
+				LCDDrawArea(5,0,OpenVolume);
 			}else{
-				LCDDrawArea(6,0,StopVolume);
+				LCDDrawArea(5,0,StopVolume);
 			}
-			clockStr[0] = (cHour >> 4) + 0xA3B0;
-			clockStr[1] = (cHour & 0x0F) + 0xA3B0;
+			clockStr[0] = cHour/10 + 0xA3B0;
+			clockStr[1] = cHour%10 + 0xA3B0;
 			clockStr[2] = 0xA1C3;
-			clockStr[3] = (cMin >> 4) + 0xA3B0;
-			clockStr[4] = (cMin & 0x0F) + 0xA3B0;		 //“00:00”
+			clockStr[3] = cMin/10 + 0xA3B0;
+			clockStr[4] = cMin%10 + 0xA3B0;		 //“00:00”
 			LCDShowCN(2,2,clockStr,5);
 			curPos = 0;
 			LCDSetCursor(3,2);
@@ -387,10 +417,13 @@ void KeyAction(uint8 keyCode)
 		}else{
 			mMode = SetDate;
 			LCDClearAll();
-			clockStr[0] = 0xD0A3;
-			clockStr[1]	= 0xCAB1;
-			LCDShowCN(2,0,clockStr,2);//为节省内存借clockStr一用
-			LCDClearImage(6,0);
+			clockStr[0] = 0xD0A3;  //"校对时间："
+			clockStr[1]	= 0xB6D4;
+			clockStr[2] = 0xCAB1;
+			clockStr[3] = 0xBCE4;
+			clockStr[4]	= 0xA3BA;
+			LCDShowCN(0,0,clockStr,5);//为节省内存借clockStr一用
+			LCDClearImage(5,0);	//清除响铃图标
 			LCDDrawArea(5,0,SaveButton);
 			pSec = 0xAA;
 			pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
@@ -402,7 +435,14 @@ void KeyAction(uint8 keyCode)
 			
 		}
 	}else if(keyCode == 0x1B){//取消
-
+		mMode = ReadDate;
+		LCDClearAll();	  //清屏
+		LCDCancelCursor();	//取消光标闪烁
+		LCDClearImage(5,0);	  //清除小图标
+		pSec = 0xAA;
+		pHour = 0xAA;
+		pDay = 0xAA;
+		ShowCurrentTime(); //强制时间更新界面
 	}else if(keyCode == 0x26){//向上
 		if(mMode == SetDate){
 			AdjustDate();
