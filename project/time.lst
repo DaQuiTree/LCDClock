@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      pSec = timeMod.sec;
   54   2                      tStr[0] = (timeMod.hour >> 4) + 0xA3B0; //时高
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 2   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 2   
 
   55   2                      tStr[1] = (timeMod.hour & 0x0F) + 0xA3B0;//时低
   56   2                      tStr[2] = 0xA1C3;//时间分隔符
@@ -126,7 +126,7 @@ line level    source
  114   1              dat[1] = humi%10 + 0xA3B0;
  115   1              dat[2] = 0xA3A5; 
  116   1              LCDShowCN(3,2,dat,3);  //湿度
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 3   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 3   
 
  117   1      }
  118          
@@ -190,7 +190,7 @@ line level    source
  176   1      
  177   1              timeMod.month = (timeMod.month << 4) | timeBuf.month/10;        //BCD高位
  178   1              timeMod.month = (timeMod.month << 4) | timeBuf.month%10;        //BCD低位
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 4   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 4   
 
  179   1      
  180   1              timeMod.day = (timeMod.day << 4) | timeBuf.day/10;      //BCD高位
@@ -254,7 +254,7 @@ line level    source
  238   3                              case 5:
  239   3                                      CNTmp[0] = (timeBuf.min /10) + 0xA3B0;
  240   3                                      CNTmp[1] = (timeBuf.min %10) + 0xA3B0;
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 5   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 5   
 
  241   3                                      LCDShowCN(3,3,CNTmp,2);
  242   3                                      LCDSetCursor(4,3);       //Cursor保持不动
@@ -318,7 +318,7 @@ line level    source
  300   4                                              break;
  301   4                                      }; 
  302   3                              }
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 6   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 6   
 
  303   2                              if(timeBuf.day > DateMap[timeBuf.month-1][1]) timeBuf.day = 1;
  304   2                              break;
@@ -382,7 +382,7 @@ line level    source
  362          {
  363   1              if(keyCode == 0x0D)//按回车键进入设定状态
  364   1              {
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 7   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 7   
 
  365   2                      uint16 pdata clockStr[5];
  366   2      
@@ -413,7 +413,7 @@ line level    source
  390   3                              clockStr[0] = 0xD0A3;
  391   3                              clockStr[1]     = 0xCAB1;
  392   3                              LCDShowCN(2,0,clockStr,2);//为节省内存借clockStr一用
- 393   3                              LCDClearImage(5,0);
+ 393   3                              LCDClearImage(6,0);
  394   3                              LCDDrawArea(5,0,SaveButton);
  395   3                              pSec = 0xAA;
  396   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
@@ -446,7 +446,7 @@ line level    source
  423   4                                      ShowInfo();
  424   4                              }
  425   3                      }else{   //处于设定状态右键相当于调整设定位置
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:25:24 PAGE 8   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 16:34:25 PAGE 8   
 
  426   3                              if(mMode == SetDate){
  427   4                                      RightShiftDate();

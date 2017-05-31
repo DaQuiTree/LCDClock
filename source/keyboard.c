@@ -81,11 +81,12 @@ void KeyDriver()
 				if(keyBuf[i][j] == 0){
 					ethBuf += 1;
 					if(ethBuf > enterThreshold){
-						KeyAction(0xD0);
-						enterThreshold += 200;
+						KeyAction(0x26);
+						enterThreshold += 100;
 					}
 				}else{
 					ethBuf = 0;
+					enterThreshold = 1000;
 				}		
 			}
 
