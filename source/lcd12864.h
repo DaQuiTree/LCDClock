@@ -13,6 +13,8 @@ extern uint8 code clockImage[32];
 extern uint8 code moonImage[32];
 extern uint8 code sunImage[32];
 extern uint8 code SaveButton[32];
+extern uint8 code OpenVolume[32];
+extern uint8 code StopVolume[32];
 #endif
 
 void InitLCD12864();//≥ı ºªØ“∫æß
