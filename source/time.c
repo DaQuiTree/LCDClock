@@ -14,6 +14,15 @@ uint8 pHour = 0xAA; //时钟的初始值
 uint8 cHour = 0x00;
 uint8 cMin = 0x00; //闹钟初始值
 
+sTime timeBuf; //存储着十进制时间
+
+uint8 curPos = 0;
+
+uint8 code DateMap[12][2] = {
+	{1,31},{2,28},{3,31},{4,30},{5,31},{6,30},
+	{7,31},{8,31},{9,30},{10,31},{11,30},{12,31}
+};
+
 uint16 code weekCN[8][2] = {
 	{0x0000,0x0000},{0xD6DC,0xD2BB},
 	{0xD6DC,0xB6FE},{0xD6DC,0xC8FD},
@@ -128,6 +137,162 @@ void ShowInfo()
 	LCDShowCN(1,0,lunar,lunarLen);
 }
 
+void RightShiftDate()
+{
+	switch(curPos)
+	{
+		case 0: LCDSetCursor(4,1);break;
+		case 1: LCDSetCursor(6,1);break;
+		case 2: LCDSetCursor(4,2);break;
+		case 3: LCDSetCursor(1,3);break;
+		case 4: LCDSetCursor(4,3);break;
+		case 5: LCDSetCursor(7,3);break;
+		case 6: LCDSetCursor(2,1);break;
+		default: break;
+	}
+	curPos++;
+	if(curPos > 5) curPos = 0;
+}
+
+void RightShiftClock()
+{
+	switch(curPos)
+	{
+		case 0: LCDSetCursor(6,2);break;
+		case 1: LCDSetCursor(3,2);break;
+		default: break;
+	}
+	curPos++;
+	curPos &= 0x01;	
+}
+
+void ShowAdjusted()				  
+{
+	uint8 pdata strTmp[2];
+	uint16 pdata CNTmp[2];
+
+	if(mMode == SetDate)
+	{
+		case 0:
+			strTmp[0] = (timeBuf.year >> 4) + '0';
+			strTmp[1] = (timeBuf.year & 0x0F) + '0';
+			LCDShowStr(2,1,strTmp,2);
+			break;
+		case 1:
+			strTmp[0] = (timeBuf.month >> 4) + '0';
+			strTmp[1] = (timeBuf.month & 0x0F) + '0';
+			LCDShowStr(4,1,strTmp,2);
+			break;
+		case 2:
+			strTmp[0] = (timeBuf.day >> 4) + '0';
+			strTmp[1] = (timeBuf.day & 0x0F) + '0';
+			LCDShowStr(6,1,strTmp,2);
+			break;
+		case 3:
+			LCDShowCN(3,2,weekCN[timeBuf.week],2);
+			break;			
+		case 4:
+			CNTmp[0] = (timeBuf.hour >> 4) + 0xA3B0;
+			CNTmp[1] = (timeBuf.hour & 0x0F) + 0xA3B0;
+			LCDShowStr(0,3,CNTmp,2);
+			break;
+		case 5:
+			CNTmp[0] = (timeBuf.min >> 4) + 0xA3B0;
+			CNTmp[1] = (timeBuf.min & 0x0F) + 0xA3B0;
+			LCDShowStr(3,3,CNTmp,2);
+			break;
+		case 6:
+			CNTmp[0] = (timeBuf.sec >> 4) + 0xA3B0;
+			CNTmp[1] = (timeBuf.sec & 0x0F) + 0xA3B0;
+			LCDShowStr(6,3,CNTmp,2);
+			break;
+		default: break;
+	}else if(mMode == SetClock){
+		case 0:
+			CNTmp[0] = (cHour >> 4) + 0xA3B0;
+			CNTmp[1] = (cHour & 0x0F) + 0xA3B0;
+			LCDShowStr(2,2,CNTmp,2);
+			break;
+		case 1:
+			CNTmp[0] = (cMin >> 4) + 0xA3B0;
+			CNTmp[1] = (cMin & 0x0F) + 0xA3B0;
+			LCDShowStr(5,2,CNTmp,2);
+			break;
+		default: break;
+	}		
+}
+
+void AdjustDate()
+{
+	switch(curPos)
+	{
+		case 0:			//调整年
+			timeBuf.year++;
+			if(timeBuf.year > 99) timeBuf.year = 0;
+			break;
+		case 1:			 //调整月
+			timeBuf.month++;
+			if(timeBuf.month > 12) timeBuf.month = 1;
+			break;
+		case 2:			//日
+			timeBuf.day++;
+			if(timeBuf.year % 4 == 0){	//闰年二月单独处理
+				if(timeBuf.month == 2){
+					if(timeBuf.day > 29) timeBuf.day = 1;
+					break;
+				}; 
+			}
+			if(timeBuf.day > DateMap[timeBuf.month-1][1]) timeBuf.day = 1;
+			break;
+		case 3:		   //周
+			timeBuf.week++;
+			if(timeBuf.week > 7) timeBuf.week = 1;
+			break;
+		case 4:		   //时
+			timeBuf.hour++;
+			if(timeBuf.hour > 23) timeBuf.hour = 0;
+			break;
+		case 5:		   //分
+			timeBuf.min++;
+			if(timeBuf.min > 59) timeBuf.min = 0;
+			break;
+		case 6:		   //秒
+			timeBuf.sec++;
+			if(timeBuf.sec > 59) timeBuf.sec = 0;
+			break;
+		default: break;
+	}
+	ShowAdjusted();
+}
+
+void AdjustClock()
+{
+	switch(curPos)
+	{
+		case 0:			//调整Clock时
+			cHour++;
+			if(cHour > 23) cHour = 0;
+			break;
+		case 1:			 //调整Clock分
+			cMin++;
+			if(cMin > 59) cMin = 0;
+			break;
+		default: break;
+	}
+	ShowAdjusted();
+}
+
+void GetDecimalTime()
+{
+	timeBuf.year = (timeMod.year >> 4)*10 + (timeMode.year & 0x0F);
+	timeBuf.month = (timeMod.month >> 4)*10 + (timeMode.month & 0x0F);
+	timeBuf.day = (timeMod.day >> 4)*10 + (timeMode.day & 0x0F);
+	timeBuf.week =  timeMod.week;
+	timeBuf.hour = (timeMod.hour >> 4)*10 + (timeMode.hour & 0x0F);
+	timeBuf.min = (timeMod.min >> 4)*10 + (timeMode.min & 0x0F);
+	timeBuf.sec = (timeMod.sec >> 4)*10 + (timeMode.sec & 0x0F);
+}
+
 void KeyAction(uint8 keyCode)
 {
 	if(keyCode == 0x0D)//按回车键进入设定状态
@@ -144,15 +309,21 @@ void KeyAction(uint8 keyCode)
 			clockStr[3] = (cMin >> 4) + 0xA3B0;
 			clockStr[4] = (cMin & 0x0F) + 0xA3B0;
 			LCDShowCN(2,2,clockStr,5);
+			curPos = 0;
 			LCDSetCursor(3,2);
 			LCDShowCursor();
 		}else{
 			mMode = SetDate;
 			LCDClearAll();
-			LCDShowCN(0,0,"调整时钟：",5);
+			clockStr[0] = 0xD0A3;
+			clockStr[1]	= 0xCAB1;
+			LCDShowCN(2,0,clockStr,2);//为节省内存借clockStr一用
+			LCDDrawArea(5,0,SaveButton);
 			pSec = 0xAA;
 			pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
 			ShowCurrentTime();
+			GetDecimalTime();//将BCD时间转换为十进制时间
+			curPos = 0;
 			LCDSetCursor(2,1);
 			LCDShowCursor();
 			
@@ -160,8 +331,12 @@ void KeyAction(uint8 keyCode)
 	}else if(keyCode == 0x1B){//取消
 
 	}else if(keyCode == 0x26){//向上
-
-	}else if(keyCode == 0x27){//向上、翻页
+		if(mMode == SetDate){
+			AdjustDate();
+		}else if(mMode == SetClock){
+			AdjustClock();
+		}		
+	}else if(keyCode == 0x27){//向右、翻页
 		if(mMode < SetDate) //处于信息展示状态时翻页
 		{
 			mMode++;
@@ -174,8 +349,12 @@ void KeyAction(uint8 keyCode)
 			}else if(mMode == ReadInfo){//温度等信息界面
 				ShowInfo();
 			}
-		}else{
-			
+		}else{	 //处于设定状态右键相当于调整设定位置
+			if(mMode == SetDate){
+				RightShiftDate();
+			}else if(mMode == SetClock){
+				RightShiftClock();
+			}
 		}		
 	}
 }

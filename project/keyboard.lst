@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:38:50 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      if((state[queue][i] & 0x0F) == 0x0F)
   54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:38:50 PAGE 2   
 
   55   3                              keySta[queue][i] = 1;
   56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
@@ -126,7 +126,7 @@ line level    source
  114   1              TMOD |= 0x01;
  115   1      
  116   1              TH0 = T0RH;
-C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:27:18 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              05/31/2017 08:38:50 PAGE 3   
 
  117   1              TL0 = T0RL;
  118   1      

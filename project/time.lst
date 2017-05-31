@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:27:18 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -62,7 +62,7 @@ line level    source
   52   2                      LCDShowCN(0,3,tStr,8);//液晶第1行显示日期时间
   53   2                      if(pHour != timeMod.hour){
   54   3                              pHour = timeMod.hour;
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:27:18 PAGE 2   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 2   
 
   55   3                              if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)        //若在白天，显示太阳图标
   56   3                              {
@@ -126,7 +126,7 @@ line level    source
  114   1                      {0xCEC2,0xB6C8,0xA3BA},
  115   1                      {0xCAAA,0xB6C8,0xA3BA},
  116   1                      {0xC4D6,0xD6D3,0xA3BA}
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:27:18 PAGE 3   
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 3   
 
  117   1              };
  118   1              
@@ -159,49 +159,52 @@ line level    source
  144   3                              clockStr[3] = (cMin >> 4) + 0xA3B0;
  145   3                              clockStr[4] = (cMin & 0x0F) + 0xA3B0;
  146   3                              LCDShowCN(2,2,clockStr,5);
- 147   3                              LCDSetCursor(2,3);
+ 147   3                              LCDSetCursor(3,2);
  148   3                              LCDShowCursor();
  149   3                      }else{
  150   3                              mMode = SetDate;
  151   3                              LCDClearAll();
- 152   3                              LCDShowCN(0,0,"调整时钟：",5);
-*** WARNING C182 IN LINE 152 OF ..\SOURCE\TIME.C: pointer to different objects
- 153   3                              pSec = 0xAA;
- 154   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
- 155   3                              ShowCurrentTime();
- 156   3                              LCDSetCursor(2,1);
- 157   3                              LCDShowCursor();
- 158   3                              
- 159   3                      }
- 160   2              }else if(keyCode == 0x1B){//取消
- 161   2      
- 162   2              }else if(keyCode == 0x26){//向上
- 163   2      
- 164   2              }else if(keyCode == 0x27){//向上、翻页
- 165   2                      if(mMode < SetDate) //处于信息展示状态时翻页
- 166   2                      {
- 167   3                              mMode++;
- 168   3                              mMode &= 0x01;//改变mMode状态
- 169   3                              if(mMode == ReadDate){ //时间界面
- 170   4                                      LCDClearAll();  //清屏
- 171   4                                      pSec = 0xAA;    //强制显示时间
- 172   4                                      pDay = 0xAA;
- 173   4                                      pHour = 0xAA;
- 174   4                              }else if(mMode == ReadInfo){//温度等信息界面
- 175   4                                      ShowInfo();
- 176   4                              }
-C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:27:18 PAGE 4   
+ 152   3                              clockStr[0] = 0xD0A3;
+ 153   3                              clockStr[1]     = 0xA1A0;
+ 154   3                              clockStr[2]     = 0xA1A0;
+ 155   3                              clockStr[3]     = 0xCAB1;
+ 156   3                              LCDShowCN(2,0,clockStr,4);//为节省内存借clockStr一用
+ 157   3                              pSec = 0xAA;
+ 158   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
+ 159   3                              ShowCurrentTime();
+ 160   3                              LCDSetCursor(2,1);
+ 161   3                              LCDShowCursor();
+ 162   3                              
+ 163   3                      }
+ 164   2              }else if(keyCode == 0x1B){//取消
+ 165   2      
+ 166   2              }else if(keyCode == 0x26){//向上
+ 167   2      
+ 168   2              }else if(keyCode == 0x27){//向上、翻页
+ 169   2                      if(mMode < SetDate) //处于信息展示状态时翻页
+ 170   2                      {
+ 171   3                              mMode++;
+ 172   3                              mMode &= 0x01;//改变mMode状态
+ 173   3                              if(mMode == ReadDate){ //时间界面
+ 174   4                                      LCDClearAll();  //清屏
+ 175   4                                      pSec = 0xAA;    //强制显示时间
+ 176   4                                      pDay = 0xAA;
+ 177   4                                      pHour = 0xAA;
+C51 COMPILER V8.08   TIME                                                                  05/31/2017 08:38:49 PAGE 4   
 
- 177   3                      }else{
- 178   3                              
- 179   3                      }               
- 180   2              }
- 181   1      }
+ 178   4                              }else if(mMode == ReadInfo){//温度等信息界面
+ 179   4                                      ShowInfo();
+ 180   4                              }
+ 181   3                      }else{
+ 182   3                              
+ 183   3                      }               
+ 184   2              }
+ 185   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    865    ----
-   CONSTANT SIZE    =     72    ----
+   CODE SIZE        =    898    ----
+   CONSTANT SIZE    =     61    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----      62
    DATA SIZE        =      5      10
@@ -210,4 +213,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
