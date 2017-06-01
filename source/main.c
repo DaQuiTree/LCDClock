@@ -7,6 +7,7 @@
 #include "DHT11.h"
 #include "keyboard.h"
 #include "main.h"
+#include "pwmled.h"
 
 SystemMode mMode = ReadDate;
 bit flagStopAlarm = 0;
@@ -15,7 +16,8 @@ void CheckClock();
 
 void main()
 {
-	EA = 1;	
+	EA = 1;
+	InitLED();	
 	InitDS1302();										  
 	InitLCD12864();
 	LCDInitImage();
@@ -54,11 +56,11 @@ void CheckClock()
 				if(cMin == (timeMod.min >> 4)*10+(timeMod.min&0x0F))
 				{
 					flagBuzzOn = 1;
+					LEDFlash();
 				}
 			 }
 		 }
-	}else{					   //用户取消
-		flagBuzzOn = 0;				 
+	}else{					   //用户取消				 
 		alarmCnt++;
 		if(alarmCnt >= 300) //一分钟后取消用户设定
 		{

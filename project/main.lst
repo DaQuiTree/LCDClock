@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  06/01/2017 10:53:23 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  06/01/2017 17:37:52 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -17,72 +17,74 @@ line level    source
    7          #include "DHT11.h"
    8          #include "keyboard.h"
    9          #include "main.h"
-  10          
-  11          SystemMode mMode = ReadDate;
-  12          bit flagStopAlarm = 0;
-  13          
-  14          void CheckClock();
-  15          
-  16          void main()
-  17          {
-  18   1              EA = 1; 
-  19   1              InitDS1302();                                                                             
-  20   1              InitLCD12864();
-  21   1              LCDInitImage();
-  22   1              ConfigTimerZero(1);
-  23   1              
-  24   1              while(1)
-  25   1              {
-  26   2                      if(mMode == ReadDate){
-  27   3                              if(flag200ms){
-  28   4                                      flag200ms = 0;
-  29   4                                      ShowCurrentTime();
-  30   4                                      if(bClockOpen){
-  31   5                                              CheckClock();
-  32   5                                      }
-  33   4                              }else if(mMode == ReadInfo){
-  34   4                                      if(flag1s){
-  35   5                                              flag1s = 0;
-  36   5                                              ShowTemp();
-  37   5                                      } 
-  38   4                              } 
-  39   3                      }
-  40   2                      KeyDriver();
-  41   2              }
-  42   1      }
-  43          
-  44          void CheckClock()
-  45          {
-  46   1              static uint16 alarmCnt = 0;
-  47   1      //      static bit flagTimeArrive = 0;
-  48   1              
-  49   1              /*************** 启动闹钟 *****************/
-  50   1              if(!flagStopAlarm){                             //用户未取消
-  51   2                      if(!flagBuzzOn){                 //     闹铃未响
-  52   3                              if(cHour == (timeMod.hour >> 4)*10+(timeMod.hour&0x0F)) //检测是否该响了
-  53   3                              {
-  54   4                                      if(cMin == (timeMod.min >> 4)*10+(timeMod.min&0x0F))
-C51 COMPILER V8.08   MAIN                                                                  06/01/2017 10:53:23 PAGE 2   
+  10          #include "pwmled.h"
+  11          
+  12          SystemMode mMode = ReadDate;
+  13          bit flagStopAlarm = 0;
+  14          
+  15          void CheckClock();
+  16          
+  17          void main()
+  18          {
+  19   1              EA = 1;
+  20   1              InitLED();      
+  21   1              InitDS1302();                                                                             
+  22   1              InitLCD12864();
+  23   1              LCDInitImage();
+  24   1              ConfigTimerZero(1);
+  25   1              
+  26   1              while(1)
+  27   1              {
+  28   2                      if(mMode == ReadDate){
+  29   3                              if(flag200ms){
+  30   4                                      flag200ms = 0;
+  31   4                                      ShowCurrentTime();
+  32   4                                      if(bClockOpen){
+  33   5                                              CheckClock();
+  34   5                                      }
+  35   4                              }else if(mMode == ReadInfo){
+  36   4                                      if(flag1s){
+  37   5                                              flag1s = 0;
+  38   5                                              ShowTemp();
+  39   5                                      } 
+  40   4                              } 
+  41   3                      }
+  42   2                      KeyDriver();
+  43   2              }
+  44   1      }
+  45          
+  46          void CheckClock()
+  47          {
+  48   1              static uint16 alarmCnt = 0;
+  49   1      //      static bit flagTimeArrive = 0;
+  50   1              
+  51   1              /*************** 启动闹钟 *****************/
+  52   1              if(!flagStopAlarm){                             //用户未取消
+  53   2                      if(!flagBuzzOn){                 //     闹铃未响
+  54   3                              if(cHour == (timeMod.hour >> 4)*10+(timeMod.hour&0x0F)) //检测是否该响了
+C51 COMPILER V8.08   MAIN                                                                  06/01/2017 17:37:52 PAGE 2   
 
-  55   4                                      {
-  56   5                                              flagBuzzOn = 1;
-  57   5                                      }
-  58   4                               }
-  59   3                       }
-  60   2              }else{                                     //用户取消
-  61   2                      flagBuzzOn = 0;                          
-  62   2                      alarmCnt++;
-  63   2                      if(alarmCnt >= 300) //一分钟后取消用户设定
-  64   2                      {
-  65   3                              alarmCnt = 0;
-  66   3                              flagStopAlarm = 0;
-  67   3                      }
-  68   2              }
-  69   1      }
+  55   3                              {
+  56   4                                      if(cMin == (timeMod.min >> 4)*10+(timeMod.min&0x0F))
+  57   4                                      {
+  58   5                                              flagBuzzOn = 1;
+  59   5                                              LEDFlash();
+  60   5                                      }
+  61   4                               }
+  62   3                       }
+  63   2              }else{                                     //用户取消                            
+  64   2                      alarmCnt++;
+  65   2                      if(alarmCnt >= 300) //一分钟后取消用户设定
+  66   2                      {
+  67   3                              alarmCnt = 0;
+  68   3                              flagStopAlarm = 0;
+  69   3                      }
+  70   2              }
+  71   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    149    ----
+   CODE SIZE        =    152    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

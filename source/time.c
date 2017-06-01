@@ -6,6 +6,7 @@
 #include "DHT11.h"
 #include "keyboard.h"
 #include "main.h"
+#include "pwmled.h"
 
 uint8 pSec = 0xAA;
 uint8 pDay = 0xAA;
@@ -388,12 +389,14 @@ void KeyAction(uint8 keyCode)
 	{
 		flagStopAlarm = 1;
 		flagBuzzOn = 0;
+		LEDBreath();  	//恢复呼吸状态
 	}
 
 	if(keyCode == 0x0D)//按回车键进入设定状态
 	{
 		uint16 pdata clockStr[5];
 
+		LEDOff();	//关闭LED
 		if(mMode == SetDate){
 			mMode = SetClock;
 			LCDClearAll();
@@ -441,6 +444,7 @@ void KeyAction(uint8 keyCode)
 			
 		}
 	}else if(keyCode == 0x1B){//取消
+		LEDBreath();  	//恢复呼吸状态
 		mMode = ReadDate;
 		LCDClearAll();	  //清屏
 		LCDCancelCursor();	//取消光标闪烁
