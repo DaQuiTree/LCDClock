@@ -16,6 +16,7 @@
  
  #ifndef _MAIN_C
  extern SystemMode mMode;
+ extern bit flagStopAlarm;
  #endif 
 
  #endif

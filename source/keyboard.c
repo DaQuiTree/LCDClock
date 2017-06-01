@@ -5,7 +5,7 @@
 
 bit flag200ms = 0;
 bit flag1s = 0;
-bit flag5s = 0;
+bit flagBuzzOn = 0;
 
 uint8 T0RH = 0;
 uint8 T0RL = 0;
@@ -123,7 +123,8 @@ void ConfigTimerZero(uint8 ms)
 
 void InterruptTimerZero() interrupt 1
 {
-	static uint8 cnt200ms = 0, cnt1s = 0, cnt5s = 0;
+	static uint8 cnt200ms = 0, cnt1s = 0, flute = 0;
+	static uint16 cnt500ms = 0;
 
 	TH0 = T0RH;
 	TL0 = T0RL;
@@ -139,12 +140,38 @@ void InterruptTimerZero() interrupt 1
 			cnt1s = 0;
 			flag1s = 1;
 		}
-		cnt5s++;
-		if(cnt5s >= 25)
+	}
+
+	if(flagBuzzOn)
+	{
+		switch(flute)
 		{
-			cnt5s = 0;
-			flag5s = 1;
+			case 0:
+			case 2:
+			case 4:
+				BUZZ = ~BUZZ;
+				if(cnt200ms >= 199)flute++;
+				break;
+			case 1:
+			case 3:
+			case 5:
+				if(cnt200ms >= 199)flute++;
+				break;				
+			case 6:
+				BUZZ = ~BUZZ;
+				cnt500ms++;
+				if(cnt500ms >= 500)
+				{
+					cnt500ms = 0;
+					flute++;
+				}
+				break;
+			case 7:
+				if(cnt200ms >= 199)flute = 0;
+				break;
+			default: break;
 		}
 	}
+
 	ClearTremble();
 }
