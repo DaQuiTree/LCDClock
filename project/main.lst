@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  06/01/2017 17:37:52 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  06/01/2017 20:00:41 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   1              if(!flagStopAlarm){                             //用户未取消
   53   2                      if(!flagBuzzOn){                 //     闹铃未响
   54   3                              if(cHour == (timeMod.hour >> 4)*10+(timeMod.hour&0x0F)) //检测是否该响了
-C51 COMPILER V8.08   MAIN                                                                  06/01/2017 17:37:52 PAGE 2   
+C51 COMPILER V8.08   MAIN                                                                  06/01/2017 20:00:41 PAGE 2   
 
   55   3                              {
   56   4                                      if(cMin == (timeMod.min >> 4)*10+(timeMod.min&0x0F))

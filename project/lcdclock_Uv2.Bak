@@ -20,6 +20,7 @@ File 2,5,<..\source\time.h><time.h> 0x0
 File 2,5,<..\source\lunar.h><lunar.h> 0x0 
 File 2,5,<..\source\DHT11.h><DHT11.h> 0x0 
 File 2,5,<..\source\keyboard.h><keyboard.h> 0x0 
+File 2,5,<..\source\main.h><main.h> 0x0 
 
 
 Options 1,0,0  // Target 'Target 1'
