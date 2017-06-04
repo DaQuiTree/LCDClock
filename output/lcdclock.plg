@@ -4,7 +4,7 @@
 <h1>µVision3 Build Log</h1>
 <h2>Project:</h2>
 G:\GitHub Project\LCDClock\project\lcdclock.uv2
-Project File Date:  05/31/2017
+Project File Date:  06/02/2017
 
 <h2>Output:</h2>
 Build target 'Target 1'
@@ -12,20 +12,49 @@ compiling DS1302.c...
 compiling LCD12864.c...
 compiling main.c...
 compiling time.c...
-..\SOURCE\TIME.C(391): warning C206: 'LEDBreath': missing function-prototype
-..\SOURCE\TIME.C(398): warning C206: 'LEDOff': missing function-prototype
 compiling lunar.c...
 compiling DHT11.c...
 compiling keyboard.c...
-compiling pwmled.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CLEARINFORAREA?TIME
-Program Size: data=89.1 xdata=92 code=8230
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LEDFLASH
+    MODULE:  ..\output\main.obj (MAIN)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  INITLED
+    MODULE:  ..\output\main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  INITLED
+    MODULE:  ..\output\main.obj (MAIN)
+    ADDRESS: 1AF1H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LEDFLASH
+    MODULE:  ..\output\main.obj (MAIN)
+    ADDRESS: 1967H
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LEDBREATH
+    MODULE:  ..\output\time.obj (TIME)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LEDOFF
+    MODULE:  ..\output\time.obj (TIME)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LEDBREATH
+    MODULE:  ..\output\time.obj (TIME)
+    ADDRESS: 0A15H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LEDOFF
+    MODULE:  ..\output\time.obj (TIME)
+    ADDRESS: 0A21H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LEDBREATH
+    MODULE:  ..\output\time.obj (TIME)
+    ADDRESS: 0B60H
+Program Size: data=78.0 xdata=92 code=7516
 creating hex file from "..\output\lcdclock"...
-"..\output\lcdclock" - 0 Error(s), 4 Warning(s).
+"..\output\lcdclock" - 0 Error(s), 11 Warning(s).
 Build target 'Target 1'
 compiling DS1302.c...
 compiling LCD12864.c...

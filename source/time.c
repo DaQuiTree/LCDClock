@@ -7,6 +7,7 @@
 #include "keyboard.h"
 #include "main.h"
 #include "pwmled.h"
+#include "innerE2PROM.h"
 
 uint8 pSec = 0xAA;
 uint8 pDay = 0xAA;
@@ -351,6 +352,18 @@ void AdjustDate()
 	ShowAdjusted();
 }
 
+void RecordClock() //将时钟写入E2PROM
+{
+	E2SectorErase(0x8200); //所有信息保存第二扇区，整扇擦除
+	if(bClockOpen){
+		E2ByteProgram(0x8201,0x01);
+	}else{
+		E2ByteProgram(0x8201,0x00);
+	}
+	E2ByteProgram(0x8201,cHour);	//写入闹钟小时
+	E2ByteProgram(0x8202,cMin);		//写入闹钟分钟
+}
+
 void AdjustClock()
 {
 	switch(curPos)
@@ -423,6 +436,7 @@ void KeyAction(uint8 keyCode)
 			LCDSetCursor(3,2);
 			LCDShowCursor();
 		}else{
+			RecordClock();
 			mMode = SetDate;
 			LCDClearAll();
 			clockStr[0] = 0xD0A3;  //"校 时："
@@ -445,6 +459,10 @@ void KeyAction(uint8 keyCode)
 		}
 	}else if(keyCode == 0x1B){//取消
 		LEDBreath();  	//恢复呼吸状态
+		if(mMode == SetClock) //若处于设定时钟界面，则记录时钟设定状态
+		{
+			RecordClock();
+		}
 		mMode = ReadDate;
 		LCDClearAll();	  //清屏
 		LCDCancelCursor();	//取消光标闪烁

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.05                                                        06/01/2017  17:37:53  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.05                                                        06/02/2017  09:53:19  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
                     0021H.1   0000H.7                *** GAP ***
             DATA    0022H     000EH     UNIT         ?DT?TIME
             DATA    0030H     000CH     UNIT         ?DT?KEYBOARD
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 2
 
 
             DATA    003CH     000BH     UNIT         ?DT?PWMLED
@@ -119,7 +119,7 @@ LINK MAP OF MODULE:  ..\output\lcdclock (DS1302)
             CODE    1D2BH     003AH     UNIT         ?PR?_DS1302BURSTWRITE?DS1302
             CODE    1D65H     0039H     UNIT         ?PR?MAIN?MAIN
             CODE    1D9EH     0032H     UNIT         ?PR?INITDS1302?DS1302
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 3
 
 
             CODE    1DD0H     002DH     UNIT         ?PR?ADJUSTCLOCK?TIME
@@ -179,7 +179,7 @@ SEGMENT                                    BIT_GROUP          DATA_GROUP        
   +--> ?PR?_CONFIGTIMERZERO?KEYBOARD
   +--> ?PR?SHOWCURRENTTIME?TIME
   +--> ?PR?CHECKCLOCK?MAIN
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 4
 
 
   +--> ?PR?SHOWTEMP?TIME
@@ -239,7 +239,7 @@ SEGMENT                                    BIT_GROUP          DATA_GROUP        
 
 ?PR?_LCDDRAWAREA?LCD12864               -----    -----      000BH    0004H      -----    -----
   +--> ?PR?_LCDWRITECMD?LCD12864
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 5
 
 
   +--> ?PR?_LCDWRITEDATA?LCD12864
@@ -299,7 +299,7 @@ SEGMENT                                    BIT_GROUP          DATA_GROUP        
   +--> ?PR?_LCDSHOWSTR?LCD12864
 
 ?PR?LCDSHOWCURSOR?LCD12864              -----    -----      -----    -----      -----    -----
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 6
 
 
   +--> ?PR?_LCDWRITECMD?LCD12864
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   VALUE           TYPE          NAME
   ----------------------------------
 
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 7
 
 
   -------         MODULE        DS1302
@@ -419,7 +419,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1EC4H         LINE#         23
   C:1EC4H         LINE#         24
   C:1EC4H         LINE#         27
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 8
 
 
   C:1EC9H         LINE#         28
@@ -479,7 +479,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1FCCH         LINE#         78
   C:1FCEH         LINE#         79
   C:1FCEH         LINE#         80
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 9
 
 
   -------         ENDPROC       _DS1302SINGLEREAD
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1E80H         PUBLIC        _LCDShowStr
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 10
 
 
   C:1FEFH         PUBLIC        _LCDClearArea
@@ -599,7 +599,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1F4AH         LINE#         59
   C:1F4CH         LINE#         60
   C:1F4CH         LINE#         61
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 11
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 11
 
 
   C:1F4FH         LINE#         62
@@ -659,7 +659,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         ENDPROC       _LCDSHOWCN
   -------         PROC          _LCDSETCURSOR
   D:0006H         SYMBOL        x
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 12
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 12
 
 
   D:0005H         SYMBOL        y
@@ -719,7 +719,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:17FDH         LINE#         153
   C:1804H         LINE#         154
   C:1809H         LINE#         155
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 13
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 13
 
 
   C:180BH         LINE#         156
@@ -779,7 +779,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1B76H         LINE#         208
   C:1B76H         LINE#         211
   C:1B7BH         LINE#         212
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 14
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 14
 
 
   C:1B80H         LINE#         213
@@ -839,7 +839,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         DO            
   C:1428H         SYMBOL        clearDat
   -------         ENDDO         
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 15
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 15
 
 
   C:1FEFH         LINE#         268
@@ -899,7 +899,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1B17H         LINE#         46
   C:1B17H         LINE#         47
   C:1B17H         LINE#         52
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 16
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 16
 
 
   C:1B1AH         LINE#         53
@@ -959,7 +959,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   D:00D0H         PUBLIC        PSW
   -------         PROC          CLEARINFORAREA
   -------         DO            
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 17
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 17
 
 
   D:001EH         SYMBOL        i
@@ -1019,7 +1019,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0DB2H         LINE#         89
   C:0DB4H         LINE#         90
   C:0DB8H         LINE#         91
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 18
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 18
 
 
   C:0DBCH         LINE#         92
@@ -1079,7 +1079,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1011H         LINE#         147
   C:1023H         LINE#         148
   C:102CH         LINE#         149
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 19
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 19
 
 
   C:103CH         LINE#         150
@@ -1139,7 +1139,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:110AH         LINE#         203
   C:1119H         LINE#         205
   C:1128H         LINE#         206
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 20
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 20
 
 
   C:1137H         LINE#         208
@@ -1199,7 +1199,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0766H         LINE#         265
   C:0778H         LINE#         266
   C:0788H         LINE#         267
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 21
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 21
 
 
   C:078CH         LINE#         268
@@ -1259,7 +1259,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1480H         LINE#         321
   C:1482H         LINE#         322
   C:1488H         LINE#         323
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 22
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 22
 
 
   C:148DH         LINE#         324
@@ -1319,7 +1319,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1A6DH         LINE#         379
   C:1A7EH         LINE#         380
   C:1A81H         LINE#         381
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 23
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 23
 
 
   C:1A92H         LINE#         382
@@ -1379,7 +1379,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0C14H         LINE#         434
   C:0C1BH         LINE#         435
   C:0C21H         LINE#         436
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 24
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 24
 
 
   C:0C2EH         LINE#         437
@@ -1439,7 +1439,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0AE1H         PUBLIC        ChAnimal
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 25
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 25
 
 
   D:00A8H         PUBLIC        IE
@@ -1499,7 +1499,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0198H         LINE#         83
   C:01D0H         LINE#         84
   C:01D6H         LINE#         86
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 26
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 26
 
 
   C:01D9H         LINE#         87
@@ -1559,7 +1559,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:0EE5H         LINE#         139
   C:0EE5H         LINE#         140
   C:0F01H         LINE#         141
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 27
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 27
 
 
   C:0F34H         LINE#         142
@@ -1619,7 +1619,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1EFAH         LINE#         23
   C:1F01H         LINE#         24
   C:1F03H         LINE#         25
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 28
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 28
 
 
   C:1F0AH         LINE#         26
@@ -1679,7 +1679,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1E29H         PUBLIC        _ConfigTimerZero
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 29
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 29
 
 
   B:0020H.0       PUBLIC        flagBuzzOn
@@ -1739,7 +1739,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1268H         LINE#         55
   C:1275H         LINE#         56
   C:127AH         LINE#         57
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 30
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 30
 
 
   C:1286H         LINE#         58
@@ -1799,7 +1799,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1E3DH         LINE#         111
   C:1E3FH         LINE#         112
   C:1E44H         LINE#         114
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 31
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 31
 
 
   C:1E47H         LINE#         115
@@ -1859,7 +1859,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:157FH         LINE#         170
   C:1589H         LINE#         171
   C:1589H         LINE#         172
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 32
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 32
 
 
   C:1589H         LINE#         173
@@ -1919,7 +1919,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1F94H         LINE#         28
   C:1F96H         LINE#         30
   C:1F98H         LINE#         31
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 33
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 33
 
 
   -------         ENDPROC       CONFIGTIMERTWO
@@ -1979,7 +1979,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   C:1F7CH         LINE#         76
   C:1F7CH         LINE#         77
   C:1F7FH         LINE#         78
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 34
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 34
 
 
   C:1F82H         LINE#         79
@@ -2039,7 +2039,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
   -------         PROC          LEDBREATH
   C:201AH         LINE#         134
   C:201AH         LINE#         135
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 35
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 35
 
 
   C:201AH         LINE#         136
@@ -2099,7 +2099,7 @@ SYMBOL TABLE OF MODULE:  ..\output\lcdclock (DS1302)
 
   -------         MODULE        ?C?ISTOPTR
   C:0477H         PUBLIC        ?C?ISTOPTR
-BL51 BANKED LINKER/LOCATER V6.05                                                      06/01/2017  17:37:53  PAGE 36
+BL51 BANKED LINKER/LOCATER V6.05                                                      06/02/2017  09:53:19  PAGE 36
 
 
   -------         ENDMOD        ?C?ISTOPTR
