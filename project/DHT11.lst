@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DHT11                                                                 06/02/2017 09:53:18 PAGE 1   
+C51 COMPILER V8.08   DHT11                                                                 06/05/2017 08:55:59 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
@@ -62,7 +62,7 @@ line level    source
   52   3                              cntThr = 0;
   53   3                              while(!DHT11_DATA && cntThr++ < NUMBER);        //等待高电平到来
   54   3                              if(cntThr >= NUMBER){
-C51 COMPILER V8.08   DHT11                                                                 06/02/2017 09:53:18 PAGE 2   
+C51 COMPILER V8.08   DHT11                                                                 06/05/2017 08:55:59 PAGE 2   
 
   55   4                                      DHT11_DATA = 1;
   56   4                                      EA = 1;

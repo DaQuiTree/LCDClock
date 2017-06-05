@@ -8,10 +8,12 @@
 #include "keyboard.h"
 #include "main.h"
 #include "pwmled.h"
+#include "innerE2PROM.h"
 
 SystemMode mMode = ReadDate;
 bit flagStopAlarm = 0;
 
+void InitClock();
 void CheckClock();
 
 void main()
@@ -20,6 +22,7 @@ void main()
 	InitLED();	
 	InitDS1302();										  
 	InitLCD12864();
+	InitClock();
 	LCDInitImage();
 	ConfigTimerZero(1);
 	
@@ -41,6 +44,24 @@ void main()
 		}
 		KeyDriver();
 	}
+}
+
+void InitClock()
+{
+	uint8 byteTmp;
+	  
+	byteTmp = E2ByteRead(0x8200);
+	if(byteTmp == 0x01){	   //读闹钟开启状态
+		bClockOpen = 1;
+	}else if(byteTmp == 0x00){
+		bClockOpen = 0;
+	}else{
+		bClockOpen = 0;	    //初次启动SweetTimer,由其他位置将闹钟初始化为00:00
+		return;
+	}
+
+	cHour = E2ByteRead(0x8201);
+	cMin = E2ByteRead(0x8202);
 }
 
 void CheckClock()

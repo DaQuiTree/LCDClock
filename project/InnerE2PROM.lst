@@ -1,0 +1,104 @@
+C51 COMPILER V8.08   INNERE2PROM                                                           06/05/2017 08:56:00 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE INNERE2PROM
+OBJECT MODULE PLACED IN ..\output\InnerE2PROM.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\InnerE2PROM.c BROWSE DEBUG OBJECTEXTEND PRINT(.\InnerE2PROM.lst) 
+                    -OBJECT(..\output\InnerE2PROM.obj)
+
+line level    source
+
+   1             /* 
+   2          ************************************************************************************ 
+   3          Fuction:STC89C52单片机内部4K的EEPROM操作驱动 
+   4          Software Designer:Jason 
+   5          ************************************************************************************ 
+   6          */  
+   7          #include "config.h"  
+   8          #include "innerE2PROM.h"
+   9          
+  10          /******************定义命令字节******************/       
+  11          #define Read_COM    0x01                    //字节读数据命令     
+  12          #define Prog_COM    0x02                    //字节编程数据命令     
+  13          #define Erase_COM    0x03                   //扇区擦除数据命令      
+  14          #define En_Wait_TIME    0x81                //设置等待时间 ,并使能ISP/IAP        
+  15          #define Start_ADDRH 0x20                    //扇区地址高位      
+  16          #define Start_ADDRL 0x00                    //扇区地址低位 
+  17           
+  18          /****************特殊功能寄存器声明****************/  
+  19          sfr ISP_DATA = 0xe2;   
+  20          sfr ISP_ADDRH = 0xe3;     
+  21          sfr ISP_ADDRL = 0xe4;   
+  22          sfr ISP_CMD = 0xe5;   
+  23          sfr ISP_TRIG = 0xe6;      
+  24          sfr ISP_CONTR = 0xe7;  
+  25          
+  26          /*****************关闭ISP&IAP功能*****************/     
+  27          void ISP_IAP_disable()     
+  28          {     
+  29   1          ISP_CONTR = 0x00;     
+  30   1          ISP_CMD = 0x00;      
+  31   1          ISP_TRIG = 0x00;     
+  32   1      }     
+  33          
+  34          /*********************字节读**********************/       
+  35          uint8 E2ByteRead(uint16 byte_addr)     
+  36          {     
+  37   1          EA = 0;                                     //关中断      
+  38   1          ISP_CONTR = En_Wait_TIME;                   //开启ISP&IAP，并送等待时间      
+  39   1          ISP_CMD = Read_COM;                         //送字节读命令字         
+  40   1          ISP_ADDRH = (uint8)(byte_addr >> 8);          //送地址高字节      
+  41   1          ISP_ADDRL = (uint8)(byte_addr & 0x00ff);    //送地址低字节          
+  42   1          ISP_TRIG = 0x46;                            //送触发命令字0x46     
+  43   1          ISP_TRIG = 0xB9;                            //送触发命令字0xB9     
+  44   1          _nop_();     
+  45   1          ISP_IAP_disable();                          //关闭ISP&IAP功能      
+  46   1          EA = 1;                                     //开中断      
+  47   1          return (ISP_DATA);     
+  48   1      }       
+  49          /*********************字节编程*********************/     
+  50          void E2ByteProgram(uint16 byte_addr,uint8 isp_iap_data)     
+  51          {     
+  52   1          EA = 0;                                     //关中断      
+  53   1          ISP_CONTR = En_Wait_TIME;                   //开启ISP&IAP，并送等待时间      
+  54   1          ISP_CMD = Prog_COM;                         //送字节编程命令字        
+C51 COMPILER V8.08   INNERE2PROM                                                           06/05/2017 08:56:00 PAGE 2   
+
+  55   1          ISP_ADDRH = (uint8)(byte_addr >> 8);          //送地址高字节      
+  56   1          ISP_ADDRL = (uint8)(byte_addr & 0x00ff);    //送地址低字节          
+  57   1          ISP_DATA = isp_iap_data;                    //送数据进ISP_DATA      
+  58   1          ISP_TRIG = 0x46;                            //送触发命令字0x46     
+  59   1          ISP_TRIG = 0xB9;                            //送触发命令字0xB9     
+  60   1          _nop_();     
+  61   1          ISP_IAP_disable();                          //关闭ISP&IAP功能      
+  62   1          EA = 1;                                     //开中断         
+  63   1      }     
+  64               
+  65          /*********************扇区擦除*********************/     
+  66          void E2SectorErase(uint16 sector_addr)                  
+  67          {     
+  68   1          EA = 0;                                     //关中断      
+  69   1          ISP_CONTR = En_Wait_TIME;                   //开启ISP&IAP;并送等待时间      
+  70   1          ISP_CMD = Erase_COM;                        //送扇区擦除命令字        
+  71   1          ISP_ADDRH = (uint8)(sector_addr >> 8);    //送地址高字节      
+  72   1          ISP_ADDRL = (uint8)(sector_addr & 0X00FF);  //送地址低字节          
+  73   1          ISP_TRIG = 0X46;                            //送触发命令字0x46    
+  74   1          ISP_TRIG = 0XB9;                            //送触发命令字0xB9     
+  75   1          _nop_();     
+  76   1          ISP_IAP_disable();                          //关闭ISP&IAP功能      
+  77   1          EA = 1;     
+  78   1      }    
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    102    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              06/02/2017 09:53:18 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      if((state[queue][i] & 0x0F) == 0x0F)
   54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              06/02/2017 09:53:18 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 2   
 
   55   3                              keySta[queue][i] = 1;
   56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
@@ -126,7 +126,7 @@ line level    source
  114   1              TMOD &= 0xF0;
  115   1              TMOD |= 0x01;
  116   1      
-C51 COMPILER V8.08   KEYBOARD                                                              06/02/2017 09:53:18 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 3   
 
  117   1              TH0 = T0RH;
  118   1              TL0 = T0RL;
@@ -190,7 +190,7 @@ line level    source
  176   1              ClearTremble();
  177   1      }
 
-C51 COMPILER V8.08   KEYBOARD                                                              06/02/2017 09:53:18 PAGE 4   
+C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 4   
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
