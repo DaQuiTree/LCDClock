@@ -19,7 +19,8 @@ void CheckClock();
 void main()
 {
 	EA = 1;
-	InitLED();	
+	InitLED();
+	LEDBreath();	
 	InitDS1302();										  
 	InitLCD12864();
 	InitClock();

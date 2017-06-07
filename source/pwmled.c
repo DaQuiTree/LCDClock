@@ -146,7 +146,7 @@ void LEDFlash()
 {
 	mLedState = LED_Flash;
 
-	PWMOUT = 1;
+	PWMOUT = 0;
 
 	ET1 = 0;
 	TR1 = 0; //关闭定时器中断1，Flash不使用该中断

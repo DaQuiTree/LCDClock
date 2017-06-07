@@ -119,6 +119,7 @@ void ConfigTimerZero(uint8 ms)
 
 	TR0 = 1;
 	ET0 = 1;
+	PT1 = 1;
 }
 
 void InterruptTimerZero() interrupt 1

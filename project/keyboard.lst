@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/07/2017 10:44:08 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   1              {
   53   2                      if((state[queue][i] & 0x0F) == 0x0F)
   54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              06/07/2017 10:44:08 PAGE 2   
 
   55   3                              keySta[queue][i] = 1;
   56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
@@ -126,75 +126,76 @@ line level    source
  114   1              TMOD &= 0xF0;
  115   1              TMOD |= 0x01;
  116   1      
-C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              06/07/2017 10:44:08 PAGE 3   
 
  117   1              TH0 = T0RH;
  118   1              TL0 = T0RL;
  119   1      
  120   1              TR0 = 1;
  121   1              ET0 = 1;
- 122   1      }
- 123          
- 124          void InterruptTimerZero() interrupt 1
- 125          {
- 126   1              static uint8 cnt200ms = 0, cnt1s = 0, flute = 0;
- 127   1              static uint16 cnt500ms = 0;
- 128   1      
- 129   1              TH0 = T0RH;
- 130   1              TL0 = T0RL;
- 131   1      
- 132   1              cnt200ms++;                     
- 133   1              if(cnt200ms >= 200) //200ms定时器
- 134   1              {
- 135   2                      cnt200ms = 0;
- 136   2                      flag200ms = 1;
- 137   2                      cnt1s++;                //1s定时器
- 138   2                      if(cnt1s >= 5)
- 139   2                      {
- 140   3                              cnt1s = 0;
- 141   3                              flag1s = 1;
- 142   3                      }
- 143   2              }
- 144   1      
- 145   1              if(flagBuzzOn)
- 146   1              {
- 147   2                      switch(flute)
- 148   2                      {
- 149   3                              case 0:
- 150   3                              case 2:
- 151   3                              case 4:
- 152   3                                      BUZZ = ~BUZZ;
- 153   3                                      if(cnt200ms >= 199)flute++;
- 154   3                                      break;
- 155   3                              case 1:
- 156   3                              case 3:
- 157   3                              case 5:
- 158   3                                      if(cnt200ms >= 199)flute++;
- 159   3                                      break;                          
- 160   3                              case 6:
- 161   3                                      BUZZ = ~BUZZ;
- 162   3                                      cnt500ms++;
- 163   3                                      if(cnt500ms >= 500)
- 164   3                                      {
- 165   4                                              cnt500ms = 0;
- 166   4                                              flute++;
- 167   4                                      }
- 168   3                                      break;
- 169   3                              case 7:
- 170   3                                      if(cnt200ms >= 199)flute = 0;
- 171   3                                      break;
- 172   3                              default: break;
- 173   3                      }
- 174   2              }
- 175   1      
- 176   1              ClearTremble();
- 177   1      }
+ 122   1              PT1 = 1;
+ 123   1      }
+ 124          
+ 125          void InterruptTimerZero() interrupt 1
+ 126          {
+ 127   1              static uint8 cnt200ms = 0, cnt1s = 0, flute = 0;
+ 128   1              static uint16 cnt500ms = 0;
+ 129   1      
+ 130   1              TH0 = T0RH;
+ 131   1              TL0 = T0RL;
+ 132   1      
+ 133   1              cnt200ms++;                     
+ 134   1              if(cnt200ms >= 200) //200ms定时器
+ 135   1              {
+ 136   2                      cnt200ms = 0;
+ 137   2                      flag200ms = 1;
+ 138   2                      cnt1s++;                //1s定时器
+ 139   2                      if(cnt1s >= 5)
+ 140   2                      {
+ 141   3                              cnt1s = 0;
+ 142   3                              flag1s = 1;
+ 143   3                      }
+ 144   2              }
+ 145   1      
+ 146   1              if(flagBuzzOn)
+ 147   1              {
+ 148   2                      switch(flute)
+ 149   2                      {
+ 150   3                              case 0:
+ 151   3                              case 2:
+ 152   3                              case 4:
+ 153   3                                      BUZZ = ~BUZZ;
+ 154   3                                      if(cnt200ms >= 199)flute++;
+ 155   3                                      break;
+ 156   3                              case 1:
+ 157   3                              case 3:
+ 158   3                              case 5:
+ 159   3                                      if(cnt200ms >= 199)flute++;
+ 160   3                                      break;                          
+ 161   3                              case 6:
+ 162   3                                      BUZZ = ~BUZZ;
+ 163   3                                      cnt500ms++;
+ 164   3                                      if(cnt500ms >= 500)
+ 165   3                                      {
+ 166   4                                              cnt500ms = 0;
+ 167   4                                              flute++;
+ 168   4                                      }
+ 169   3                                      break;
+ 170   3                              case 7:
+ 171   3                                      if(cnt200ms >= 199)flute = 0;
+ 172   3                                      break;
+ 173   3                              default: break;
+ 174   3                      }
+ 175   2              }
+ 176   1      
+ 177   1              ClearTremble();
+ 178   1      }
+C51 COMPILER V8.08   KEYBOARD                                                              06/07/2017 10:44:08 PAGE 4   
 
-C51 COMPILER V8.08   KEYBOARD                                                              06/05/2017 08:55:59 PAGE 4   
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    646    ----
+   CODE SIZE        =    648    ----
    CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =     48    ----

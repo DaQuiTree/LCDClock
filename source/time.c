@@ -356,9 +356,9 @@ void RecordClock() //将时钟写入E2PROM
 {
 	E2SectorErase(0x8200); //所有信息保存第二扇区，整扇擦除
 	if(bClockOpen){
-		E2ByteProgram(0x8201,0x01);
+		E2ByteProgram(0x8200,0x01);
 	}else{
-		E2ByteProgram(0x8201,0x00);
+		E2ByteProgram(0x8200,0x00);
 	}
 	E2ByteProgram(0x8201,cHour);	//写入闹钟小时
 	E2ByteProgram(0x8202,cMin);		//写入闹钟分钟

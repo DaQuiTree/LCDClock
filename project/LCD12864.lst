@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              06/05/2017 08:55:58 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              06/07/2017 10:44:07 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -62,7 +62,7 @@ line level    source
   52   1              LCD12864_RS = 0;
   53   1              LCD12864_RW = 0;
   54   1              LCD12864_EN = 1;
-C51 COMPILER V8.08   LCD12864                                                              06/05/2017 08:55:58 PAGE 2   
+C51 COMPILER V8.08   LCD12864                                                              06/07/2017 10:44:07 PAGE 2   
 
   55   1              LCD12864_DB = cmd;
   56   1              LCD12864_EN = 0;        
@@ -126,7 +126,7 @@ line level    source
  114   2                      case 1:
  115   2                              pos = 0x90 + x;
  116   2                              break;
-C51 COMPILER V8.08   LCD12864                                                              06/05/2017 08:55:58 PAGE 3   
+C51 COMPILER V8.08   LCD12864                                                              06/07/2017 10:44:07 PAGE 3   
 
  117   2                      case 2:
  118   2                              pos = 0x88 + x;
@@ -190,7 +190,7 @@ line level    source
  176          {
  177   1              uint8 i;
  178   1      
-C51 COMPILER V8.08   LCD12864                                                              06/05/2017 08:55:58 PAGE 4   
+C51 COMPILER V8.08   LCD12864                                                              06/07/2017 10:44:07 PAGE 4   
 
  179   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
  180   1              LCDWriteCmd(0x34);
@@ -254,7 +254,7 @@ line level    source
  238   1              uint8 i;
  239   1      
  240   1              LCDWriteCmd(0x34); //扩充指令集设定关闭绘图显示
-C51 COMPILER V8.08   LCD12864                                                              06/05/2017 08:55:58 PAGE 5   
+C51 COMPILER V8.08   LCD12864                                                              06/07/2017 10:44:07 PAGE 5   
 
  241   1              LCDWriteCmd(0x34);
  242   1      
