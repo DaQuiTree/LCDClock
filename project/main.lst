@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  06/11/2017 10:06:39 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  06/11/2017 19:05:47 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52   1              uint8 byteTmp;
   53   1                
   54   1              byteTmp = E2ByteRead(0x8200);
-C51 COMPILER V8.08   MAIN                                                                  06/11/2017 10:06:39 PAGE 2   
+C51 COMPILER V8.08   MAIN                                                                  06/11/2017 19:05:47 PAGE 2   
 
   55   1              if(byteTmp == 0x01){       //¶ÁÄÖÖÓ¿ªÆô×´Ì¬
   56   2                      bClockOpen = 1;

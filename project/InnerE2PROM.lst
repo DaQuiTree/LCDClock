@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   INNERE2PROM                                                           06/11/2017 10:06:40 PAGE 1   
+C51 COMPILER V8.08   INNERE2PROM                                                           06/11/2017 19:05:48 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE INNERE2PROM
@@ -62,7 +62,7 @@ line level    source
   52   1          EA = 0;                                     //关中断      
   53   1          ISP_CONTR = En_Wait_TIME;                   //开启ISP&IAP，并送等待时间      
   54   1          ISP_CMD = Prog_COM;                         //送字节编程命令字        
-C51 COMPILER V8.08   INNERE2PROM                                                           06/11/2017 10:06:40 PAGE 2   
+C51 COMPILER V8.08   INNERE2PROM                                                           06/11/2017 19:05:48 PAGE 2   
 
   55   1          ISP_ADDRH = (uint8)(byte_addr >> 8);          //送地址高字节      
   56   1          ISP_ADDRL = (uint8)(byte_addr & 0x00ff);    //送地址低字节          

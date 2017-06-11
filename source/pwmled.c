@@ -80,8 +80,11 @@ void InterruptTimerOne() interrupt 3
 
 void InterruptTimerTwo() interrupt 5
 {
-	uint8 code table[16] = {
-	1, 5, 10,18, 23, 30, 41, 51, 60, 68, 75, 81, 86, 90, 93, 95
+	uint8 code table[32] = {
+	 1,  3,  5,  7,  9, 11,	13, 15, 
+	18, 20, 23, 27, 30, 35, 41, 46,
+	51, 56, 60, 65, 68, 72, 75, 78,
+	83, 86, 88, 90, 93, 95, 97, 100
 	};
 	static bit dir = 0;
 	static uint8 index = 0, flashCnt = 0;
@@ -94,7 +97,7 @@ void InterruptTimerTwo() interrupt 5
 			if(dir == 0)
 			{
 				index++;
-				if(index >= 15)
+				if(index >= 29)
 				{
 					dir = 1;
 				}
@@ -108,7 +111,7 @@ void InterruptTimerTwo() interrupt 5
 			break;
 		case LED_Flash:
 			flashCnt++;
-			if(flashCnt > 10){
+			if(flashCnt > 2){
 				flashCnt = 0;
 				PWMOUT = ~PWMOUT;
 			}

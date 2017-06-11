@@ -95,19 +95,24 @@ void ConfigTimerZero(uint8 ms)
 
 void InterruptTimerZero() interrupt 1
 {
-	static uint8 cnt200ms = 0, cnt1s = 0, flute = 0;
-	static uint16 cnt500ms = 0;
+	static uint8 cnt100ms = 0, cnt200ms = 0, cnt1s = 0, flute = 0;
+	static uint16 cnt300ms = 0;
 
 	TH0 = T0RH;
 	TL0 = T0RL;
 
-	cnt200ms++;			
-	if(cnt200ms >= 200) //200ms定时器
+	cnt100ms++;			
+	if(cnt100ms >= 100) //200ms定时器
 	{
-		cnt200ms = 0;
-		flag200ms = 1;
+		cnt100ms = 0;
+		cnt200ms++;
+		if(cnt200ms >= 2)
+		{
+			cnt200ms = 0;
+			flag200ms = 1;
+		}
 		cnt1s++;		//1s定时器
-		if(cnt1s >= 5)
+		if(cnt1s >= 10)
 		{
 			cnt1s = 0;
 			flag1s = 1;
@@ -122,24 +127,24 @@ void InterruptTimerZero() interrupt 1
 			case 2:
 			case 4:
 				BUZZ = ~BUZZ;
-				if(cnt200ms >= 199)flute++;
+				if(cnt100ms >= 99)flute++;
 				break;
 			case 1:
 			case 3:
 			case 5:
-				if(cnt200ms >= 199)flute++;
+				if(cnt100ms >= 99)flute++;
 				break;				
 			case 6:
 				BUZZ = ~BUZZ;
-				cnt500ms++;
-				if(cnt500ms >= 500)
+				cnt300ms++;
+				if(cnt300ms >= 300)
 				{
-					cnt500ms = 0;
+					cnt300ms = 0;
 					flute++;
 				}
 				break;
 			case 7:
-				if(cnt200ms >= 199)flute = 0;
+				if(cnt100ms >= 99)flute = 0;
 				break;
 			default: break;
 		}

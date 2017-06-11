@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 10:06:40 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   2                      {
   53   3                              if(keyBuf[i] == 0){
   54   4                                      ethBuf += 1;
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 10:06:40 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 2   
 
   55   4                                      if(ethBuf > enterThreshold){
   56   5                                              KeyAction(0x26);
@@ -107,68 +107,73 @@ line level    source
   95          
   96          void InterruptTimerZero() interrupt 1
   97          {
-  98   1              static uint8 cnt200ms = 0, cnt1s = 0, flute = 0;
-  99   1              static uint16 cnt500ms = 0;
+  98   1              static uint8 cnt100ms = 0, cnt200ms = 0, cnt1s = 0, flute = 0;
+  99   1              static uint16 cnt300ms = 0;
  100   1      
  101   1              TH0 = T0RH;
  102   1              TL0 = T0RL;
  103   1      
- 104   1              cnt200ms++;                     
- 105   1              if(cnt200ms >= 200) //200ms定时器
+ 104   1              cnt100ms++;                     
+ 105   1              if(cnt100ms >= 100) //200ms定时器
  106   1              {
- 107   2                      cnt200ms = 0;
- 108   2                      flag200ms = 1;
- 109   2                      cnt1s++;                //1s定时器
- 110   2                      if(cnt1s >= 5)
- 111   2                      {
- 112   3                              cnt1s = 0;
- 113   3                              flag1s = 1;
- 114   3                      }
- 115   2              }
- 116   1      
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 10:06:40 PAGE 3   
+ 107   2                      cnt100ms = 0;
+ 108   2                      cnt200ms++;
+ 109   2                      if(cnt200ms >= 2)
+ 110   2                      {
+ 111   3                              cnt200ms = 0;
+ 112   3                              flag200ms = 1;
+ 113   3                      }
+ 114   2                      cnt1s++;                //1s定时器
+ 115   2                      if(cnt1s >= 10)
+ 116   2                      {
+C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 3   
 
- 117   1              if(flagBuzzOn)
- 118   1              {
- 119   2                      switch(flute)
- 120   2                      {
- 121   3                              case 0:
- 122   3                              case 2:
- 123   3                              case 4:
- 124   3                                      BUZZ = ~BUZZ;
- 125   3                                      if(cnt200ms >= 199)flute++;
- 126   3                                      break;
- 127   3                              case 1:
- 128   3                              case 3:
- 129   3                              case 5:
- 130   3                                      if(cnt200ms >= 199)flute++;
- 131   3                                      break;                          
- 132   3                              case 6:
- 133   3                                      BUZZ = ~BUZZ;
- 134   3                                      cnt500ms++;
- 135   3                                      if(cnt500ms >= 500)
- 136   3                                      {
- 137   4                                              cnt500ms = 0;
- 138   4                                              flute++;
- 139   4                                      }
- 140   3                                      break;
- 141   3                              case 7:
- 142   3                                      if(cnt200ms >= 199)flute = 0;
- 143   3                                      break;
- 144   3                              default: break;
- 145   3                      }
- 146   2              }
- 147   1      
- 148   1              ClearTremble();
- 149   1      }
+ 117   3                              cnt1s = 0;
+ 118   3                              flag1s = 1;
+ 119   3                      }
+ 120   2              }
+ 121   1      
+ 122   1              if(flagBuzzOn)
+ 123   1              {
+ 124   2                      switch(flute)
+ 125   2                      {
+ 126   3                              case 0:
+ 127   3                              case 2:
+ 128   3                              case 4:
+ 129   3                                      BUZZ = ~BUZZ;
+ 130   3                                      if(cnt100ms >= 99)flute++;
+ 131   3                                      break;
+ 132   3                              case 1:
+ 133   3                              case 3:
+ 134   3                              case 5:
+ 135   3                                      if(cnt100ms >= 99)flute++;
+ 136   3                                      break;                          
+ 137   3                              case 6:
+ 138   3                                      BUZZ = ~BUZZ;
+ 139   3                                      cnt300ms++;
+ 140   3                                      if(cnt300ms >= 300)
+ 141   3                                      {
+ 142   4                                              cnt300ms = 0;
+ 143   4                                              flute++;
+ 144   4                                      }
+ 145   3                                      break;
+ 146   3                              case 7:
+ 147   3                                      if(cnt100ms >= 99)flute = 0;
+ 148   3                                      break;
+ 149   3                              default: break;
+ 150   3                      }
+ 151   2              }
+ 152   1      
+ 153   1              ClearTremble();
+ 154   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    421    ----
+   CODE SIZE        =    433    ----
    CONSTANT SIZE    =      4    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =     12    ----
-   DATA SIZE        =     11       1
+   DATA SIZE        =     12       1
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      3    ----
 END OF MODULE INFORMATION.
