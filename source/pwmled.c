@@ -5,8 +5,6 @@
 
 ledState mLedState = LED_Breath;
 
-sbit PWMOUT = P3^3;
-
 uint8 HighRH = 0;  //高电平重载值的高字节
 uint8 HighRL = 0;  //高电平重载值的低字节
 uint8 LowRH  = 0;  //低电平重载值的高字节

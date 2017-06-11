@@ -32,6 +32,20 @@ uint8 code StopVolume[32]={
 	0x05,0x90,0x0C,0xD8,0x18,0x6C,0x3F,0xFE,0x01,0x58,0x00,0x8C,0x00,0x06,0x00,0x00,
 };
 
+uint8 code ReverseDat[16] ={//用于翻转字节的静态数据
+        0x00,0x08,0x04,0x0C,0x02,0x0A,0x06,0x0E,0x01,0x09,0x05,0x0D,0x03,0x0B,0x07,0x0F
+};
+
+uint8 ReverseByte(uint8 c)
+{
+    uint8 d = 0;
+
+    d |= (ReverseDat[c&0xF]) << 4;
+    d |= ReverseDat[c>>4];
+
+    return d;
+}
+
 void LCDWaitReady()
 {
 	uint8 tmp = 0xFF;
@@ -40,7 +54,7 @@ void LCDWaitReady()
 	LCD12864_RW = 1;
 	do{
 		LCD12864_EN = 1;
-		tmp = LCD12864_DB & 0x80;
+		tmp = LCD12864_DB & 0x01; //由于DB接反进行改动 0x80 -> 0x01
 		LCD12864_EN = 0;	
 	}while(tmp != 0x00);
 	LCD12864_EN = 0;	
@@ -48,6 +62,7 @@ void LCDWaitReady()
 
 void LCDWriteCmd(uint8 cmd)
 {
+	cmd = ReverseByte(cmd);
 	LCDWaitReady();
 	LCD12864_RS = 0;
 	LCD12864_RW = 0;
@@ -58,6 +73,7 @@ void LCDWriteCmd(uint8 cmd)
 
 void LCDWriteData(uint8 dat)
 {
+	dat = ReverseByte(dat);
 	LCDWaitReady();
 	LCD12864_RS = 1;
 	LCD12864_RW = 0;
