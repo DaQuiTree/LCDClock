@@ -36,13 +36,13 @@ void main()
 				if(bClockOpen){
 					CheckClock();
 				}
-			}else if(mMode == ReadInfo){
-				if(flag1s){
-					flag1s = 0;
-					ShowTemp();
-				} 
+			}
+		}else if(mMode == ReadInfo){
+			if(flag1s){
+				flag1s = 0;
+				ShowTemp();
 			} 
-		}
+		} 
 		KeyDriver();
 	}
 }

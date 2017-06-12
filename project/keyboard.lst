@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   2                      {
   53   3                              if(keyBuf[i] == 0){
   54   4                                      ethBuf += 1;
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 2   
 
   55   4                                      if(ethBuf > enterThreshold){
   56   5                                              KeyAction(0x26);
@@ -126,7 +126,7 @@ line level    source
  114   2                      cnt1s++;                //1s¶¨Ê±Æ÷
  115   2                      if(cnt1s >= 10)
  116   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              06/11/2017 19:05:48 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 3   
 
  117   3                              cnt1s = 0;
  118   3                              flag1s = 1;
@@ -138,34 +138,40 @@ line level    source
  124   2                      switch(flute)
  125   2                      {
  126   3                              case 0:
- 127   3                              case 2:
- 128   3                              case 4:
- 129   3                                      BUZZ = ~BUZZ;
- 130   3                                      if(cnt100ms >= 99)flute++;
- 131   3                                      break;
- 132   3                              case 1:
- 133   3                              case 3:
- 134   3                              case 5:
- 135   3                                      if(cnt100ms >= 99)flute++;
- 136   3                                      break;                          
- 137   3                              case 6:
- 138   3                                      BUZZ = ~BUZZ;
- 139   3                                      cnt300ms++;
- 140   3                                      if(cnt300ms >= 300)
- 141   3                                      {
- 142   4                                              cnt300ms = 0;
- 143   4                                              flute++;
- 144   4                                      }
- 145   3                                      break;
- 146   3                              case 7:
- 147   3                                      if(cnt100ms >= 99)flute = 0;
- 148   3                                      break;
- 149   3                              default: break;
- 150   3                      }
- 151   2              }
- 152   1      
- 153   1              ClearTremble();
- 154   1      }
+ 127   3                                      BUZZ = 0; //³õÊ¼
+ 128   3                              case 2:
+ 129   3                              case 4:
+ 130   3                                      if(cnt100ms >= 99){
+ 131   4                                              flute++;
+ 132   4                                              BUZZ = 1;
+ 133   4                                      }
+ 134   3                                      break;
+ 135   3                              case 1:
+ 136   3                              case 3:
+ 137   3                              case 5:
+ 138   3                                      if(cnt100ms >= 99){
+ 139   4                                              flute++;
+ 140   4                                              BUZZ = 0;
+ 141   4                                      }
+ 142   3                                      break;                          
+ 143   3                              case 6:
+ 144   3                                      cnt300ms++;
+ 145   3                                      if(cnt300ms >= 300)
+ 146   3                                      {
+ 147   4                                              cnt300ms = 0;
+ 148   4                                              flute++;
+ 149   4                                              BUZZ = 1;
+ 150   4                                      }
+ 151   3                                      break;
+ 152   3                              case 7:
+ 153   3                                      if(cnt100ms >= 99)flute = 0;
+ 154   3                                      break;
+ 155   3                              default: break;
+ 156   3                      }
+ 157   2              }
+ 158   1      
+ 159   1              ClearTremble();
+ 160   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

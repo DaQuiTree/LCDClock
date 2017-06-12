@@ -124,23 +124,29 @@ void InterruptTimerZero() interrupt 1
 		switch(flute)
 		{
 			case 0:
+				BUZZ = 0; //³õÊ¼
 			case 2:
 			case 4:
-				BUZZ = ~BUZZ;
-				if(cnt100ms >= 99)flute++;
+				if(cnt100ms >= 99){
+					flute++;
+					BUZZ = 1;
+				}
 				break;
 			case 1:
 			case 3:
 			case 5:
-				if(cnt100ms >= 99)flute++;
+				if(cnt100ms >= 99){
+					flute++;
+					BUZZ = 0;
+				}
 				break;				
 			case 6:
-				BUZZ = ~BUZZ;
 				cnt300ms++;
 				if(cnt300ms >= 300)
 				{
 					cnt300ms = 0;
 					flute++;
+					BUZZ = 1;
 				}
 				break;
 			case 7:

@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -62,7 +62,7 @@ line level    source
   52   1              if(pHour == 0xAA) //显示小闹钟图标的时机和显示太阳/月亮时机相同
   53   1              {
   54   2                      if(bClockOpen)
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 2   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 2   
 
   55   2                      {
   56   3                              LCDDrawArea(0,0,clockImage);
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1              uint8 temp,humi;
  116   1              uint16 dat[3];
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 3   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 3   
 
  117   1      
  118   1              DHT11GetData(&humi, &temp);
@@ -190,7 +190,7 @@ line level    source
  176   2                      case 5: LCDSetCursor(7,3);break;
  177   2                      case 6: LCDSetCursor(5,0);break;
  178   2                      case 7: LCDSetCursor(2,1);break;
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 4   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 4   
 
  179   2                      default: break;
  180   2              }
@@ -254,7 +254,7 @@ line level    source
  238   3                                      strTmp[1] = (timeBuf.year %10) + '0';
  239   3                                      LCDShowStr(2,1,strTmp,2);
  240   3                                      LCDSetCursor(2,1);       //Cursor保持不动
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 5   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 5   
 
  241   3                                      break;
  242   3                              case 1:
@@ -318,7 +318,7 @@ line level    source
  300   4                                      }else{
  301   4                                              LCDDrawArea(4,0,StopVolume);//显示关闭闹钟图标
  302   4                                      }
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 6   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 6   
 
  303   3                                      break;
  304   3                              default: break;
@@ -382,7 +382,7 @@ line level    source
  362   2              }
  363   1              E2ByteProgram(0x8201,cHour);    //写入闹钟小时
  364   1              E2ByteProgram(0x8202,cMin);             //写入闹钟分钟
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 7   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 7   
 
  365   1      }
  366          
@@ -425,112 +425,115 @@ line level    source
  403   2                      flagStopAlarm = 1;
  404   2                      flagBuzzOn = 0;
  405   2                      LEDBreath();    //恢复呼吸状态
- 406   2              }
- 407   1      
- 408   1              if(keyCode == 0x0D)//按回车键进入设定状态
- 409   1              {
- 410   2                      uint16 pdata clockStr[5];
- 411   2      
- 412   2                      LEDOff();       //关闭LED
- 413   2                      if(mMode == SetDate){
- 414   3                              mMode = SetClock;
- 415   3                              LCDClearAll();
- 416   3                              clockStr[0] = 0xC4D6;   //"闹 钟："
- 417   3                              clockStr[1] = 0xA1A0;   //0xD6D3;
- 418   3                              clockStr[2] = 0xD6D3;   //0xC9E8;
- 419   3                              clockStr[3] = 0xA3BA;
- 420   3                              LCDShowCN(0,0,clockStr,4);
- 421   3                              LCDClearImage(5,0);      //清除太阳、月亮图标
- 422   3                              LCDClearImage(0,0);      //     清除小闹钟图标
- 423   3                              if(bClockOpen)  //Clock是否开启？
- 424   3                              {
- 425   4                                      LCDDrawArea(4,0,OpenVolume);
- 426   4                              }else{
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 8   
+ 406   2                      BUZZ = 1;       // 关闭蜂鸣器，防止按键按下BUZZ = 0的状态
+ 407   2              }
+ 408   1      
+ 409   1              if(keyCode == 0x0D)//按回车键进入设定状态
+ 410   1              {
+ 411   2                      uint16 pdata clockStr[5];
+ 412   2      
+ 413   2                      LEDOff();       //关闭LED
+ 414   2                      if(mMode == SetDate){
+ 415   3                              mMode = SetClock;
+ 416   3                              LCDClearAll();
+ 417   3                              clockStr[0] = 0xC4D6;   //"闹 钟："
+ 418   3                              clockStr[1] = 0xA1A0;   //0xD6D3;
+ 419   3                              clockStr[2] = 0xD6D3;   //0xC9E8;
+ 420   3                              clockStr[3] = 0xA3BA;
+ 421   3                              LCDShowCN(0,0,clockStr,4);
+ 422   3                              LCDClearImage(5,0);      //清除太阳、月亮图标
+ 423   3                              LCDClearImage(0,0);      //     清除小闹钟图标
+ 424   3                              if(bClockOpen)  //Clock是否开启？
+ 425   3                              {
+ 426   4                                      LCDDrawArea(4,0,OpenVolume);
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 8   
 
- 427   4                                      LCDDrawArea(4,0,StopVolume);
- 428   4                              }
- 429   3                              clockStr[0] = cHour/10 + 0xA3B0;
- 430   3                              clockStr[1] = cHour%10 + 0xA3B0;
- 431   3                              clockStr[2] = 0xA1C3;
- 432   3                              clockStr[3] = cMin/10 + 0xA3B0;
- 433   3                              clockStr[4] = cMin%10 + 0xA3B0;          //“00:00”
- 434   3                              LCDShowCN(2,2,clockStr,5);
- 435   3                              curPos = 0;
- 436   3                              LCDSetCursor(3,2);
- 437   3                              LCDShowCursor();
- 438   3                      }else{
- 439   3                              RecordClock();
- 440   3                              mMode = SetDate;
- 441   3                              LCDClearAll();
- 442   3                              clockStr[0] = 0xD0A3;  //"校 时："
- 443   3                              clockStr[1]     = 0xA1A0;       
- 444   3                              clockStr[2] = 0xCAB1;
- 445   3                              clockStr[3]     = 0xA3BA;
- 446   3                              LCDShowCN(0,0,clockStr,4);//为节省内存借clockStr一用
- 447   3                              LCDClearImage(5,0);     //清除太阳、月亮图标
- 448   3                              LCDClearImage(4,0);     //清除响铃图标
- 449   3                              LCDClearImage(0,0);      //     清除小闹钟图标
- 450   3                              LCDDrawArea(5,0,SaveButton);
- 451   3                              pSec = 0xAA;
- 452   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
- 453   3                              ShowCurrentTime();
- 454   3                              GetDecimalTime();//将BCD时间转换为十进制时间
- 455   3                              curPos = 0;
- 456   3                              LCDSetCursor(2,1);
- 457   3                              LCDShowCursor();
- 458   3                              
- 459   3                      }
- 460   2              }else if(keyCode == 0x1B){//取消
- 461   2                      LEDBreath();    //恢复呼吸状态
- 462   2                      if(mMode == SetClock) //若处于设定时钟界面，则记录时钟设定状态
- 463   2                      {
- 464   3                              RecordClock();
- 465   3                      }
- 466   2                      mMode = ReadDate;
- 467   2                      LCDClearAll();    //清屏
- 468   2                      LCDCancelCursor();      //取消光标闪烁
- 469   2                      LCDClearImage(4,0);     //清除响铃图标
- 470   2                      LCDClearImage(5,0);       //清除太阳、月亮图标
- 471   2                      LCDClearImage(0,0);      //     清除小闹钟图标
- 472   2                      pSec = 0xAA;
- 473   2                      pHour = 0xAA;
- 474   2                      pDay = 0xAA;
- 475   2                      ShowCurrentTime(); //强制时间更新界面
- 476   2              }else if(keyCode == 0x26){//向上
- 477   2                      if(mMode == SetDate){
- 478   3                              AdjustDate();
- 479   3                      }else if(mMode == SetClock){
- 480   3                              AdjustClock();
- 481   3                      }               
- 482   2              }else if(keyCode == 0x27){//向右、翻页
- 483   2                      if(mMode < SetDate) //处于信息展示状态时翻页
- 484   2                      {
- 485   3                              mMode++;
- 486   3                              mMode &= 0x01;//改变mMode状态
- 487   3                              if(mMode == ReadDate){ //时间界面
- 488   4                                      LCDClearAll();  //清屏
-C51 COMPILER V8.08   TIME                                                                  06/11/2017 19:05:47 PAGE 9   
+ 427   4                              }else{
+ 428   4                                      LCDDrawArea(4,0,StopVolume);
+ 429   4                              }
+ 430   3                              clockStr[0] = cHour/10 + 0xA3B0;
+ 431   3                              clockStr[1] = cHour%10 + 0xA3B0;
+ 432   3                              clockStr[2] = 0xA1C3;
+ 433   3                              clockStr[3] = cMin/10 + 0xA3B0;
+ 434   3                              clockStr[4] = cMin%10 + 0xA3B0;          //“00:00”
+ 435   3                              LCDShowCN(2,2,clockStr,5);
+ 436   3                              curPos = 0;
+ 437   3                              LCDSetCursor(3,2);
+ 438   3                              LCDShowCursor();
+ 439   3                      }else{
+ 440   3                              RecordClock();
+ 441   3                              mMode = SetDate;
+ 442   3                              LCDClearAll();
+ 443   3                              clockStr[0] = 0xD0A3;  //"校 时："
+ 444   3                              clockStr[1]     = 0xA1A0;       
+ 445   3                              clockStr[2] = 0xCAB1;
+ 446   3                              clockStr[3]     = 0xA3BA;
+ 447   3                              LCDShowCN(0,0,clockStr,4);//为节省内存借clockStr一用
+ 448   3                              LCDClearImage(5,0);     //清除太阳、月亮图标
+ 449   3                              LCDClearImage(4,0);     //清除响铃图标
+ 450   3                              LCDClearImage(0,0);      //     清除小闹钟图标
+ 451   3                              LCDDrawArea(5,0,SaveButton);
+ 452   3                              pSec = 0xAA;
+ 453   3                              pDay = 0xAA; //强制刷新时间界面（不刷新太阳月亮图标）
+ 454   3                              ShowCurrentTime();
+ 455   3                              GetDecimalTime();//将BCD时间转换为十进制时间
+ 456   3                              curPos = 0;
+ 457   3                              LCDSetCursor(2,1);
+ 458   3                              LCDShowCursor();
+ 459   3                              
+ 460   3                      }
+ 461   2              }else if(keyCode == 0x1B){//取消
+ 462   2                      LEDBreath();    //恢复呼吸状态
+ 463   2                      if(mMode == SetClock) //若处于设定时钟界面，则记录时钟设定状态
+ 464   2                      {
+ 465   3                              RecordClock();
+ 466   3                      }
+ 467   2                      mMode = ReadDate;
+ 468   2                      LCDClearAll();    //清屏
+ 469   2                      LCDCancelCursor();      //取消光标闪烁
+ 470   2                      LCDClearImage(4,0);     //清除响铃图标
+ 471   2                      LCDClearImage(5,0);       //清除太阳、月亮图标
+ 472   2                      LCDClearImage(0,0);      //     清除小闹钟图标
+ 473   2                      pSec = 0xAA;
+ 474   2                      pHour = 0xAA;
+ 475   2                      pDay = 0xAA;
+ 476   2                      ShowCurrentTime(); //强制时间更新界面
+ 477   2              }else if(keyCode == 0x26){//向上
+ 478   2                      if(mMode == SetDate){
+ 479   3                              AdjustDate();
+ 480   3                      }else if(mMode == SetClock){
+ 481   3                              AdjustClock();
+ 482   3                      }               
+ 483   2              }else if(keyCode == 0x27){//向右、翻页
+ 484   2                      if(mMode < SetDate) //处于信息展示状态时翻页
+ 485   2                      {
+ 486   3                              mMode++;
+ 487   3                              mMode &= 0x01;//改变mMode状态
+ 488   3                              if(mMode == ReadDate){ //时间界面
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 11:20:04 PAGE 9   
 
- 489   4                                      pSec = 0xAA;    //强制显示时间
- 490   4                                      pDay = 0xAA;
- 491   4                                      pHour = 0xAA;
- 492   4                              }else if(mMode == ReadInfo){//温度等信息界面
- 493   4                                      ShowInfo();
- 494   4                              }
- 495   3                      }else{   //处于设定状态右键相当于调整设定位置
- 496   3                              if(mMode == SetDate){
- 497   4                                      RightShiftDate();
- 498   4                              }else if(mMode == SetClock){
- 499   4                                      RightShiftClock();
- 500   4                              }
- 501   3                      }               
- 502   2              }
- 503   1      }
+ 489   4                                      LEDBreath();
+ 490   4                                      LCDClearAll();  //清屏
+ 491   4                                      pSec = 0xAA;    //强制显示时间
+ 492   4                                      pDay = 0xAA;
+ 493   4                                      pHour = 0xAA;
+ 494   4                              }else if(mMode == ReadInfo){//温度等信息界面
+ 495   4                                      LEDOff();
+ 496   4                                      ShowInfo();
+ 497   4                              }
+ 498   3                      }else{   //处于设定状态右键相当于调整设定位置
+ 499   3                              if(mMode == SetDate){
+ 500   4                                      RightShiftDate();
+ 501   4                              }else if(mMode == SetClock){
+ 502   4                                      RightShiftClock();
+ 503   4                              }
+ 504   3                      }               
+ 505   2              }
+ 506   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2642    ----
+   CODE SIZE        =   2650    ----
    CONSTANT SIZE    =     74    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----      68

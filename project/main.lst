@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   MAIN                                                                  06/11/2017 19:05:47 PAGE 1   
+C51 COMPILER V8.08   MAIN                                                                  06/12/2017 11:20:04 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
@@ -46,13 +46,13 @@ line level    source
   36   4                                      if(bClockOpen){
   37   5                                              CheckClock();
   38   5                                      }
-  39   4                              }else if(mMode == ReadInfo){
-  40   4                                      if(flag1s){
-  41   5                                              flag1s = 0;
-  42   5                                              ShowTemp();
-  43   5                                      } 
+  39   4                              }
+  40   3                      }else if(mMode == ReadInfo){
+  41   3                              if(flag1s){
+  42   4                                      flag1s = 0;
+  43   4                                      ShowTemp();
   44   4                              } 
-  45   3                      }
+  45   3                      } 
   46   2                      KeyDriver();
   47   2              }
   48   1      }
@@ -62,7 +62,7 @@ line level    source
   52   1              uint8 byteTmp;
   53   1                
   54   1              byteTmp = E2ByteRead(0x8200);
-C51 COMPILER V8.08   MAIN                                                                  06/11/2017 19:05:47 PAGE 2   
+C51 COMPILER V8.08   MAIN                                                                  06/12/2017 11:20:04 PAGE 2   
 
   55   1              if(byteTmp == 0x01){       //¶ÁÄÖÖÓ¿ªÆô×´Ì¬
   56   2                      bClockOpen = 1;

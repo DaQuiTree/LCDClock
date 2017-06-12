@@ -403,6 +403,7 @@ void KeyAction(uint8 keyCode)
 		flagStopAlarm = 1;
 		flagBuzzOn = 0;
 		LEDBreath();  	//恢复呼吸状态
+		BUZZ = 1;	// 关闭蜂鸣器，防止按键按下BUZZ = 0的状态
 	}
 
 	if(keyCode == 0x0D)//按回车键进入设定状态
@@ -485,11 +486,13 @@ void KeyAction(uint8 keyCode)
 			mMode++;
 			mMode &= 0x01;//改变mMode状态
 			if(mMode == ReadDate){ //时间界面
+				LEDBreath();
 				LCDClearAll();	//清屏
 			   	pSec = 0xAA;	//强制显示时间
 				pDay = 0xAA;
 				pHour = 0xAA;
 			}else if(mMode == ReadInfo){//温度等信息界面
+				LEDOff();
 				ShowInfo();
 			}
 		}else{	 //处于设定状态右键相当于调整设定位置
