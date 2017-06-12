@@ -1,7 +1,7 @@
+#define _DHT11_C
+
 #include "config.h"
 #include "dht11.h"
-
-#define _DHT11_C
 
 #define NUMBER 20
 uint8 cntThr = 0;

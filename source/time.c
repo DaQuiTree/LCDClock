@@ -115,17 +115,17 @@ void ShowTemp()
 	uint8 temp,humi;
 	uint16 dat[3];
 
-	DHT11GetData(&humi, &temp);
-	
-	dat[0] = temp/10 + 0xA3B0;
-	dat[1] = temp%10 + 0xA3B0;
-	dat[2] = 0xA1E6; 
-	LCDShowCN(3,1,dat,3);  //温度
+	if(DHT11GetData(&humi, &temp)){
+		dat[0] = temp/10 + 0xA3B0;
+		dat[1] = temp%10 + 0xA3B0;
+		dat[2] = 0xA1E6; 
+		LCDShowCN(3,1,dat,3);  //温度
 
-	dat[0] = humi/10 + 0xA3B0;
-	dat[1] = humi%10 + 0xA3B0;
-	dat[2] = 0xA3A5; 
-	LCDShowCN(3,2,dat,3);  //湿度
+		dat[0] = humi/10 + 0xA3B0;
+		dat[1] = humi%10 + 0xA3B0;
+		dat[2] = 0xA3A5; 
+		LCDShowCN(3,2,dat,3);  //湿度
+	}
 }
 
 void ShowInfo()
@@ -156,12 +156,12 @@ void ShowInfo()
 		lunar[2] = 0xC6F4;		 
 		LCDShowCN(3,3,lunar,3);	  
 	}
-	ShowTemp();				   //显示数值
-	lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);
+	lyear = (timeMod.year >> 4) * 10 + (timeMod.year & 0x0F);	//显示农历
 	lmonth = (timeMod.month >> 4) * 10 + (timeMod.month & 0x0F);
 	lday = (timeMod.day >> 4) * 10 + (timeMod.day & 0x0F); 
 	lunarLen = GetLunarDate(lyear, lmonth, lday, lunar);
 	LCDShowCN(1,0,lunar,lunarLen);
+//	ShowTemp();			//显示温度	   
 }
 
 void RightShiftDate()

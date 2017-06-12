@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 16:10:41 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
@@ -62,7 +62,7 @@ line level    source
   52   2                      {
   53   3                              if(keyBuf[i] == 0){
   54   4                                      ethBuf += 1;
-C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 2   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 16:10:41 PAGE 2   
 
   55   4                                      if(ethBuf > enterThreshold){
   56   5                                              KeyAction(0x26);
@@ -126,7 +126,7 @@ line level    source
  114   2                      cnt1s++;                //1s¶¨Ê±Æ÷
  115   2                      if(cnt1s >= 10)
  116   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 11:20:05 PAGE 3   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 16:10:41 PAGE 3   
 
  117   3                              cnt1s = 0;
  118   3                              flag1s = 1;

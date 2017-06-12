@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   DHT11                                                                 06/12/2017 11:20:04 PAGE 1   
+C51 COMPILER V8.08   DHT11                                                                 06/12/2017 16:10:41 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DHT11
@@ -8,10 +8,10 @@ COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DHT11.c BROWSE DEBUG OBJE
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "dht11.h"
-   3          
-   4          #define _DHT11_C
+   1          #define _DHT11_C
+   2          
+   3          #include "config.h"
+   4          #include "dht11.h"
    5          
    6          #define NUMBER 20
    7          uint8 cntThr = 0;
@@ -62,7 +62,7 @@ line level    source
   52   3                              cntThr = 0;
   53   3                              while(!DHT11_DATA && cntThr++ < NUMBER);        //等待高电平到来
   54   3                              if(cntThr >= NUMBER){
-C51 COMPILER V8.08   DHT11                                                                 06/12/2017 11:20:04 PAGE 2   
+C51 COMPILER V8.08   DHT11                                                                 06/12/2017 16:10:41 PAGE 2   
 
   55   4                                      DHT11_DATA = 1;
   56   4                                      EA = 1;

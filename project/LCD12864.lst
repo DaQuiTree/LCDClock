@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1              LCD12864_RS = 0;
   54   1              LCD12864_RW = 1;
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 2   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 2   
 
   55   1              do{
   56   2                      LCD12864_EN = 1;
@@ -126,7 +126,7 @@ line level    source
  114   2                      lsb = (uint8)(*str); 
  115   2                      LCDWriteData(msb);
  116   2                      LCDWriteData(lsb);
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 3   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 3   
 
  117   2                      str++;                                          
  118   2              }
@@ -190,7 +190,7 @@ line level    source
  176   2              }
  177   1              
  178   1              for(i = 0; i < 32; i++){
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 4   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 4   
 
  179   2                      LCDWriteCmd(0x80 | i); //ÉèÖÃ»æÍ¼´¹Ö±µØÖ·
  180   2                      LCDWriteCmd(0x88);
@@ -254,7 +254,7 @@ line level    source
  238   1              
  239   1              for(i = 0; i < 32; i++){
  240   2                      LCDWriteCmd(0x80 | i); //ÉèÖÃ»æÍ¼´¹Ö±µØÖ·
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 5   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 5   
 
  241   2                      LCDWriteCmd(0x88);
  242   2                      for( j = 0; j < 8; j++)
@@ -319,7 +319,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 11:20:04 PAGE 6   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 6   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
