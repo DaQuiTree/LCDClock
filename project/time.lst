@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 1   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE TIME
@@ -62,7 +62,7 @@ line level    source
   52   1              if(pHour == 0xAA) //显示小闹钟图标的时机和显示太阳/月亮时机相同
   53   1              {
   54   2                      if(bClockOpen)
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 2   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 2   
 
   55   2                      {
   56   3                              LCDDrawArea(0,0,clockImage);
@@ -86,10 +86,10 @@ line level    source
   74   2                      LCDShowCN(0,3,tStr,8);//液晶第1行显示日期时间
   75   2                      if(pHour != timeMod.hour){
   76   3                              pHour = timeMod.hour;
-  77   3                              if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)        //若在白天，显示太阳图标
+  77   3                              if(timeMod.hour >= 0x07 && timeMod.hour <= 0x18)        //若在白天，显示太阳动画
   78   3                              {
   79   4                                      LCDDrawArea(5,0,sunImage);
-  80   4                              }else{    //若在黑夜，显示月亮图标
+  80   4                              }else{    //若在黑夜，显示月亮动画
   81   4                                      LCDDrawArea(5,0,moonImage);
   82   4                              }
   83   3                      }
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1              uint8 temp,humi;
  116   1              uint16 dat[3];
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 3   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 3   
 
  117   1      
  118   1              if(DHT11GetData(&humi, &temp)){
@@ -190,7 +190,7 @@ line level    source
  176   2                      case 5: LCDSetCursor(7,3);break;
  177   2                      case 6: LCDSetCursor(5,0);break;
  178   2                      case 7: LCDSetCursor(2,1);break;
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 4   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 4   
 
  179   2                      default: break;
  180   2              }
@@ -254,7 +254,7 @@ line level    source
  238   3                                      strTmp[1] = (timeBuf.year %10) + '0';
  239   3                                      LCDShowStr(2,1,strTmp,2);
  240   3                                      LCDSetCursor(2,1);       //Cursor保持不动
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 5   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 5   
 
  241   3                                      break;
  242   3                              case 1:
@@ -318,7 +318,7 @@ line level    source
  300   4                                      }else{
  301   4                                              LCDDrawArea(4,0,StopVolume);//显示关闭闹钟图标
  302   4                                      }
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 6   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 6   
 
  303   3                                      break;
  304   3                              default: break;
@@ -382,7 +382,7 @@ line level    source
  362   2              }
  363   1              E2ByteProgram(0x8201,cHour);    //写入闹钟小时
  364   1              E2ByteProgram(0x8202,cMin);             //写入闹钟分钟
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 7   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 7   
 
  365   1      }
  366          
@@ -446,7 +446,7 @@ line level    source
  424   3                              if(bClockOpen)  //Clock是否开启？
  425   3                              {
  426   4                                      LCDDrawArea(4,0,OpenVolume);
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 8   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 8   
 
  427   4                              }else{
  428   4                                      LCDDrawArea(4,0,StopVolume);
@@ -510,7 +510,7 @@ line level    source
  486   3                              mMode++;
  487   3                              mMode &= 0x01;//改变mMode状态
  488   3                              if(mMode == ReadDate){ //时间界面
-C51 COMPILER V8.08   TIME                                                                  06/12/2017 16:10:41 PAGE 9   
+C51 COMPILER V8.08   TIME                                                                  06/12/2017 20:05:26 PAGE 9   
 
  489   4                                      LEDBreath();
  490   4                                      LCDClearAll();  //清屏

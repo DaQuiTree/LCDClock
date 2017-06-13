@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 1   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE LCD12864
@@ -13,18 +13,18 @@ line level    source
    3          #include "lcd12864.h"
    4          
    5          uint8 code clockImage[32] ={
-   6                  0x00,0x00,0x00,0x00,0x18,0x30,0x33,0x98,0x6F,0xEC,0x58,0x34,0x11,0x10,0x31,0x18,
-   7                  0x31,0x18,0x31,0xD8,0x10,0x10,0x18,0x30,0x0F,0xE0,0x07,0xC0,0x1C,0x70,0x00,0x00,
+   6                  0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x80,0x19,0x30,0x37,0xD8,0x2C,0x68,0x19,0x30,
+   7                  0x19,0x38,0x19,0xB0,0x0C,0x60,0x07,0xC0,0x03,0x80,0x1E,0xF0,0x00,0x00,0x00,0x00,
    8          };
    9          
   10          uint8 code sunImage[32] = {
   11                  0x00,0x00,0x01,0x00,0x41,0x04,0x20,0x08,0x13,0x90,0x07,0xC0,0x0F,0xE0,0xDF,0xF6,
-  12                  0x1F,0xF0,0x0F,0xE0,0x07,0xC0,0x13,0x90,0x20,0x08,0x41,0x04,0x01,0x00,0x00,0x00,
+  12                  0x1F,0xF0,0x0F,0xE0,0x07,0xC0,0x13,0x90,0x20,0x08,0x41,0x04,0x01,0x00,0x00,0x00
   13          };
   14          
   15          uint8 code moonImage[32] = {
-  16                  0x00,0x00,0x07,0x80,0x03,0xC0,0x01,0xE0,0x01,0xF0,0x00,0xF8,0x00,0xF8,0x00,0xF8,
-  17                  0x00,0xF8,0x00,0xF8,0x01,0xF0,0x03,0xF0,0x07,0xE0,0x0F,0xC0,0x1F,0x00,0x00,0x00,
+  16                  0x00,0x00,0x00,0x00,0x03,0xC0,0x01,0xE0,0x00,0xF0,0x00,0x78,0x00,0x78,0x00,0x78,
+  17                  0x08,0x78,0x80,0xF8,0x21,0xF0,0x03,0xE1,0x07,0xC0,0x1F,0x80,0x00,0x00,0x00,0x00,
   18          };
   19          
   20          uint8 code SaveButton[32] ={
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1              LCD12864_RS = 0;
   54   1              LCD12864_RW = 1;
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 2   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 2   
 
   55   1              do{
   56   2                      LCD12864_EN = 1;
@@ -126,7 +126,7 @@ line level    source
  114   2                      lsb = (uint8)(*str); 
  115   2                      LCDWriteData(msb);
  116   2                      LCDWriteData(lsb);
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 3   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 3   
 
  117   2                      str++;                                          
  118   2              }
@@ -190,7 +190,7 @@ line level    source
  176   2              }
  177   1              
  178   1              for(i = 0; i < 32; i++){
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 4   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 4   
 
  179   2                      LCDWriteCmd(0x80 | i); //ÉèÖÃ»æÍ¼´¹Ö±µØÖ·
  180   2                      LCDWriteCmd(0x88);
@@ -254,7 +254,7 @@ line level    source
  238   1              
  239   1              for(i = 0; i < 32; i++){
  240   2                      LCDWriteCmd(0x80 | i); //ÉèÖÃ»æÍ¼´¹Ö±µØÖ·
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 5   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 5   
 
  241   2                      LCDWriteCmd(0x88);
  242   2                      for( j = 0; j < 8; j++)
@@ -319,7 +319,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V8.08   LCD12864                                                              06/12/2017 16:10:40 PAGE 6   
+C51 COMPILER V8.08   LCD12864                                                              06/12/2017 20:05:26 PAGE 6   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

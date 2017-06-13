@@ -74,10 +74,10 @@ void ShowCurrentTime()
 		LCDShowCN(0,3,tStr,8);//液晶第1行显示日期时间
 		if(pHour != timeMod.hour){
 			pHour = timeMod.hour;
-			if(timeMod.hour >= 0x08 && timeMod.hour <= 0x18)	//若在白天，显示太阳图标
+			if(timeMod.hour >= 0x07 && timeMod.hour <= 0x18)	//若在白天，显示太阳动画
 			{
 				LCDDrawArea(5,0,sunImage);
-			}else{	  //若在黑夜，显示月亮图标
+			}else{	  //若在黑夜，显示月亮动画
 				LCDDrawArea(5,0,moonImage);
 			}
 		}

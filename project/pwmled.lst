@@ -1,4 +1,4 @@
-C51 COMPILER V8.08   PWMLED                                                                06/12/2017 16:10:42 PAGE 1   
+C51 COMPILER V8.08   PWMLED                                                                06/12/2017 20:05:27 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE PWMLED
@@ -62,7 +62,7 @@ line level    source
   52          void AdjustDutyCycle(uint8 dc)
   53          {
   54   1              uint16 high, low;
-C51 COMPILER V8.08   PWMLED                                                                06/12/2017 16:10:42 PAGE 2   
+C51 COMPILER V8.08   PWMLED                                                                06/12/2017 20:05:27 PAGE 2   
 
   55   1      
   56   1              high = (PeriodCnt*dc)/100;
@@ -126,7 +126,7 @@ line level    source
  114   2                              if(flashCnt > 2){
  115   3                                      flashCnt = 0;
  116   3                                      PWMOUT = ~PWMOUT;
-C51 COMPILER V8.08   PWMLED                                                                06/12/2017 16:10:42 PAGE 3   
+C51 COMPILER V8.08   PWMLED                                                                06/12/2017 20:05:27 PAGE 3   
 
  117   3                              }
  118   2                              break;
@@ -190,7 +190,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =     11       1
-C51 COMPILER V8.08   PWMLED                                                                06/12/2017 16:10:42 PAGE 4   
+C51 COMPILER V8.08   PWMLED                                                                06/12/2017 20:05:27 PAGE 4   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
