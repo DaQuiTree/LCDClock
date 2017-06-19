@@ -1,146 +1,188 @@
-C51 COMPILER V8.08   KEYBOARD                                                              05/21/2017 19:46:00 PAGE 1   
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 20:05:27 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE KEYBOARD
-OBJECT MODULE PLACED IN .\keyboard.obj
+OBJECT MODULE PLACED IN ..\output\keyboard.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\keyboard.c BROWSE DEBUG OBJECTEXTEND PRINT(.\keyboard.lst) OBJECT
-                    -(.\keyboard.obj)
+                    -(..\output\keyboard.obj)
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "keyboard.h"
-   3          #include "time.h"
-   4          
-   5          #define _KEYBOARD_C
-   6          
-   7          bit flag200ms = 0;
-   8          bit flag1s = 0;
+   1          #define _KEYBOARD_C
+   2          #include "config.h"
+   3          #include "keyboard.h"
+   4          #include "time.h"
+   5          
+   6          bit flag200ms = 0;
+   7          bit flag1s = 0;
+   8          bit flagBuzzOn = 0;
    9          
   10          uint8 T0RH = 0;
   11          uint8 T0RL = 0;
   12          
-  13          uint8 keySta[4][4]={
-  14                  {1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}
-  15          };
-  16          
-  17          uint8 code keyCodeMap[4][4] = { //矩阵按键编号到标准键盘键码的映射表
-  18              { 0x31, 0x32, 0x33, 0x26 }, //数字键1、数字键2、数字键3、向上键
-  19              { 0x34, 0x35, 0x36, 0x25 }, //数字键4、数字键5、数字键6、向左键
-  20              { 0x37, 0x38, 0x39, 0x28 }, //数字键7、数字键8、数字键9、向下键
-  21              { 0x30, 0x1B, 0x0D, 0x27 }  //数字键0、ESC键、  回车键、 向右键
-  22          };
-  23          
-  24          void ClearTremble()
-  25          {
-  26   1              uint8 i;
-  27   1              static uint8 queue = 0; 
-  28   1      
-  29   1              static uint8 state[4][4] = 
-  30   1              {
-  31   1                      {0x0F,0x0F,0x0F,0x0F},
-  32   1                      {0x0F,0x0F,0x0F,0x0F},
-  33   1                      {0x0F,0x0F,0x0F,0x0F},
-  34   1                      {0x0F,0x0F,0x0F,0x0F}
-  35   1              };
-  36   1      
-  37   1              switch(queue)
-  38   1              {
-  39   2                      case 0:KeyOut4 = 1;KeyOut1 = 0;break;
-  40   2                      case 1:KeyOut1 = 1;KeyOut2 = 0;break;
-  41   2                      case 2:KeyOut2 = 1;KeyOut3 = 0;break;
-  42   2                      case 3:KeyOut3 = 1;KeyOut4 = 0;break;
-  43   2                      default:break;
-  44   2              }
-  45   1      
-  46   1              state[queue][0] = (state[queue][0] << 1) | KeyIn1;
-  47   1              state[queue][1] = (state[queue][1] << 1) | KeyIn2;
-  48   1              state[queue][2] = (state[queue][2] << 1) | KeyIn3;
-  49   1              state[queue][3] = (state[queue][3] << 1) | KeyIn4;
-  50   1      
-  51   1              for(i = 0; i < 4; i++)
-  52   1              {
-  53   2                      if((state[queue][i] & 0x0F) == 0x0F)
-  54   2                      {
-C51 COMPILER V8.08   KEYBOARD                                                              05/21/2017 19:46:00 PAGE 2   
+  13          uint8 pdata keySta[4]={1,1,1,1};
+  14          
+  15          uint8 code keyCodeMap[4] = { //矩阵按键编号到标准键盘键码的映射表
+  16                  0x26, 0x1B, 0x0D, 0x27   //向上键、 ESC键、  回车键、 向右键
+  17          };
+  18          
+  19          void ClearTremble()
+  20          {
+  21   1              uint8 i;
+  22   1      
+  23   1              static uint8 pdata state[4] = {0x0F,0x0F,0x0F,0x0F};
+  24   1      
+  25   1              state[0] = (state[0] << 1) | KeyAdj;
+  26   1              state[1] = (state[1] << 1) | KeyCancel;
+  27   1              state[2] = (state[2] << 1) | KeySet;
+  28   1              state[3] = (state[3] << 1) | KeyPage;
+  29   1      
+  30   1              for(i = 0; i < 4; i++)
+  31   1              {
+  32   2                      if((state[i] & 0x0F) == 0x0F)
+  33   2                      {
+  34   3                              keySta[i] = 1;
+  35   3                      }else if((state[i] & 0x0F) == 0x00){
+  36   3                              keySta[i] = 0;
+  37   3                      }else{
+  38   3                      }
+  39   2              }
+  40   1      }
+  41          
+  42          void KeyDriver()
+  43          {
+  44   1              static uint8 pdata keyBuf[4]={1,1,1,1};
+  45   1              static uint16 ethBuf = 0, enterThreshold = 1000;
+  46   1      
+  47   1              uint8 i;
+  48   1      
+  49   1              for(i = 0; i < 4; i++)
+  50   1              {
+  51   2                      if(keyCodeMap[i] == 0x26) //长按向上键连续增加
+  52   2                      {
+  53   3                              if(keyBuf[i] == 0){
+  54   4                                      ethBuf += 1;
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 20:05:27 PAGE 2   
 
-  55   3                              keySta[queue][i] = 1; 
-  56   3                      }else if((state[queue][i] & 0x0F) == 0x00){
-  57   3                              keySta[queue][i] = 0;
-  58   3                      }else{
-  59   3                      }
-  60   2              }
-  61   1      
-  62   1              queue++;
-  63   1              queue &= 0x03;
-  64   1      }
-  65          
-  66          void KeyDriver()
-  67          {
-  68   1              static uint8 keyBuf[4][4]={
-  69   1                      {1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1} 
-  70   1              };
-  71   1              uint8 i,j;
-  72   1      
-  73   1              for(i = 0; i < 4; i++)
-  74   1              {
-  75   2                      for(j = 0; j < 4; j++)
-  76   2                      {
-  77   3                              if(keyBuf[i][j] != keySta[i][j])
-  78   3                              {
-  79   4                                      if(keyBuf[i][j] == 0x00)
-  80   4                                      {
-  81   5                                              KeyAction(keyCodeMap[i][j]);
-*** WARNING C206 IN LINE 81 OF ..\SOURCE\KEYBOARD.C: 'KeyAction': missing function-prototype
-*** ERROR C267 IN LINE 81 OF ..\SOURCE\KEYBOARD.C: 'KeyAction': requires ANSI-style prototype
-  82   5                                      }
-  83   4                                      keyBuf[i][j] = keySta[i][j];
-  84   4                              }
-  85   3                      }
-  86   2              }       
-  87   1      }
-  88          
-  89          void ConfigTimerZero(uint8 ms)
-  90          {
-  91   1              uint16 tmp;
-  92   1      
-  93   1              tmp = 65536 - SYS_CLK/1000*ms + 18;
-  94   1      
-  95   1              T0RH = (uint8)(tmp >> 8);
-  96   1              T0RL = (uint8)(tmp & 0x0F);
-  97   1      
-  98   1              TMOD &= 0xF0;
-  99   1              TMOD |= 0x01;
+  55   4                                      if(ethBuf > enterThreshold){
+  56   5                                              KeyAction(0x26);
+  57   5                                              enterThreshold += 100;
+  58   5                                      }
+  59   4                              }else{
+  60   4                                      ethBuf = 0;
+  61   4                                      enterThreshold = 1000;
+  62   4                              }               
+  63   3                      }
+  64   2      
+  65   2                      if(keyBuf[i] != keySta[i])
+  66   2                      {
+  67   3                              if(keyBuf[i] == 0x01)
+  68   3                              {
+  69   4                                      KeyAction(keyCodeMap[i]);
+  70   4                              }
+  71   3                              keyBuf[i] = keySta[i];
+  72   3                      }
+  73   2              }       
+  74   1      }
+  75          
+  76          void ConfigTimerZero(uint8 ms)
+  77          {
+  78   1              uint16 tmp;
+  79   1      
+  80   1              tmp = 65536 - SYS_CLK/1000*ms + 18;
+  81   1      
+  82   1              T0RH = (uint8)(tmp >> 8);
+  83   1              T0RL = (uint8)(tmp & 0x0F);
+  84   1      
+  85   1              TMOD &= 0xF0;
+  86   1              TMOD |= 0x01;
+  87   1      
+  88   1              TH0 = T0RH;
+  89   1              TL0 = T0RL;
+  90   1      
+  91   1              TR0 = 1;
+  92   1              ET0 = 1;
+  93   1              PT1 = 1;
+  94   1      }
+  95          
+  96          void InterruptTimerZero() interrupt 1
+  97          {
+  98   1              static uint8 cnt100ms = 0, cnt200ms = 0, cnt1s = 0, flute = 0;
+  99   1              static uint16 cnt300ms = 0;
  100   1      
  101   1              TH0 = T0RH;
  102   1              TL0 = T0RL;
  103   1      
- 104   1              TR0 = 1;
- 105   1              ET0 = 1;
- 106   1      }
- 107          
- 108          void InterruptTimerZero() interrupt 1
- 109          {
- 110   1              static uint8 cnt200ms = 0, cnt1s = 0;
- 111   1      
- 112   1              TH0 = T0RH;
- 113   1              TL0 = T0RL;
- 114   1      
-C51 COMPILER V8.08   KEYBOARD                                                              05/21/2017 19:46:00 PAGE 3   
+ 104   1              cnt100ms++;                     
+ 105   1              if(cnt100ms >= 100) //200ms定时器
+ 106   1              {
+ 107   2                      cnt100ms = 0;
+ 108   2                      cnt200ms++;
+ 109   2                      if(cnt200ms >= 2)
+ 110   2                      {
+ 111   3                              cnt200ms = 0;
+ 112   3                              flag200ms = 1;
+ 113   3                      }
+ 114   2                      cnt1s++;                //1s定时器
+ 115   2                      if(cnt1s >= 10)
+ 116   2                      {
+C51 COMPILER V8.08   KEYBOARD                                                              06/12/2017 20:05:27 PAGE 3   
 
- 115   1              cnt200ms++;                     
- 116   1              if(cnt200ms >= 200) //200ms定时器
- 117   1              {
- 118   2                      cnt200ms = 0;
- 119   2                      flag200ms = 1;
- 120   2                      cnt1s++;                //1s定时器
- 121   2                      if(cnt1s >= 5)
- 122   2                      {
- 123   3                              cnt1s = 0;
- 124   3                              flag1s = 1;
- 125   3                      }
- 126   2              }
- 127   1              ClearTremble();
- 128   1      }
+ 117   3                              cnt1s = 0;
+ 118   3                              flag1s = 1;
+ 119   3                      }
+ 120   2              }
+ 121   1      
+ 122   1              if(flagBuzzOn)
+ 123   1              {
+ 124   2                      switch(flute)
+ 125   2                      {
+ 126   3                              case 0:
+ 127   3                                      BUZZ = 0; //初始
+ 128   3                              case 2:
+ 129   3                              case 4:
+ 130   3                                      if(cnt100ms >= 99){
+ 131   4                                              flute++;
+ 132   4                                              BUZZ = 1;
+ 133   4                                      }
+ 134   3                                      break;
+ 135   3                              case 1:
+ 136   3                              case 3:
+ 137   3                              case 5:
+ 138   3                                      if(cnt100ms >= 99){
+ 139   4                                              flute++;
+ 140   4                                              BUZZ = 0;
+ 141   4                                      }
+ 142   3                                      break;                          
+ 143   3                              case 6:
+ 144   3                                      cnt300ms++;
+ 145   3                                      if(cnt300ms >= 300)
+ 146   3                                      {
+ 147   4                                              cnt300ms = 0;
+ 148   4                                              flute++;
+ 149   4                                              BUZZ = 1;
+ 150   4                                      }
+ 151   3                                      break;
+ 152   3                              case 7:
+ 153   3                                      if(cnt100ms >= 99)flute = 0;
+ 154   3                                      break;
+ 155   3                              default: break;
+ 156   3                      }
+ 157   2              }
+ 158   1      
+ 159   1              ClearTremble();
+ 160   1      }
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    433    ----
+   CONSTANT SIZE    =      4    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =     12    ----
+   DATA SIZE        =     12       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

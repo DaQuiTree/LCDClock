@@ -1,138 +1,137 @@
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 1   
+C51 COMPILER V8.08   DS1302                                                                06/12/2017 20:05:26 PAGE 1   
 
 
 C51 COMPILER V8.08, COMPILATION OF MODULE DS1302
 OBJECT MODULE PLACED IN ..\output\DS1302.obj
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DS1302.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\DS1302.lst) OBJE
-                    -CT(..\output\DS1302.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\DS1302.c BROWSE DEBUG OBJECTEXTEND PRINT(.\DS1302.lst) OBJECT(..\
+                    -output\DS1302.obj)
 
 line level    source
 
-   1          #include "config.h"
-   2          #include "DS1302.h"
-   3          
-   4          #define _DS1302_C
-   5          
-   6          struct sTime timeMod;
-   7          
-   8          uint8 DS1302ReadByte()
-   9          {
-  10   1              uint8 mask;
-  11   1              uint8 dat = 0;
-  12   1      
-  13   1              for(mask = 0x01; mask != 0; mask <<= 1)
-  14   1              {
-  15   2                      if(DS1302_IO){
-  16   3                              dat |= mask; 
-  17   3                      }
-  18   2                      DS1302_CK = 1;
-  19   2                      DS1302_CK = 0;  
-  20   2              }
-  21   1              return dat;
-  22   1      }
-  23          
-  24          void DS1302WriteByte(uint8 dat)
-  25          {
-  26   1              uint8 mask;
-  27   1      
-  28   1              for(mask = 0x01; mask != 0; mask <<= 1)
-  29   1              {
-  30   2                      if((mask & dat) == 0){
-  31   3                              DS1302_IO = 0;
-  32   3                      }else{
-  33   3                              DS1302_IO = 1;
-  34   3                      }
-  35   2                      
-  36   2                      DS1302_CK = 1;
-  37   2                      DS1302_CK = 0;          
-  38   2              }
-  39   1      }
-  40          
-  41          void DS1302BurstRead(struct sTime* time)
-  42          {
-  43   1              DS1302_CE = 1;
-  44   1              DS1302WriteByte(0xBF); //Brust读模式
-  45   1              time->sec = DS1302ReadByte();
-  46   1              time->min = DS1302ReadByte();
-  47   1              time->hour = DS1302ReadByte();
-  48   1              time->day = DS1302ReadByte();
-  49   1              time->month = DS1302ReadByte();
-  50   1              time->week = DS1302ReadByte();
-  51   1              time->year = DS1302ReadByte();
-  52   1              DS1302_CE = 0;
-  53   1      
-  54   1              time->sec &= 0x7F;
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 2   
+   1          #define _DS1302_C
+   2          #include "config.h"
+   3          #include "DS1302.h"
+   4          
+   5          struct sTime timeMod;
+   6          
+   7          uint8 DS1302ReadByte()
+   8          {
+   9   1              uint8 mask;
+  10   1              uint8 dat = 0;
+  11   1      
+  12   1              for(mask = 0x01; mask != 0; mask <<= 1)
+  13   1              {
+  14   2                      if(DS1302_IO){
+  15   3                              dat |= mask; 
+  16   3                      }
+  17   2                      DS1302_CK = 1;
+  18   2                      DS1302_CK = 0;  
+  19   2              }
+  20   1              return dat;
+  21   1      }
+  22          
+  23          void DS1302WriteByte(uint8 dat)
+  24          {
+  25   1              uint8 mask;
+  26   1      
+  27   1              for(mask = 0x01; mask != 0; mask <<= 1)
+  28   1              {
+  29   2                      if((mask & dat) == 0){
+  30   3                              DS1302_IO = 0;
+  31   3                      }else{
+  32   3                              DS1302_IO = 1;
+  33   3                      }
+  34   2                      
+  35   2                      DS1302_CK = 1;
+  36   2                      DS1302_CK = 0;          
+  37   2              }
+  38   1      }
+  39          
+  40          void DS1302BurstRead(struct sTime* time)
+  41          {
+  42   1              DS1302_CE = 1;
+  43   1              DS1302WriteByte(0xBF); //Brust读模式
+  44   1              time->sec = DS1302ReadByte();
+  45   1              time->min = DS1302ReadByte();
+  46   1              time->hour = DS1302ReadByte();
+  47   1              time->day = DS1302ReadByte();
+  48   1              time->month = DS1302ReadByte();
+  49   1              time->week = DS1302ReadByte();
+  50   1              time->year = DS1302ReadByte();
+  51   1              DS1302_CE = 0;
+  52   1      
+  53   1              time->sec &= 0x7F;
+  54   1      }
+C51 COMPILER V8.08   DS1302                                                                06/12/2017 20:05:26 PAGE 2   
 
-  55   1      }
-  56          
-  57          void DS1302BurstWrite(struct sTime* time)
-  58          {
-  59   1              DS1302_CE = 1;
-  60   1              DS1302WriteByte(0xBE); //Brust写模式
-  61   1              DS1302WriteByte(time->sec);
-  62   1              DS1302WriteByte(time->min);
-  63   1              DS1302WriteByte(time->hour);
-  64   1              DS1302WriteByte(time->day);
-  65   1              DS1302WriteByte(time->month);
-  66   1              DS1302WriteByte(time->week);
-  67   1              DS1302WriteByte(time->year);
-  68   1              DS1302WriteByte(0x00);
-  69   1              DS1302_CE = 0;  
-  70   1      }
-  71          
-  72          uint8 DS1302SingleRead(uint8 reg)
-  73          {
-  74   1              uint8 dat;
-  75   1      
-  76   1              DS1302_CE = 1;
-  77   1              DS1302WriteByte((reg << 1) | 0x81);
-  78   1              dat = DS1302ReadByte();
-  79   1              DS1302_CE = 0;
-  80   1              return dat;
-  81   1      }
-  82          
-  83          void DS1302SingleWrite(uint8 reg, uint8 dat)
-  84          {       
-  85   1              DS1302_CE = 1;
-  86   1              DS1302WriteByte((reg << 1) | 0x80);
-  87   1              DS1302WriteByte(dat);
-  88   1              DS1302_CE = 0;
-  89   1      }
-  90          
-  91          void InitDS1302()
-  92          {
-  93   1              uint8 i;
-  94   1              struct sTime initTime;
-  95   1      
-  96   1              initTime.year = 0x17;
-  97   1              initTime.month = 0x05;
-  98   1              initTime.day = 0x09;
-  99   1              initTime.hour = 0x12;
- 100   1              initTime.min = 0x55;
- 101   1              initTime.sec = 0x00;
- 102   1              initTime.week = 0x02;
- 103   1      
- 104   1              DS1302_CK = 0;
- 105   1              DS1302_CE = 0;
- 106   1      
- 107   1              i = DS1302SingleRead(0);
- 108   1              if((i & 0x80) != 0)     //如果1302没有处于工作状态
- 109   1              {
- 110   2                      DS1302SingleWrite(7, 0x00); //取消写保护
- 111   2                      DS1302BurstWrite(&initTime); //进行初始化               
- 112   2              }
- 113   1      }
+  55          
+  56          void DS1302BurstWrite(struct sTime* time)
+  57          {
+  58   1              DS1302_CE = 1;
+  59   1              DS1302WriteByte(0xBE); //Brust写模式
+  60   1              DS1302WriteByte(time->sec);
+  61   1              DS1302WriteByte(time->min);
+  62   1              DS1302WriteByte(time->hour);
+  63   1              DS1302WriteByte(time->day);
+  64   1              DS1302WriteByte(time->month);
+  65   1              DS1302WriteByte(time->week);
+  66   1              DS1302WriteByte(time->year);
+  67   1              DS1302WriteByte(0x00);
+  68   1              DS1302_CE = 0;  
+  69   1      }
+  70          
+  71          uint8 DS1302SingleRead(uint8 reg)
+  72          {
+  73   1              uint8 dat;
+  74   1      
+  75   1              DS1302_CE = 1;
+  76   1              DS1302WriteByte((reg << 1) | 0x81);
+  77   1              dat = DS1302ReadByte();
+  78   1              DS1302_CE = 0;
+  79   1              return dat;
+  80   1      }
+  81          
+  82          void DS1302SingleWrite(uint8 reg, uint8 dat)
+  83          {       
+  84   1              DS1302_CE = 1;
+  85   1              DS1302WriteByte((reg << 1) | 0x80);
+  86   1              DS1302WriteByte(dat);
+  87   1              DS1302_CE = 0;
+  88   1      }
+  89          
+  90          void InitDS1302()
+  91          {
+  92   1              uint8 i;
+  93   1              struct sTime initTime;
+  94   1      
+  95   1              initTime.year = 0x17;
+  96   1              initTime.month = 0x05;
+  97   1              initTime.day = 0x09;
+  98   1              initTime.hour = 0x12;
+  99   1              initTime.min = 0x55;
+ 100   1              initTime.sec = 0x00;
+ 101   1              initTime.week = 0x02;
+ 102   1      
+ 103   1              DS1302_CK = 0;
+ 104   1              DS1302_CE = 0;
+ 105   1      
+ 106   1              i = DS1302SingleRead(0);
+ 107   1              if((i & 0x80) != 0)     //如果1302没有处于工作状态
+ 108   1              {
+ 109   2                      DS1302SingleWrite(7, 0x00); //取消写保护
+ 110   2                      DS1302BurstWrite(&initTime); //进行初始化               
+ 111   2              }
+ 112   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V8.08   DS1302                                                                05/28/2017 14:35:00 PAGE 3   
+   CODE SIZE        =    267    ----
+C51 COMPILER V8.08   DS1302                                                                06/12/2017 20:05:26 PAGE 3   
 
-   CODE SIZE        =    276    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =      8       8
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      8       8
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -10,10 +10,17 @@ File 1,1,<..\source\DS1302.c><DS1302.c> 0x0
 File 1,1,<..\source\LCD12864.c><LCD12864.c> 0x0 
 File 1,1,<..\source\main.c><main.c> 0x0 
 File 1,1,<..\source\time.c><time.c> 0x0 
+File 1,1,<..\source\lunar.c><lunar.c> 0x0 
+File 1,1,<..\source\DHT11.c><DHT11.c> 0x0 
+File 1,1,<..\source\keyboard.c><keyboard.c> 0x0 
 File 2,5,<..\source\config.h><config.h> 0x0 
 File 2,5,<..\source\DS1302.H><DS1302.H> 0x0 
 File 2,5,<..\source\lcd12864.h><lcd12864.h> 0x0 
 File 2,5,<..\source\time.h><time.h> 0x0 
+File 2,5,<..\source\lunar.h><lunar.h> 0x0 
+File 2,5,<..\source\DHT11.h><DHT11.h> 0x0 
+File 2,5,<..\source\keyboard.h><keyboard.h> 0x0 
+File 2,5,<..\source\main.h><main.h> 0x0 
 
 
 Options 1,0,0  // Target 'Target 1'
@@ -68,7 +75,7 @@ Options 1,0,0  // Target 'Target 1'
  XT51FL=0
  CBANKS5=0
  XBANKS5=0
- RCB51 { 0,0,0,0,0,0,0,1,0 }
+ RCB51 { 0,0,0,0,0,255,255,0,0 }
  RXB51 { 0,0,0,0,0,0,0,0,0 }
  OCM51 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
  OCR51 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
